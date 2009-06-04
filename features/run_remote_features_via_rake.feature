@@ -1,4 +1,4 @@
-Feature: Run features via Rake
+Feature: Run remote features via Rake
 
   As a developer
   I want to run remote features using Rake

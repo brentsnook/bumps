@@ -1,0 +1,20 @@
+require 'webrick'
+
+server = WEBrick::HTTPServer.new :Port => 1726
+
+server.mount_proc("/all_features") do |request, response|
+  response.body = <<-XML
+<?xml version="1.0"?>
+<xml-goes-here/>
+XML
+  response['Content-Type'] = 'text/xml' 
+end
+
+%w(INT TERM).each do |signal|
+  trap signal do
+    server.shutdown
+    exit!
+  end
+end
+
+server.start

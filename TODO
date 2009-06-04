@@ -1,0 +1,4 @@
+- extract process control logic out into a new gem
+- check that nothing else does this
+- register rubyforge project
+- polish up gem for release

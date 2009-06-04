@@ -8,13 +8,13 @@ Feature: Run remote features
 
     Given that a feature server is running
     When I run all remote features
-    Then a report will be produced containing all remote features
+    Then a report will be produced containing the results from all remote features
 
   Scenario: Run a single remote feature
 
     Given that a feature server is running
     When I run a single remote feature
-    Then a report will be produced containing only the nominated feature
+    Then a report will be produced containing the results from only the nominated feature
 
   Scenario: Nominated feature does not exist
 

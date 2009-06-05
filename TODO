@@ -3,8 +3,13 @@
 - implement last verification step
 - implement pickle command wrapper
 - lower cucumber version in pickle bin as much as possible (play with versions)
+- write some info messages about what is being synched
+  - Retrieving features from LOCATION
+  - Wrote 35 features to /usr/bin/features
+- force creation of feature file path
 
-- extract process control logic out into a new gem
-- check that nothing else does this
+
 - register rubyforge project
 - polish up gem for release
+
+- extract process control logic out into a new gem

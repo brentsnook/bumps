@@ -6,4 +6,7 @@ module Pickle
   LOWEST_SUPPORTED_CUCUMBER_VERSION = '0.3.11'
 end
 
-require 'pickle/pre_cucumber'
+[
+  'feature',
+  'configuration'
+].each {|file| require "pickle/#{file}"}

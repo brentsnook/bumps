@@ -2,7 +2,7 @@
 require 'rubygems'
 
 require File.expand_path(File.dirname(__FILE__), '../lib/pickle')
-Pickle::PreCucumber.fetch_features
+Pickle::Feature.fetch Pickle::Configuration.new(ARGV)
 
 gem 'cucumber'
 load 'cucumber', Pickle::LOWEST_SUPPORTED_CUCUMBER_VERSION

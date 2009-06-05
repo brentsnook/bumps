@@ -1,1 +1,8 @@
-echo 'I yam the pickle command, implement me already'
+#!/usr/bin/env ruby
+require 'rubygems'
+
+require File.expand_path(File.dirname(__FILE__), '../lib/pickle')
+Pickle::PreCucumber.fetch_features
+
+gem 'cucumber'
+load 'cucumber', Pickle::LOWEST_SUPPORTED_CUCUMBER_VERSION

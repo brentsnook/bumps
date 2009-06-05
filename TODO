@@ -1,3 +1,9 @@
+- fix duplicate loading of pickle in lib
+- get cucumber script called from pickle
+- implement last verification step
+- implement pickle command wrapper
+- lower cucumber version in pickle bin as much as possible (play with versions)
+
 - extract process control logic out into a new gem
 - check that nothing else does this
 - register rubyforge project

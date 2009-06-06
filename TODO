@@ -1,15 +1,38 @@
+--- PULLING FEATURES ---
+- upgrade libxml version and reinstall nokogiri to shut it up
 - fix duplicate loading of pickle in lib
-- get cucumber script called from pickle
 - implement last verification step
-- implement pickle command wrapper
 - lower cucumber version in pickle bin as much as possible (play with versions)
-- write some info messages about what is being synched
-  - Retrieving features from LOCATION
-  - Wrote 35 features to /usr/bin/features
-- force creation of feature file path
+- fix Invalid or inclomplete context typo in Nokogiri
 
+--- SERVING STATUS ---
+- formatter for simplified format
+- change pickle wrapper script to register new formatter (via gem or command line???)
+- add server to serve status
+- add command line script to start server
+  - specify report location (defaults)
+- post results immediately after run finishes
+
+--- RAKE TASK ---
+
+- add a rake task a la cucumber
+
+--- RELEASE ---
 
 - register rubyforge project
+- complete README
+- complete wiki pages
+- register google group
 - polish up gem for release
+- release gem
+- post to wave google group
+- post to cucumber google group
 
+--- LATER ---
+- need to be able to do a pull without running all features - is this useful or should you just run all features?
+- any way to speed up synching???
+- can it be more of a synch than a straight clobber???
 - extract process control logic out into a new gem
+- support synching a single feature ???
+- support obtaining details for a single feature ???
+- create lighthouse project

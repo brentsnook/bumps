@@ -6,7 +6,10 @@ module Pickle
   LOWEST_SUPPORTED_CUCUMBER_VERSION = '0.3.11'
 end
 
+require 'rubygems'
+
 [
+  'remote_feature',
   'feature',
   'configuration'
 ].each {|file| require "pickle/#{file}"}

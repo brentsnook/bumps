@@ -1,8 +1,3 @@
 #!/usr/bin/env ruby
-require 'rubygems'
-
 require File.expand_path(File.dirname(__FILE__), '../lib/pickle')
-Pickle::Feature.fetch Pickle::Configuration.new(ARGV)
-
-gem 'cucumber'
-load 'cucumber', Pickle::LOWEST_SUPPORTED_CUCUMBER_VERSION
+Pickle::Feature.pull Pickle::Configuration.new

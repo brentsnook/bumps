@@ -1,0 +1,2 @@
+feature_server: http://localhost:1726/features
+feature_directory: ../../tmp/features

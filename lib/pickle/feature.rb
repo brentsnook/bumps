@@ -10,10 +10,13 @@ module Pickle
       @content = ''
     end  
     
-    def self.pull configuration
-      RemoteFeature.fetch(configuration.feature_location).each do |feature|
-        feature.write_to configuration.feature_directory
+    def self.pull config
+      config.output_stream << "\nRetrieving features from #{config.feature_location} ...\n"
+      features = RemoteFeature.fetch(config.feature_location)
+      features.each do |feature|
+        feature.write_to config.feature_directory
       end
+      config.output_stream << "Wrote #{features.size} features to #{config.feature_directory}\n\n"
     end
     
     def write_to directory

@@ -2,8 +2,9 @@
 - upgrade libxml version and reinstall nokogiri to shut it up
 - fix duplicate loading of pickle in lib
 - implement last verification step
-- lower cucumber version in pickle bin as much as possible (play with versions)
+- lower cucumber and nokogiri version in pickle bin as much as possible (play with versions)
 - fix Invalid or inclomplete context typo in Nokogiri
+- better way to create lazy mocks than :null_object
 
 --- SERVING STATUS ---
 - formatter for simplified format

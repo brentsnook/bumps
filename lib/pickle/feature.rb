@@ -1,5 +1,3 @@
-require 'net/http'
-
 module Pickle
   class Feature
     
@@ -20,7 +18,9 @@ module Pickle
     end
     
     def write_to directory
-      file = File.new(File.expand_path(directory, name), 'w')
+      file_path = File.expand_path(File.join(directory, name))
+      FileUtils.makedirs File.dirname(file_path)
+      file = File.new(file_path, 'w')
       file.write content
     end 
     

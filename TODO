@@ -1,16 +1,18 @@
 
 
 --- PULLING FEATURES ---
-- fix pickle script so it actually runs
-- upgrade libxml version and reinstall nokogiri to shut it up
+- implement command line options
+  - --featureurl
+  
 - fix duplicate loading of pickle in lib
 - implement last verification step
-- lower cucumber and nokogiri version in pickle bin as much as possible (play with versions)
-- fix Invalid or inclomplete context typo in Nokogiri
-I_KNOW_I_AM_USING_AN_OLD_AND_BUGGY_VERSION_OF_LIBXML2 before requring nokogiri
-- better way to create lazy mocks than :null_object
+- lower cucumber and nokogiri version in pickle bin as much as possible??? (play with versions)
 - do we need command line options?
 
+
+LIMITATIONS
+
+  - takes for granted that the name you give it is a valid path relative to the supplied feature path (SECURITY PROBLEMS???)
 
 --- SERVING STATUS ---
 - formatter for simplified format

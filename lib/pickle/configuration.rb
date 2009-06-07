@@ -3,6 +3,12 @@ module Pickle
     
     CONFIG_FILE = 'pickle.yml'
     
+    attr_reader :output_stream
+    
+    def initialize output_stream
+      @output_stream = output_stream
+    end  
+    
     def method_missing method, *args
       config.has_key?(method.to_s) ? config[method.to_s] : super(method, args)
     end  

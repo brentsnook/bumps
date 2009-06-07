@@ -1,5 +1,7 @@
 require 'nokogiri'
 
+require 'open-uri'
+
 module Pickle
   
   class RemoteFeature

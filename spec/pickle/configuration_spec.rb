@@ -2,6 +2,9 @@ require File.dirname(__FILE__) + '/../spec_helper.rb'
 
 describe Pickle::Configuration do
   
+  before {@output_stream = mock('output stream', :null_object => true)}
+  subject {Pickle::Configuration.new @output_stream}
+  
   it 'should load configuration from pickle.yml' do
     File.stub!(:exist?).and_return true
     IO.stub!(:read).with('pickle.yml').and_return (file_contents = mock('file'))
@@ -41,5 +44,7 @@ describe Pickle::Configuration do
     lambda{ subject.feature_directory }.should raise_error(RuntimeError, 'Required property feature_directory not found in pickle.yml')
   end
   
-  
+  it 'should return the output stream it was created with' do
+    subject.output_stream.should == @output_stream
+  end  
 end

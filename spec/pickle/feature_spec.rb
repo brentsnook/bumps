@@ -58,21 +58,31 @@ describe Pickle::Feature do
   
     it 'should construct file name from expanded directory and feature name' do
       subject.stub!(:name).and_return 'name'
-      File.stub!(:expand_path).with('directory/path', 'name').and_return 'expanded path'
+      File.stub!(:expand_path).with('directory/path/name').and_return 'expanded path'
       File.should_receive(:new).with('expanded path', anything).and_return @file
     
       subject.write_to 'directory/path'
     end
   
     it 'should overwrite existing files' do
+      FileUtils.stub! :makedirs
+      
       File.should_receive(:new).with(anything, 'w').and_return @file
-    
+     
       subject.write_to ''
     end
-
-    it 'should first force creation of feature file path'
+    
+    it 'should force the creation of directories in the feature name' do
+      File.stub!(:expand_path).and_return 'features_dir/subdir/featurename.feature'
+      File.stub(:new).and_return mock('file', :null_object => true)
+      
+      FileUtils.should_receive(:makedirs).with 'features_dir/subdir'
+      
+      subject.write_to ''
+    end
   
     it 'should write content to file' do
+      FileUtils.stub! :makedirs
       File.stub!(:new).and_return @file
       subject.stub!(:content).and_return 'content'
     

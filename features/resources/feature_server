@@ -2,10 +2,16 @@ require 'webrick'
 
 server = WEBrick::HTTPServer.new :Port => 1726
 
-server.mount_proc("/all_features") do |request, response|
+server.mount_proc("/features") do |request, response|
   response.body = <<-XML
 <?xml version="1.0"?>
-<xml-goes-here/>
+<features>
+  <feature name="kick_some_arse.feature">
+    As a ruby dude
+    I want to kick some arse
+    Just because
+  </feature>
+</features>
 XML
   response['Content-Type'] = 'text/xml' 
 end

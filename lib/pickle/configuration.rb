@@ -1,7 +1,7 @@
 module Pickle
   class Configuration
     
-    CONFIG_FILE = 'pickle.yml'
+    DEFAULT_CONFIG_FILE = 'pickle.yml'
     
     attr_reader :output_stream
     
@@ -11,16 +11,21 @@ module Pickle
     
     def method_missing method, *args
       config.has_key?(method.to_s) ? config[method.to_s] : super(method, args)
+    end
+    
+    def file
+      config_file = ARGV[0] || DEFAULT_CONFIG_FILE
+      unless File.exist? config_file
+        raise "Pickle configuration file (#{config_file}) was not found"
+      end
+      config_file
     end  
     
     private
     
     def config
       return @config if @config
-      unless File.exist? CONFIG_FILE
-        raise "Pickle configuration file (#{CONFIG_FILE}) was not found"
-      end
-      properties = YAML::load(IO.read(CONFIG_FILE))
+      properties = YAML::load(IO.read(file))
       assert_required_present properties
       @config = properties
     end
@@ -28,9 +33,10 @@ module Pickle
     def assert_required_present properties
       ['feature_location', 'feature_directory'].each do |required_property|
         unless properties.keys.include? required_property
-          raise "Required property #{required_property} not found in #{CONFIG_FILE}"
+          raise "Required property #{required_property} not found in #{file}"
         end   
       end
     end
+    
   end
 end  

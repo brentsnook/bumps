@@ -1,13 +1,13 @@
 
 
 --- PULLING FEATURES ---
-- implement command line options
-  - --featureurl
-  
-- fix duplicate loading of pickle in lib
-- implement last verification step
+- implement last verification step, get story fully passing
+- use given config file if passed (implement in step too)
+- would json be a better choice than xml??? Probably not
 - lower cucumber and nokogiri version in pickle bin as much as possible??? (play with versions)
 - do we need command line options?
+- scenarios to cover multiple directory levels?
+- rip off cucumber process handling and see if it works OK
 
 
 LIMITATIONS
@@ -16,7 +16,7 @@ LIMITATIONS
 
 --- SERVING STATUS ---
 - formatter for simplified format
-- change pickle wrapper script to register new formatter (via gem or command line???)
+- need to register a new formatter if loaded after cucumber - how to do it?
 - add server to serve status
 - add command line script to start server
   - specify report location (defaults)
@@ -28,7 +28,6 @@ LIMITATIONS
 
 --- RELEASE ---
 
-- register rubyforge project
 - complete README
 - complete wiki pages
 - register google group

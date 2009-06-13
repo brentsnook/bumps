@@ -14,7 +14,7 @@ module Pickle
       document = Nokogiri::XML xml
       document.search('feature').collect do |feature_element|
         feature = Feature.new
-        feature.content = feature_element.text
+        feature.content = feature_element.text.strip
         feature.name = feature_element.attribute('name').to_s
         feature
       end  

@@ -90,5 +90,6 @@ describe Pickle::Feature do
     
       subject.write_to ''
     end
+    
   end
 end

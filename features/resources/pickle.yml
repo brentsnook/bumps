@@ -1,2 +1,2 @@
 feature_location: http://localhost:1726/features
-feature_directory: ../../tmp/features
+feature_directory: tmp/features

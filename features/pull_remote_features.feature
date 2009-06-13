@@ -8,7 +8,7 @@ Feature: Pull remote features
 
     Given that a feature server is running
     When I pull all remote features
-    Then all remote features will be written to the feature directory
+    Then the feature directory will contain all remote features
 
   Scenario: Feature server not running
 

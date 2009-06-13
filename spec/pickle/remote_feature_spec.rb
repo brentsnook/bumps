@@ -35,17 +35,33 @@ describe Pickle::RemoteFeature do
 <features>
   <feature name="feature 0">I am the content for feature 0</feature>
   <feature name="feature 1">I am the content for feature 1</feature>
-</features
+</features>
 XML
 
       subject.parse(xml).should eql(features)
     end 
     
+    it 'should trim leading and trailing whitespace from content' do
+      xml = <<-XML
+<?xml version="1.0"?>
+<features>
+  <feature name="feature 0">
+  
+  
+  I am the content for feature 0
+  
+  </feature>
+</features>
+XML
+
+      subject.parse(xml).first.content.should == 'I am the content for feature 0'
+    end  
+    
     it 'should return an empty feature list when none were found' do
       xml = <<-XML
 <?xml version="1.0"?>
 <features>
-</features
+</features>
 XML
       subject.parse(xml).should eql([])
     end

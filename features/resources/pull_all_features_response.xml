@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<features>
+  <feature name="destroy_dr_thaddeus_venture.feature">
+Feature: Destroy Dr Thaddeus Venture
+
+  As The Monarch
+  I want to destroy Dr Thaddeus Venture
+  Just because
+
+  Scenario: Brock Samson shows up
+
+    Given an evil plan is in effect 
+    When Brock Samson shows up
+    Then all henchmen will be killed
+    And the plan will fail
+  </feature>
+</features>

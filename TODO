@@ -1,43 +1,86 @@
+-- CHANGE NAME
+  - Pickle is already taken.....crappp!
+  - Bumps?
+  - Register new rubyforge project
+  - Delete old Rubyforge project
+  - Shift github repository and leave a redirection notice
+  - Name replace through whole app
 
+-- MAKE PULL HAPPEN VIA GEM INCLUDE
+  - refactor Configuration to be a singleton
+  - change test steps (rename also?)
+  - change lib to run on gem include
+      
+     Before :all do
+       Bumps::Feature.pull Bumps::Configuration.new(STDOUT)
+     end
 
---- PULLING FEATURES ---
-- implement last verification step, get story fully passing
-- use given config file if passed (implement in step too)
-- would json be a better choice than xml??? Probably not
-- lower cucumber and nokogiri version in pickle bin as much as possible??? (play with versions)
-- do we need command line options?
-- scenarios to cover multiple directory levels?
-- rip off cucumber process handling and see if it works OK
+  - add language for configuration
+  
+      include 'pickle'
+
+	  Bumps.configure do
+	    pull_features_from http://localhost:1726/features
+	    push_results_to http://localhost:1726/features
+	  end
+	
+	  Bumps.configure { use_server http://localhost:1726 }
+	
+  - change config to detect from pickle.yml only if Pickle.configure not called or remove ???
+  - is the feature directory already set by the time you run env.rb ???
+  - make Configuration detect feature directory from cucumber LAZILY
+  - remove command line tool and associated methods on ScenarioProcess  
+  - add scenarios to cover multiple directory levels?
+
+-- ADD FORMATTER
+
+  - Change configuration to programatically register a new Formatter configured with push address on push_results_to
+  - Do you need a new decorator formatter that allows multiple formatters ???
+  - Add a new formatter that accumulates results and then sends to configured address
+
+-- RELEASE
+
+  - complete README
+
+    - what is it for?
+    - how do you use it?
+      - install
+      - start up a [compliant server] (you may need to write one first)
+      - add some pickleness to your cucumber *env.rb*
+      - run cucumber as normal
+
+    - how to know if it is working
+      - messages will be displayed
+
+  - make sure dependent gem versions are correct
+  - make sure developer gem dependencies are correct
+
+  - WIKI
+  
+    - What does it do?
+      - allows you to store features in
+-- LATER
+
+  - rip off cucumber process handling and see if it works OK
 
 
 LIMITATIONS
 
   - takes for granted that the name you give it is a valid path relative to the supplied feature path (SECURITY PROBLEMS???)
 
---- SERVING STATUS ---
-- formatter for simplified format
-- need to register a new formatter if loaded after cucumber - how to do it?
-- add server to serve status
-- add command line script to start server
-  - specify report location (defaults)
-- post results immediately after run finishes
-
---- RAKE TASK ---
-
-- add a rake task a la cucumber
-
 --- RELEASE ---
 
 - complete README
 - complete wiki pages
-- register google group
 - polish up gem for release
-- release gem
+- test gem install
+- release gem on rubyforge
+- register google group and update wiki doco
 - post to wave google group
 - post to cucumber google group
 
+
 --- LATER ---
-- need to be able to do a pull without running all features - is this useful or should you just run all features?
 - any way to speed up synching???
 - can it be more of a synch than a straight clobber???
 - extract process control logic out into a new gem

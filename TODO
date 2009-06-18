@@ -4,15 +4,11 @@
 
 -- MAKE PULL HAPPEN VIA GEM INCLUDE
 
-  - add Hook for
-    - overriding load_plain_text_features method
-    - checking that only a single feature directory has been specified
-    - setting feature directory in configuration
-
   - add checks for trailing slash on server url
   - cucumber world usage is wrong (try with two arguments)
   - add scenarios to cover multiple directory levels?
   - get rid of warnings
+  - scan for puts
 
 -- ADD FORMATTER
 

@@ -8,7 +8,7 @@ require 'cucumber'
   'remote_feature',
   'feature',
   'configuration',
-  'feature_pull_hook'
+  'pre_feature_load_hook'
 ].each {|file| require "pickle/#{file}"}
 
 module Pickle
@@ -18,6 +18,6 @@ module Pickle
   
   def self.configure &block
     Configuration.configure(&block)
-    FeaturePullHook.register_on Cucumber::Cli::Main
+    PreFeatureLoadHook.register_on Cucumber::Cli::Main
   end
 end

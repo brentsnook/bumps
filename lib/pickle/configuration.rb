@@ -13,6 +13,10 @@ module Pickle
       config[:feature_location] = "#{server}/pull_features"
     end
     
+    def self.feature_directory= directory
+      raise 'implement me'  
+    end
+      
     private 
     
     def self.config

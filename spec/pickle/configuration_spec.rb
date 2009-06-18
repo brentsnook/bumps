@@ -21,6 +21,12 @@ describe Pickle::Configuration do
     subject.feature_location.should == 'http://server/pull_features'
   end
   
+  it 'should allow the feature directory to be set' do
+    subject.feature_directory = 'feature_directory'
+    
+    subject.feature_directory.should == 'feature_directory'
+  end
+  
   # it 'should create a new configuration using STDOUT' do
   #   Pickle::FeaturePullHook.stub! :register_on
   #   Pickle::Configuration.should_receive(:new).with(STDOUT).and_return mock('configuration', :null_object => true)

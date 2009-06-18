@@ -14,7 +14,7 @@ module Pickle
     end
     
     def self.feature_directory= directory
-      raise 'implement me'  
+      config[:feature_directory] = directory
     end
       
     private 

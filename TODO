@@ -1,3 +1,28 @@
+
+
+- cucumber world usage is wrong (try with two arguments)
+- override and alias cukes main load_plain_text_features method
+
+
+-- MAKE PULL HAPPEN VIA GEM INCLUDE
+  - refactor Configuration to be a singleton
+  - change lib to run on gem include
+  - add language for configuration
+  
+      include 'pickle'
+	
+	  Bumps.configure { use_server http://localhost:1726 }
+	
+  - remove use of pickle.yml
+  - add scenarios to cover multiple directory levels?
+
+-- ADD FORMATTER
+
+  - Change configuration to programatically register a new Formatter configured with push address on push_results_to
+  - Do you need a new decorator formatter that allows multiple formatters ???
+  - Add a new formatter that accumulates results and then sends to configured address
+    - Also prints success or failure message
+
 -- CHANGE NAME
   - Pickle is already taken.....crappp!
   - Bumps?
@@ -6,37 +31,6 @@
   - Shift github repository and leave a redirection notice
   - Name replace through whole app
 
--- MAKE PULL HAPPEN VIA GEM INCLUDE
-  - refactor Configuration to be a singleton
-  - change test steps (rename also?)
-  - change lib to run on gem include
-      
-     Before :all do
-       Bumps::Feature.pull Bumps::Configuration.new(STDOUT)
-     end
-
-  - add language for configuration
-  
-      include 'pickle'
-
-	  Bumps.configure do
-	    pull_features_from http://localhost:1726/features
-	    push_results_to http://localhost:1726/features
-	  end
-	
-	  Bumps.configure { use_server http://localhost:1726 }
-	
-  - change config to detect from pickle.yml only if Pickle.configure not called or remove ???
-  - is the feature directory already set by the time you run env.rb ???
-  - make Configuration detect feature directory from cucumber LAZILY
-  - remove command line tool and associated methods on ScenarioProcess  
-  - add scenarios to cover multiple directory levels?
-
--- ADD FORMATTER
-
-  - Change configuration to programatically register a new Formatter configured with push address on push_results_to
-  - Do you need a new decorator formatter that allows multiple formatters ???
-  - Add a new formatter that accumulates results and then sends to configured address
 
 -- RELEASE
 
@@ -81,6 +75,7 @@ LIMITATIONS
 
 
 --- LATER ---
+- support separate push and pull URL
 - any way to speed up synching???
 - can it be more of a synch than a straight clobber???
 - extract process control logic out into a new gem

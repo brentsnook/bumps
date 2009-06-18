@@ -7,11 +7,11 @@ Feature: Pull remote features
   Scenario: Pull all remote features
 
     Given that a feature server is running
-    When I pull all remote features
-    Then the feature directory will contain all remote features
+    When a cucumber run is performed
+    Then the feature report will contain all remote features
 
   Scenario: Feature server not running
 
     Given that a feature server is not running
-    When I pull all remote features
+    When a cucumber run is performed
     Then an error message will be displayed stating that the feature server could not be reached

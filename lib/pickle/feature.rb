@@ -8,13 +8,13 @@ module Pickle
       @content = ''
     end  
     
-    def self.pull config
-      config.output_stream << "\nRetrieving features from #{config.feature_location} ...\n"
-      features = RemoteFeature.fetch(config.feature_location)
+    def self.pull
+      Configuration.output_stream << "\nRetrieving features from #{Configuration.feature_location} ...\n"
+      features = RemoteFeature.fetch(Configuration.feature_location)
       features.each do |feature|
-        feature.write_to config.feature_directory
+        feature.write_to Configuration.feature_directory
       end
-      config.output_stream << "Wrote #{features.size} features to #{config.feature_directory}\n\n"
+      Configuration.output_stream << "Wrote #{features.size} features to #{Configuration.feature_directory}\n\n"
     end
     
     def write_to directory

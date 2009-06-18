@@ -4,14 +4,10 @@ describe Pickle::Feature do
   describe 'when pulling' do
 
     subject {Pickle::Feature}
-    
-    before do
-      @configuration = mock 'configuration', :null_object => true
-    end
 
     it 'should write fetched features to the feature directory' do
-      @configuration.stub!(:feature_directory).and_return 'feature_directory'
-      @configuration.stub!(:feature_location).and_return 'location'
+      Pickle::Configuration.stub!(:feature_directory).and_return 'feature_directory'
+      Pickle::Configuration.stub!(:feature_location).and_return 'location'
   
       features = 3.times.collect do |index|
         feature = mock "feature #{index}"
@@ -21,32 +17,34 @@ describe Pickle::Feature do
      
       Pickle::RemoteFeature.stub!(:fetch).with('location').and_return features 
     
-      @configuration.stub!(:feature_directory).and_return 'feature_directory'
+      Pickle::Configuration.stub!(:feature_directory).and_return 'feature_directory'
 
-      subject.pull @configuration
+      subject.pull
     end 
     
     it 'should display which location the features are being retrieved from' do
       Pickle::RemoteFeature.stub!(:fetch).and_return []
       output = mock 'output', :null_object => true
-      @configuration.stub!(:feature_location).and_return 'feature_location'
-      @configuration.stub!(:output_stream).and_return output
+      Pickle::Configuration.stub!(:feature_location).and_return 'feature_location'
+      Pickle::Configuration.stub! :feature_directory
+      Pickle::Configuration.stub!(:output_stream).and_return output
       
       output.should_receive(:<<).with "\nRetrieving features from feature_location ...\n"
       
-      subject.pull @configuration
+      subject.pull
     end  
     
     it 'should display the total number of features retrieved and location they were written to' do
       features = 3.times.collect{|index| mock("feature #{index}", :null_object => true)}
       Pickle::RemoteFeature.stub!(:fetch).and_return features
       output = mock 'output', :null_object => true
-      @configuration.stub!(:feature_directory).and_return 'feature_directory'
-      @configuration.stub!(:output_stream).and_return output
+      Pickle::Configuration.stub!(:feature_directory).and_return 'feature_directory'
+      Pickle::Configuration.stub! :feature_location
+      Pickle::Configuration.stub!(:output_stream).and_return output
       
       output.should_receive(:<<).with "Wrote 3 features to feature_directory\n\n"
       
-      subject.pull @configuration
+      subject.pull
     end
   end
 

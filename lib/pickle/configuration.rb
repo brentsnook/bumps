@@ -1,22 +1,23 @@
 module Pickle
   class Configuration
-
-    def initialize output_stream
-      @config = {}
-      @config[:output_stream] = output_stream
-    end  
     
-    def method_missing method, *args
-      @config.has_key?(method) ? @config[method] : super(method, args)
+    def self.method_missing method, *args
+      config.has_key?(method) ? config[method] : super(method, args)
     end
     
-    def configure &block
-      instance_eval &block
+    def self.configure &block
+      instance_eval(&block)
     end
     
-    def use_server server
-      @config[:feature_location] = "#{server}/pull_features"
+    def self.use_server server
+      config[:feature_location] = "#{server}/pull_features"
     end
     
+    private 
+    
+    def self.config
+      return @config if @config
+      @config = {:output_stream => STDOUT}
+    end
   end
 end  

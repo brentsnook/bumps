@@ -17,13 +17,7 @@ module Pickle
   LOWEST_SUPPORTED_CUCUMBER_VERSION = '0.3.11'
   
   def self.configure &block
-    configuration = Configuration.new STDOUT
-    configuration.configure &block
-  
-    Pickle::FeaturePullHook.create Cucumber::Cli::Main, configuration
+    Configuration.configure(&block)
+    FeaturePullHook.register_on Cucumber::Cli::Main
   end
-  
-  def self.add_feature_pull_hook_to clazz, configuration
-    raise 'implement me'
-  end  
 end

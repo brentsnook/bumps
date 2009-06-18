@@ -3,6 +3,8 @@
 
 
 -- MAKE PULL HAPPEN VIA GEM INCLUDE
+  - need to expose feature directories on Cukes Configuration
+
 
   - add checks for trailing slash on server url
   - cucumber world usage is wrong (try with two arguments)

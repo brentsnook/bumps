@@ -16,4 +16,5 @@ describe Pickle, 'configuration' do
     
     Pickle.configure {}
   end
+
 end

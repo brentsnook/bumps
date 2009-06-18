@@ -9,7 +9,8 @@ class CucumberWorld
   extend Forwardable
   def_delegators CucumberWorld,
     :feature_server_script, :pull_response_file,
-    :feature_report_file, :test_cucumber_directory
+    :feature_report_file, :test_features_directory,
+    :test_require_file
 
   def self.feature_report_file
     File.expand_path File.join(root, 'tmp', 'cucumber.out')
@@ -23,11 +24,11 @@ class CucumberWorld
     File.expand_path File.join(root, 'features', 'resources', 'pull_all_features_response.xml')
   end  
 
-  def self.test_cucumber_directory
-    File.expand_path File.join(root, 'test_features')
+  def self.test_require_file
+    File.expand_path File.join(test_cucumber_directory, 'env.rb')
   end
   
-  def self.test_feature_directory
+  def self.test_features_directory
     File.expand_path File.join(test_cucumber_directory, 'features')
   end
   
@@ -36,6 +37,11 @@ class CucumberWorld
   def self.root
     File.expand_path File.join(File.dirname(__FILE__), '..', '..')
   end
+  
+  def self.test_cucumber_directory
+    File.expand_path File.join(root, 'test_features')
+  end
+
 end
 
 World do
@@ -43,8 +49,8 @@ World do
 end
 
 Before do
-  FileUtils.remove_entry_secure CucumberWorld.test_feature_directory
-  FileUtils.mkdir CucumberWorld.test_feature_directory
+  FileUtils.remove_entry_secure CucumberWorld.test_features_directory
+  FileUtils.mkdir CucumberWorld.test_features_directory
   if File.exist? CucumberWorld.feature_report_file
     FileUtils.remove_entry_secure CucumberWorld.feature_report_file
   end

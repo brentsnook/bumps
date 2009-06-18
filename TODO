@@ -1,19 +1,14 @@
 
 
-- cucumber world usage is wrong (try with two arguments)
-- override and alias cukes main load_plain_text_features method
 
 
 -- MAKE PULL HAPPEN VIA GEM INCLUDE
-  - refactor Configuration to be a singleton
-  - change lib to run on gem include
-  - add language for configuration
-  
-      include 'pickle'
-	
-	  Bumps.configure { use_server http://localhost:1726 }
-	
-  - remove use of pickle.yml
+  - add Hook for
+    - overriding load_plain_text_features method
+    - checking that only a single feature directory has been specified
+    - setting feature directory in configuration
+
+  - cucumber world usage is wrong (try with two arguments)
   - add scenarios to cover multiple directory levels?
 
 -- ADD FORMATTER

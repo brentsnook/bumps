@@ -1,41 +1,21 @@
 module Pickle
   class Configuration
-    
-    DEFAULT_CONFIG_FILE = 'pickle.yml'
-    
-    attr_reader :output_stream
-    
+
     def initialize output_stream
-      @output_stream = output_stream
+      @config = {}
+      @config[:output_stream] = output_stream
     end  
     
     def method_missing method, *args
-      config.has_key?(method.to_s) ? config[method.to_s] : super(method, args)
+      @config.has_key?(method) ? @config[method] : super(method, args)
     end
     
-    def file
-      config_file = ARGV[0] || DEFAULT_CONFIG_FILE
-      unless File.exist? config_file
-        raise "Pickle configuration file (#{config_file}) was not found"
-      end
-      config_file
-    end  
-    
-    private
-    
-    def config
-      return @config if @config
-      properties = YAML::load(IO.read(file))
-      assert_required_present properties
-      @config = properties
+    def configure &block
+      instance_eval &block
     end
     
-    def assert_required_present properties
-      ['feature_location', 'feature_directory'].each do |required_property|
-        unless properties.keys.include? required_property
-          raise "Required property #{required_property} not found in #{file}"
-        end   
-      end
+    def use_server server
+      @config[:feature_location] = "#{server}/pull_features"
     end
     
   end

@@ -10,8 +10,6 @@ class CucumberWorld
   def_delegators CucumberWorld,
     :feature_server_script, :pull_response_file,
     :feature_report_file, :test_cucumber_directory
-  #   :feature_report_file, :pull_response_file,
-  #   :feature_directory, :feature_server_script
 
   def self.feature_report_file
     File.expand_path File.join(root, 'tmp', 'cucumber.out')

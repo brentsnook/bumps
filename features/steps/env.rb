@@ -9,11 +9,16 @@ class CucumberWorld
   extend Forwardable
   def_delegators CucumberWorld,
     :feature_server_script, :pull_response_file,
-    :feature_report_file, :test_features_directory,
-    :test_require_file
+    :test_features_directory, :feature_report_file,
+    :test_require_file, :feature_server_command,
+    :feature_report
 
   def self.feature_report_file
     File.expand_path File.join(root, 'tmp', 'cucumber.out')
+  end
+  
+  def self.feature_report
+    IO.read feature_report_file
   end
   
   def self.feature_server_script
@@ -31,6 +36,10 @@ class CucumberWorld
   def self.test_features_directory
     File.expand_path File.join(test_cucumber_directory, 'features')
   end
+  
+  def self.feature_server_command
+    "ruby #{feature_server_script} #{pull_response_file}"
+  end  
   
   private
   

@@ -28,16 +28,19 @@ class ScenarioProcess
   end
   
   def self.kill_all
-    # this method of killing stuff sucks, feels error prone
-    @commands.each do |command|
-      `ps`.each do |process|
-        # the space at the front of the pattern is essential...
-        # otherwise this will only work intermittently; if the pid you want to kill
-        # is shorter than others in the process list then the group will not capture it        
-        matches = process.match /\s*(\d*).*#{Regexp.escape(command)}/
-        `kill #{matches[1]}` if matches
-      end
-    end  
+    @commands.each { |command| kill command }
+  end
+  
+  def self.kill command
+    # this method of killing stuff sucks, feels brittle
+    
+    `ps`.each do |process|
+      # the space at the front of the pattern is essential...
+      # otherwise this will only work intermittently; if the pid you want to kill
+      # is shorter than others in the process list then the group will not capture it        
+      matches = process.match /\s*(\d*).*#{Regexp.escape(command)}/
+      `kill #{matches[1]}` if matches
+    end
   end
   
   private

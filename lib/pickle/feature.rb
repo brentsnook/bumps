@@ -20,8 +20,7 @@ module Pickle
     def write_to directory
       file_path = File.expand_path(File.join(directory, name))
       FileUtils.makedirs File.dirname(file_path)
-      file = File.new(file_path, 'w')
-      file.write content
+      File.open(file_path, 'w') {|f| f.write(content) }
     end 
     
     def eql? match

@@ -9,9 +9,3 @@ Feature: Pull remote features
     Given that a feature server is running
     When a cucumber run is performed
     Then the feature report will contain all remote features
-
-  Scenario: Feature server not running
-
-    Given that a feature server is not running
-    When a cucumber run is performed
-    Then an error message will be displayed stating that the feature server could not be reached

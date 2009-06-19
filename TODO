@@ -3,8 +3,9 @@
 
 
 -- MAKE PULL HAPPEN VIA GEM INCLUDE
-  - need to expose feature directories on Cukes Configuration
-
+  - Git diff -- make sure no debug crap is left
+  - change feature spec to take block into account
+  - add back feature server not being started scenario and implement
 
   - add checks for trailing slash on server url
   - cucumber world usage is wrong (try with two arguments)

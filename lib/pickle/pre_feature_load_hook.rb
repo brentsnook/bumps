@@ -3,13 +3,15 @@ module Pickle
     def self.register_on clazz
       clazz.class_eval {
         
-        alias :original_load_plain_text_features :load_plain_text_features
+        alias_method :original_load_plain_text_features, :load_plain_text_features
         
-        def load_plain_text_features
+        def pickle_load_plain_text_features
           register_pickle_feature_directory
           Pickle::Feature.pull
           original_load_plain_text_features
         end
+        
+        alias_method :load_plain_text_features, :pickle_load_plain_text_features
         
         def register_pickle_feature_directory
           # nasty? hell yeah. got any better ideas? need access to that protected method...

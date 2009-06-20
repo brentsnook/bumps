@@ -53,9 +53,7 @@ class CucumberWorld
 
 end
 
-World do
-  CucumberWorld.new
-end
+World { CucumberWorld.new }
 
 Before do
   FileUtils.remove_entry_secure CucumberWorld.test_features_directory

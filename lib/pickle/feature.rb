@@ -10,7 +10,13 @@ module Pickle
     
     def self.pull
       Configuration.output_stream << "\nRetrieving features from #{Configuration.feature_location} ...\n"
-      features = RemoteFeature.fetch(Configuration.feature_location)
+      begin
+        features = RemoteFeature.fetch(Configuration.feature_location)
+      rescue Exception => e
+        Configuration.output_stream << "\nCould not pull features: #{e}\n"
+        features = []
+      end
+        
       features.each do |feature|
         feature.write_to Configuration.feature_directory
       end

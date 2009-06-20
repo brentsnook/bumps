@@ -6,11 +6,9 @@
 
   - add back feature server not being started scenario and implement
 
-  - add checks for trailing slash on server url
-  - cucumber world usage is wrong (try with two arguments)
   - add scenarios to cover multiple directory levels?
-  - get rid of warnings
   - scan for puts
+
 
 -- ADD FORMATTER
 
@@ -52,7 +50,7 @@
 -- LATER
 
   - rip off cucumber process handling and see if it works OK
-
+  - cucumber world usage is wrong (try with two arguments)
 
 LIMITATIONS
 

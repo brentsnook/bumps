@@ -6,7 +6,7 @@ Then /^the feature report will contain all remote features$/ do
    end
 end
 
-Then /^the feature report should show that the feature server was not available$/ do
-  feature_report.should match(/Could not retrieve features, the server was unreachable/)
+Then /^the feature report should show that features could not be pulled$/ do
+  feature_report.should match(/Could not pull features/)
 end
 

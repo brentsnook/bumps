@@ -22,6 +22,18 @@ describe Pickle::Feature do
       subject.pull
     end 
     
+    it 'should output an error message if the features could not be fetched' do
+      output = mock 'output stream', :null_object => true
+      Pickle::Configuration.stub!(:output_stream).and_return output
+      Pickle::Configuration.stub! :feature_location
+      Pickle::Configuration.stub! :feature_directory
+      Pickle::RemoteFeature.stub!(:fetch).and_raise "exception message"
+      
+      output.should_receive(:<<).with "\nCould not pull features: exception message\n" 
+      
+      subject.pull
+    end
+    
     it 'should display which location the features are being retrieved from' do
       Pickle::RemoteFeature.stub!(:fetch).and_return []
       output = mock 'output', :null_object => true

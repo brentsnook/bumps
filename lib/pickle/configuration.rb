@@ -1,3 +1,5 @@
+require 'uri'
+
 module Pickle
   class Configuration
     
@@ -10,7 +12,7 @@ module Pickle
     end
     
     def self.use_server server
-      config[:feature_location] = "#{server}/pull_features"
+      config[:feature_location] = URI.join(server, 'pull_features').to_s
     end
     
     def self.feature_directory= directory

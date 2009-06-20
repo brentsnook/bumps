@@ -65,5 +65,6 @@ XML
 XML
       subject.parse(xml).should eql([])
     end
+ 
   end
 end

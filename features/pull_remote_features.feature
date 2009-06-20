@@ -14,4 +14,4 @@ Feature: Pull remote features
 
     Given that a feature server is not running
     When a cucumber run is performed
-    Then the feature report should show that the feature server was not available
+    Then the feature report should show that features could not be pulled

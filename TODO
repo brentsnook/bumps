@@ -3,7 +3,6 @@
 
 
 -- MAKE PULL HAPPEN VIA GEM INCLUDE
-
   - add back feature server not being started scenario and implement
 
   - add scenarios to cover multiple directory levels?
@@ -53,7 +52,7 @@
   - cucumber world usage is wrong (try with two arguments)
 
 LIMITATIONS
-
+  - does not use same output stream as cukes
   - takes for granted that the name you give it is a valid path relative to the supplied feature path (SECURITY PROBLEMS???)
 
 --- RELEASE ---

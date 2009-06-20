@@ -11,7 +11,7 @@ class CucumberWorld
     :feature_server_script, :pull_response_file,
     :test_features_directory, :feature_report_file,
     :test_require_file, :feature_server_command,
-    :feature_report
+    :feature_report, :command_output
 
   def self.feature_report_file
     File.expand_path File.join(root, 'tmp', 'cucumber.out')
@@ -19,6 +19,10 @@ class CucumberWorld
   
   def self.feature_report
     IO.read feature_report_file
+  end
+  
+  def self.command_output
+    IO.read command_output_file
   end
   
   def self.feature_server_script
@@ -49,6 +53,10 @@ class CucumberWorld
   
   def self.test_cucumber_directory
     File.expand_path File.join(root, 'test_features')
+  end
+  
+  def self.command_output_file
+    File.expand_path File.join(root, 'tmp', 'cucumber.log')
   end
 
 end

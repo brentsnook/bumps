@@ -1,32 +1,60 @@
-= pickle
+= Pickle
 
-* FIX (url)
+IN PROGRESS!!!
 
-== DESCRIPTION:
+* http://github.com/brentsnook/pickle
 
-FIX (describe your package)
+Pickle adds some spice to {Cucumber}[http://cukes.info] by allowing you to pull features and push run results to and from a remote server. This means that your feature files no longer need to live with your steps and other code.
 
-== FEATURES/PROBLEMS:
+Pickle has been designed to work with a {Google Wave robot}[http://code.google.com/apis/wave/extensions/robots/] to allow feature text to be stored and edited inside of a wave. It should remain usable with any server that confirms to the {push/pull contract}[[http://wiki.github.com/brentsnook/pushpullcontract] but will evolve in line with Wave technology.
 
-* FIX (list of features or problems)
+See the {wiki}[http://wiki.github.com/brentsnook/pickle] for more details.
 
-== SYNOPSIS:
+== Installation
 
-  FIX (code sample of usage)
+  sudo gem install pickle
 
-== REQUIREMENTS:
+=== Building the Gem yourself
 
-* FIX (list of requirements)
+Grab the code from github:
 
-== INSTALL:
+  git clone git://github.com/brentsnook/pickle.git
+  cd pickle
+  rake install_gem
 
-* FIX (sudo gem install, anything else)
+== How do I use it?
 
-== LICENSE:
+First, start up a server that meets the {push/pull contract}[[http://wiki.github.com/brentsnook/pushpullcontract].
+
+Secondly, bung this inside of your *env.rb* (or equivalent, just make sure it is under the feature directory):
+
+  require 'pickle'
+  Pickle.configure { use_server 'http://mycompliantserver.com' }
+
+Lastly, just run Cukes as normal.
+
+  cucumber myfeaturedirectory
+
+Pickle will pull feature files into the specified feature directory, run cukes and then push the results back to the server. It should also spit out some messages to this effect.
+
+You must also remember the following things:
+
+* you may only give cucumber a single argument to specify feature
+* the feature argument you give cucumber must be creatable as a directory
+* don't feed your mogwai after midnight
+
+== Limitations
+
+* does not use same output stream as Cukes, if you redirect Cukes output via the -o option then Pickle output will not join it
+* takes for granted that the name you give it is a valid path relative to the supplied feature path. You have the potential to cause some major havok given a malicious feature path/content.
+* hasn't been tried with large volumes of feature files; if the current design becomes a problem then it will be addressed
+* doesn't support authentication in any way
+
+== License
 
 (The MIT License)
 
-Copyright (c) 2009 FIXME full name
+Copyright (c) 2009 Brent Snook http://fuglylogic.com
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the

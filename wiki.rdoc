@@ -1,0 +1,47 @@
+== Introduction
+
+
+
+== How does it work?
+
+Ease of use is paramount in Pickle. In order to achieve this, things can and do get a little hairy.
+
+To perform a feature pull, Pickle effectively needs to jump right in front of Cucumber at the point it attempts to read feature files. This way pickle has access to the same configuration options that will be used by Cucumber (like the feature directory). Pickle also has the opportunity to write the feature files to disk before Cucumber even knows what is going on.
+
+To perform a push, Pickle needs to register a new custom formatter programatically.
+
+These things require a spot of dark juju - opening up Cucumber and redefining the method that reads features to wedge Pickle tasks in front of it. This is brittle and stomps all over encapsulation and I'm totally open to any better suggestions.
+
+== Push pull contract
+
+Pickle talks to a single server that responds to both a push and pull URL.
+
+=== Pull
+
+Features need to be pulled from a particular URL
+  
+  http://myserver.com/pull-features
+
+A server should respond like so:
+
+<?xml version="1.0"?>
+<features>
+  <feature name="myfeature.feature">
+Feature: Do Stuff...
+  </feature>
+</features>
+
+The *feature* *name* should be usable as a relative path to the feature. Pickle will attempt to create any directories that are not present.
+
+The body of the *feature* element will be written as the feature file contents.
+
+The root *features* element can contain zero or more *feature* elements.
+
+=== Push
+
+Features need to be pushed to a particular URL
+  
+  http://myserver.com/push-results
+
+TODO: Add details of push request
+- multipart?

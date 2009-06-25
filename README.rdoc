@@ -1,6 +1,6 @@
 = Pickle
 
-IN PROGRESS!!!
+<b>IN PROGRESS!!!</b>
 
 * http://github.com/brentsnook/pickle
 
@@ -26,7 +26,7 @@ Grab the code from github:
 
 First, start up a server that meets the {push/pull contract}[[http://wiki.github.com/brentsnook/pushpullcontract].
 
-Secondly, bung this inside of your *env.rb* (or equivalent, just make sure it is under the feature directory):
+Secondly, bung this inside of your <b>env.rb</b> (or equivalent, just make sure it is under the feature directory):
 
   require 'pickle'
   Pickle.configure { use_server 'http://mycompliantserver.com' }

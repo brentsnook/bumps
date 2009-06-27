@@ -23,7 +23,7 @@ module Pickle
     private 
     
     def self.config
-      return @config if @config
+      return @config if defined? @config
       @config = {:output_stream => STDOUT}
     end
   end

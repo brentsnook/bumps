@@ -1,14 +1,12 @@
 -- ADD FORMATTER
 
-
-- Change configuration to programatically register a new Formatter configured with push address on push_results_to
-
-
   - implement ResultsPushFormatter
     - wraps another formatter, delegating all calls to wrapped formatter (except finish)
     - get it working with html formatter - how to inject in?
+   - prints success message
+   - prints failure message if cant connect
 
-   - Also prints success or failure message
+
   - implement XmlFormatter
    - how to reference steps - by line number?
    - should contain same information as HTML formatter
@@ -18,19 +16,17 @@
      - scenario status
      - duration
      - time of run
+
   - are server URLs OK? More restful?
-  - can an existing formatter be used to capture results as XML??????
   - get rid of treetop giberish
-
-
-   
-
+  - use same output stream as rest of cucumber? can you get this from formatter?
 
 -- CHANGE NAME
   - Pickle is already taken.....crappp!
   - Bumps?
   - Dill?
   - Brine?
+  - pushmepullu
   - Register new rubyforge project
   - Delete old Rubyforge project
   - Shift github repository and leave a redirection notice
@@ -58,9 +54,8 @@
 - cucumber world usage is wrong (try with two arguments)
 - add scenarios to cover multiple directory levels?
 
-- support separate push and pull URL
-- any way to speed up synching???
-- can it be more of a synch than a straight clobber???
+- support separate push and pull URL???
+- can it be more of a synch than a straight clobber??? for speed mainly
 - extract process control logic out into a new gem
 - support obtaining details for a single feature ???
 - create lighthouse project

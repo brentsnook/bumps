@@ -6,7 +6,7 @@ module Pickle
         alias_method :original_load_plain_text_features, :load_plain_text_features
         
         def pickle_load_plain_text_features
-          Pickle::PreFeatureLoadHook.tasks.each { |task| instance_eval &task }
+          Pickle::PreFeatureLoadHook.tasks.each { |task| instance_eval(&task) }
           original_load_plain_text_features
         end
         

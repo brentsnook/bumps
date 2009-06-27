@@ -2,11 +2,17 @@ require 'webrick'
 
 server = WEBrick::HTTPServer.new :Port => 1726
 
-response_content = File.read ARGV[0]
+response_content = IO.read ARGV[0]
 
 server.mount_proc("/pull_features") do |request, response|
   response.body = response_content
   response['Content-Type'] = 'text/xml' 
+end
+
+server.mount_proc("/push_features") do |request, response|
+  IO.new(ARGV[1],"w").write request.query['results']
+  response.body = ""
+  response['Content-Type'] = 'text/html' 
 end
 
 %w(INT TERM).each do |signal|

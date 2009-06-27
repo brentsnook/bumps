@@ -1,8 +1,30 @@
 -- ADD FORMATTER
-  - add feature for results push
-  - Add Pickle::ResultsPushFormatter that accumulates results and then sends to configured address
-    - Also prints success or failure message
-  - Change configuration to programatically register a new Formatter configured with push address on push_results_to
+
+
+- Change configuration to programatically register a new Formatter configured with push address on push_results_to
+  - rename Task.block to something better
+
+
+  - implement ResultsPushFormatter
+    - wraps another formatter, delegating all calls to wrapped formatter (except finish)
+    - get it working with html formatter - how to inject in?
+
+   - Also prints success or failure message
+  - implement XmlFormatter
+   - how to reference steps - by line number?
+   - should contain same information as HTML formatter
+     - step line number
+     - step status
+     - stack trace
+     - scenario status
+     - duration
+     - time of run
+  - are server URLs OK? More restful?
+  - can an existing formatter be used to capture results as XML??????
+  - get rid of treetop giberish
+
+
+   
 
 
 -- CHANGE NAME

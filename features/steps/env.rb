@@ -11,7 +11,9 @@ class CucumberWorld
     :feature_server_script, :pull_response_file,
     :test_features_directory, :feature_report_file,
     :test_require_file, :feature_server_command,
-    :feature_report, :command_output
+    :feature_report, :command_output,
+    :push_request_file, :push_request,
+    :each_feature
 
   def self.feature_report_file
     File.expand_path File.join(root, 'tmp', 'cucumber.out')
@@ -28,11 +30,15 @@ class CucumberWorld
   def self.feature_server_script
     File.expand_path File.join(root, 'features', 'resources', 'feature_server')
   end
-  
-  def self.pull_response_file
-    File.expand_path File.join(root, 'features', 'resources', 'pull_all_features_response.xml')
-  end  
 
+  def self.push_request_file
+    File.expand_path File.join(root, 'tmp', 'results.xml')
+  end
+  
+  def self.push_request
+    IO.read push_request_file
+  end
+  
   def self.test_require_file
     File.expand_path File.join(test_cucumber_directory, 'env.rb')
   end
@@ -42,8 +48,15 @@ class CucumberWorld
   end
   
   def self.feature_server_command
-    "ruby #{feature_server_script} #{pull_response_file}"
+    "ruby #{feature_server_script} #{pull_response_file} #{push_request_file}"
   end  
+  
+  def self.each_feature
+    document = Nokogiri::XML(File.read pull_response_file)
+    document.search('feature').each do |feature_element|
+      yield feature_element.text.strip.first
+    end
+  end
   
   private
   
@@ -58,6 +71,10 @@ class CucumberWorld
   def self.command_output_file
     File.expand_path File.join(root, 'tmp', 'cucumber.log')
   end
+  
+  def self.pull_response_file
+    File.expand_path File.join(root, 'features', 'resources', 'pull_all_features_response.xml')
+  end
 
 end
 
@@ -66,8 +83,11 @@ World { CucumberWorld.new }
 Before do
   FileUtils.remove_entry_secure CucumberWorld.test_features_directory
   FileUtils.mkdir CucumberWorld.test_features_directory
-  if File.exist? CucumberWorld.feature_report_file
-    FileUtils.remove_entry_secure CucumberWorld.feature_report_file
+  [
+    CucumberWorld.feature_report_file,
+    CucumberWorld.push_request_file
+  ].each do |file|
+    FileUtils.remove_entry_secure file if File.exist? file
   end
 end
 

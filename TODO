@@ -2,7 +2,6 @@
 
 
 - Change configuration to programatically register a new Formatter configured with push address on push_results_to
-  - rename Task.block to something better
 
 
   - implement ResultsPushFormatter

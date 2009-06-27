@@ -4,12 +4,12 @@ server = WEBrick::HTTPServer.new :Port => 1726
 
 response_content = IO.read ARGV[0]
 
-server.mount_proc("/pull_features") do |request, response|
+server.mount_proc("/features/content") do |request, response|
   response.body = response_content
   response['Content-Type'] = 'text/xml' 
 end
 
-server.mount_proc("/push_features") do |request, response|
+server.mount_proc("/features/results") do |request, response|
   IO.new(ARGV[1],"w").write request.query['results']
   response.body = ""
   response['Content-Type'] = 'text/html' 

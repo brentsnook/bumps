@@ -18,13 +18,19 @@ describe Pickle::Configuration do
   it 'should derive pull URL from server' do
     subject.use_server 'http://server'
     
-    subject.feature_location.should == 'http://server/pull_features'
+    subject.pull_url.should == 'http://server/features/content'
+  end
+  
+  it 'should derive push URL from server' do
+    subject.use_server 'http://server'
+    
+    subject.push_url.should == 'http://server/features/results'
   end
   
   it 'should be able to handle a server URL with a trailing slash' do
     subject.use_server 'http://server/'
     
-    subject.feature_location.should == 'http://server/pull_features'
+    subject.pull_url.should match(/^http:\/\/server\/[a-z]/)
   end
   
   it 'should allow the feature directory to be set' do

@@ -9,9 +9,9 @@ module Pickle
     end  
     
     def self.pull
-      Configuration.output_stream << "\nRetrieving features from #{Configuration.feature_location} ...\n"
+      Configuration.output_stream << "\nRetrieving features from #{Configuration.pull_url} ...\n"
       begin
-        features = RemoteFeature.fetch(Configuration.feature_location)
+        features = RemoteFeature.fetch(Configuration.pull_url)
       rescue Exception => e
         Configuration.output_stream << "\nCould not pull features: #{e}\n"
         features = []

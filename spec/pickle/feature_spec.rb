@@ -7,7 +7,7 @@ describe Pickle::Feature do
 
     it 'should write fetched features to the feature directory' do
       Pickle::Configuration.stub!(:feature_directory).and_return 'feature_directory'
-      Pickle::Configuration.stub!(:feature_location).and_return 'location'
+      Pickle::Configuration.stub!(:pull_url).and_return 'location'
   
       features = 3.times.collect do |index|
         feature = mock "feature #{index}"
@@ -25,7 +25,7 @@ describe Pickle::Feature do
     it 'should output an error message if the features could not be fetched' do
       output = mock 'output stream', :null_object => true
       Pickle::Configuration.stub!(:output_stream).and_return output
-      Pickle::Configuration.stub! :feature_location
+      Pickle::Configuration.stub! :pull_url
       Pickle::Configuration.stub! :feature_directory
       Pickle::RemoteFeature.stub!(:fetch).and_raise "exception message"
       
@@ -37,11 +37,11 @@ describe Pickle::Feature do
     it 'should display which location the features are being retrieved from' do
       Pickle::RemoteFeature.stub!(:fetch).and_return []
       output = mock 'output', :null_object => true
-      Pickle::Configuration.stub!(:feature_location).and_return 'feature_location'
+      Pickle::Configuration.stub!(:pull_url).and_return 'pull_url'
       Pickle::Configuration.stub! :feature_directory
       Pickle::Configuration.stub!(:output_stream).and_return output
       
-      output.should_receive(:<<).with "\nRetrieving features from feature_location ...\n"
+      output.should_receive(:<<).with "\nRetrieving features from pull_url ...\n"
       
       subject.pull
     end  
@@ -51,7 +51,7 @@ describe Pickle::Feature do
       Pickle::RemoteFeature.stub!(:fetch).and_return features
       output = mock 'output', :null_object => true
       Pickle::Configuration.stub!(:feature_directory).and_return 'feature_directory'
-      Pickle::Configuration.stub! :feature_location
+      Pickle::Configuration.stub! :pull_url
       Pickle::Configuration.stub!(:output_stream).and_return output
       
       output.should_receive(:<<).with "Wrote 3 features to feature_directory\n\n"

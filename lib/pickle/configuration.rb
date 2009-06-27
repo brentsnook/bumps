@@ -12,7 +12,8 @@ module Pickle
     end
     
     def self.use_server server
-      config[:feature_location] = URI.join(server, 'pull_features').to_s
+      config[:pull_url] = URI.join(server, 'features/content').to_s
+      config[:push_url] = URI.join(server, 'features/results').to_s
     end
     
     def self.feature_directory= directory

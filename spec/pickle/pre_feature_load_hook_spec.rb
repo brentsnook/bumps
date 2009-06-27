@@ -14,8 +14,8 @@ describe Pickle::PreFeatureLoadHook, 'when registered on a class' do
   end
   
   it 'should run all tasks within the context of that class' do
-    class FirstTask; def self.block; lambda {first_method}; end; end
-    class SecondTask; def self.block; lambda {second_method}; end; end
+    FirstTask = lambda {first_method}
+    SecondTask = lambda {second_method}
     Pickle::PreFeatureLoadHook.stub!(:tasks).and_return [FirstTask, SecondTask]
     
     @instance.should_receive :first_method

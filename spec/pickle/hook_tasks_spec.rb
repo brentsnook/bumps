@@ -1,11 +1,6 @@
 require File.dirname(__FILE__) + '/../spec_helper.rb'
 
-class Target
-  
-  def run task
-    instance_eval &(task.block)
-  end
-end
+class Target;end
 
 describe Pickle::HookTasks::SetFeatureDirectoryTask do
 
@@ -22,7 +17,7 @@ describe Pickle::HookTasks::SetFeatureDirectoryTask do
 
     Pickle::Configuration.should_receive(:feature_directory=).with 'feature_directory'
 
-    @target.run subject
+    @target.instance_eval &subject
   end
 
   it 'should fail if there is more than one feature directory specified' do
@@ -30,7 +25,7 @@ describe Pickle::HookTasks::SetFeatureDirectoryTask do
     @target.stub!(:configuration).and_return cukes_config
     cukes_config.stub!(:feature_dirs).and_return ['one', 'two']
 
-    lambda{ @target.run subject }.should raise_error('More than one feature directory/file was specified. Please only specify a single feature directory when using pickle')
+    lambda{ @target.instance_eval &subject }.should raise_error('More than one feature directory/file was specified. Please only specify a single feature directory when using pickle')
   end
 end
 
@@ -49,7 +44,7 @@ describe Pickle::HookTasks::PullFeaturesTask do
   it 'should pull features' do
     Pickle::Feature.should_receive :pull
   
-    @target.run subject
+    @target.instance_eval &subject
   end
 end  
   
@@ -72,7 +67,7 @@ describe Pickle::HookTasks::RegisterPushFormatterTask do
     
     @formats.should_receive(:[]=).with('Pickle::ResultsPushFormatter', anything)
           
-    @target.run subject
+    @target.instance_eval &subject
   end
       
   it 'should use the output stream of the first existing formatter' do
@@ -81,6 +76,6 @@ describe Pickle::HookTasks::RegisterPushFormatterTask do
   
     @formats.should_receive(:[]=).with(anything, output)
           
-    @target.run subject
+    @target.instance_eval &subject
   end
 end

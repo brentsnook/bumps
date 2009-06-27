@@ -13,48 +13,31 @@ describe Pickle::PreFeatureLoadHook, 'when registered on a class' do
     @instance = Clazz.new
   end
   
-  it 'should override the :load_plain_text_features method to perform a feature pull' do
-    @instance.stub! :register_pickle_feature_directory
-    Pickle::Feature.should_receive :pull
+  it 'should run all tasks within the context of that class' do
+    class FirstTask; def self.block; lambda {first_method}; end; end
+    class SecondTask; def self.block; lambda {second_method}; end; end
+    Pickle::PreFeatureLoadHook.stub!(:tasks).and_return [FirstTask, SecondTask]
+    
+    @instance.should_receive :first_method
+    @instance.should_receive :second_method
     
     @instance.load_plain_text_features
   end
   
-  it 'should call the original method after pulling features' do
-    @instance.stub! :register_pickle_feature_directory
-    Pickle::Feature.stub! :pull
+  it 'should call the original method after running tasks' do
+    Pickle::PreFeatureLoadHook.stub!(:tasks).and_return []
     
     @instance.should_receive :original_load_plain_text_features
     
     @instance.load_plain_text_features
   end
   
-  it 'should register the feature directory with pickle' do
-    Pickle::Feature.stub! :pull
-  
-    @instance.should_receive :register_pickle_feature_directory
-    
-    @instance.load_plain_text_features
-  end
-  
-  describe 'registering feature directory' do
-    it 'should set it in the pickle configuration' do
-      cukes_config = mock 'cukes_config' 
-      @instance.stub!(:configuration).and_return cukes_config
-      cukes_config.stub!(:feature_dirs).and_return ['feature_directory']
-      Pickle::Feature.stub! :pull
-    
-      Pickle::Configuration.should_receive(:feature_directory=).with 'feature_directory'
-    
-      @instance.load_plain_text_features
-    end
-  
-    it 'should fail if there is more than one feature directory specified' do
-      cukes_config = mock 'cukes_config' 
-      @instance.stub!(:configuration).and_return cukes_config
-      cukes_config.stub!(:feature_dirs).and_return ['one', 'two']
-
-      lambda{ @instance.register_pickle_feature_directory }.should raise_error('More than one feature directory/file was specified. Please only specify a single feature directory when using pickle')
-    end
+  it 'should complete tasks in correct order' do
+    # how can this be better expressed with an example?
+    Pickle::PreFeatureLoadHook.tasks.should == [
+      Pickle::HookTasks::SetFeatureDirectoryTask,
+      Pickle::HookTasks::PullFeaturesTask,
+      Pickle::HookTasks::RegisterPushFormatterTask
+    ]
   end
 end

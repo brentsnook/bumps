@@ -1,28 +1,26 @@
 module Pickle
   class PreFeatureLoadHook
     def self.register_on clazz
-      clazz.class_eval {
+      clazz.class_eval do
         
         alias_method :original_load_plain_text_features, :load_plain_text_features
         
         def pickle_load_plain_text_features
-          register_pickle_feature_directory
-          Pickle::Feature.pull
+          Pickle::PreFeatureLoadHook.tasks.each { |task| instance_eval &(task.block) }
           original_load_plain_text_features
         end
         
         alias_method :load_plain_text_features, :pickle_load_plain_text_features
-        
-        def register_pickle_feature_directory
-          # nasty? hell yeah. got any better ideas? need access to that protected method...
-          feature_directories = configuration.send :feature_dirs
-          
-          error_message = 'More than one feature directory/file was specified. ' +
-                'Please only specify a single feature directory when using pickle'
-          raise error_message if feature_directories.size > 1
-          Pickle::Configuration.feature_directory = feature_directories.first
-        end  
-      }
+
+      end
+    end
+    
+    def self.tasks
+      [
+        HookTasks::SetFeatureDirectoryTask,
+        HookTasks::PullFeaturesTask,
+        HookTasks::RegisterPushFormatterTask
+      ]
     end
   end
 end

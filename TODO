@@ -1,9 +1,9 @@
 -- ADD FORMATTER
-  - spike new formatter and delete
-  - Change configuration to programatically register a new Formatter configured with push address on push_results_to
-  - Do you need a new decorator formatter that allows multiple formatters ???
-  - Add a new formatter that accumulates results and then sends to configured address
+  - add feature for results push
+  - Add Pickle::ResultsPushFormatter that accumulates results and then sends to configured address
     - Also prints success or failure message
+  - Change configuration to programatically register a new Formatter configured with push address on push_results_to
+
 
 -- CHANGE NAME
   - Pickle is already taken.....crappp!

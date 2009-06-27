@@ -8,6 +8,8 @@ require 'cucumber'
   'remote_feature',
   'feature',
   'configuration',
+  'results_push_formatter',
+  'hook_tasks',
   'pre_feature_load_hook'
 ].each {|file| require "pickle/#{file}"}
 

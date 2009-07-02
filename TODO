@@ -1,10 +1,16 @@
 -- ADD FORMATTER
 
-  - implement ResultsPushFormatter
-    - wraps another formatter, delegating all calls to wrapped formatter (except finish)
-    - get it working with html formatter - how to inject in?
-   - prints success message
-   - prints failure message if cant connect
+  - results push formatter
+
+
+  - use same output stream as rest of cucumber? can you get this from formatter?
+
+  - rip off cucumber process handling and see if it works OK
+  - add scenarios to cover multiple directory levels?
+
+
+
+
 
 
   - implement XmlFormatter - what is going to be the best way to use this information with text in Java???????????
@@ -17,12 +23,6 @@
      - duration
      - time of run
 
-  - are server URLs OK? More restful?
-  - get rid of treetop giberish
-  - use same output stream as rest of cucumber? can you get this from formatter?
-
-  - rip off cucumber process handling and see if it works OK
-  - add scenarios to cover multiple directory levels?
 
 -- CHANGE NAME
   - Pickle is already taken.....crappp!
@@ -38,6 +38,11 @@
 
 
 --- RELEASE ---
+
+
+- are server URLs OK? More restful?
+- get rid of treetop giberish
+
 - test special characters in feature body (scenario required?)
 - complete README
 - complete wiki pages

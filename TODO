@@ -7,7 +7,7 @@
    - prints failure message if cant connect
 
 
-  - implement XmlFormatter
+  - implement XmlFormatter - what is going to be the best way to use this information with text in Java???????????
    - how to reference steps - by line number?
    - should contain same information as HTML formatter
      - step line number
@@ -21,12 +21,15 @@
   - get rid of treetop giberish
   - use same output stream as rest of cucumber? can you get this from formatter?
 
+  - rip off cucumber process handling and see if it works OK
+  - add scenarios to cover multiple directory levels?
+
 -- CHANGE NAME
   - Pickle is already taken.....crappp!
   - Bumps?
   - Dill?
   - Brine?
-  - pushmepullu
+  - pushmepullu?
   - Register new rubyforge project
   - Delete old Rubyforge project
   - Shift github repository and leave a redirection notice
@@ -49,10 +52,6 @@
 
 
 --- LATER ---
-
-- rip off cucumber process handling and see if it works OK
-- cucumber world usage is wrong (try with two arguments)
-- add scenarios to cover multiple directory levels?
 
 - support separate push and pull URL???
 - can it be more of a synch than a straight clobber??? for speed mainly

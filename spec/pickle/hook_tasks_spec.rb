@@ -1,6 +1,12 @@
 require File.dirname(__FILE__) + '/../spec_helper.rb'
 
-class Target;end
+class Target
+  
+  def out_stream= out
+    @out_stream = out
+  end
+  
+end
 
 describe Pickle::HookTasks::SetFeatureDirectoryTask do
 
@@ -51,7 +57,9 @@ end
 describe Pickle::HookTasks::RegisterPushFormatterTask do
 
   before do
+    @out_stream = mock 'out stream'
     @target = Target.new
+    @target.out_stream = @out_stream
     
     # law of demeter seems like an even better idea after mocking a chain of three objects
     @formats = mock 'formats'
@@ -70,11 +78,13 @@ describe Pickle::HookTasks::RegisterPushFormatterTask do
     @target.instance_eval &subject
   end
       
-  it 'should use the output stream of the first existing formatter' do
+  it 'should use the main output stream member for output' do
+    # this is also stomping over encapsulation but the member isn't otherwise available
+    
     output = mock 'output'
     @formats.stub!(:values).and_return [output, '']
   
-    @formats.should_receive(:[]=).with(anything, output)
+    @formats.should_receive(:[]=).with(anything, @out_stream)
           
     @target.instance_eval &subject
   end

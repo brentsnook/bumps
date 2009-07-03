@@ -15,8 +15,7 @@ module Pickle::HookTasks
   end
   
   RegisterPushFormatterTask = lambda do
-    formats = configuration.options[:formats]
-    formats['Pickle::ResultsPushFormatter'] = formats.values.first
+    configuration.options[:formats]['Pickle::ResultsPushFormatter'] = @out_stream
   end
   
 end

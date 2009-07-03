@@ -1,12 +1,10 @@
 -- ADD FORMATTER
 
   - push formatter should be outputting to @output_stream or verbose log
-  - get push formatter feature working - cant even find output in file
-
   - rip off cucumber process handling and see if it works OK
   - add scenarios to cover multiple directory levels?
   
-  - custom matcher for features (replace each_feature)
+  - custom matcher for features (replace each_feature method)
 
 
 

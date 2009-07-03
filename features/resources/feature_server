@@ -10,7 +10,7 @@ server.mount_proc("/features/content") do |request, response|
 end
 
 server.mount_proc("/features/results") do |request, response|
-  IO.new(ARGV[1],"w").write request.query['results']
+  File.open(ARGV[1], 'w'){ |f| f.write(request.query['results']) }
   response.body = ""
   response['Content-Type'] = 'text/html' 
 end

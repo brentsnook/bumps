@@ -23,7 +23,7 @@ describe Pickle::Feature do
     end 
     
     it 'should output an error message if the features could not be fetched' do
-      output = mock 'output stream', :null_object => true
+      output = mock('output stream').as_null_object
       Pickle::Configuration.stub!(:output_stream).and_return output
       Pickle::Configuration.stub! :pull_url
       Pickle::Configuration.stub! :feature_directory
@@ -36,7 +36,7 @@ describe Pickle::Feature do
     
     it 'should display which location the features are being retrieved from' do
       Pickle::RemoteFeature.stub!(:fetch).and_return []
-      output = mock 'output', :null_object => true
+      output = mock('output').as_null_object
       Pickle::Configuration.stub!(:pull_url).and_return 'pull_url'
       Pickle::Configuration.stub! :feature_directory
       Pickle::Configuration.stub!(:output_stream).and_return output
@@ -47,9 +47,9 @@ describe Pickle::Feature do
     end  
     
     it 'should display the total number of features retrieved and location they were written to' do
-      features = 3.times.collect{|index| mock("feature #{index}", :null_object => true)}
+      features = 3.times.collect{|index| mock("feature #{index}").as_null_object}
       Pickle::RemoteFeature.stub!(:fetch).and_return features
-      output = mock 'output', :null_object => true
+      output = mock('output').as_null_object
       Pickle::Configuration.stub!(:feature_directory).and_return 'feature_directory'
       Pickle::Configuration.stub! :pull_url
       Pickle::Configuration.stub!(:output_stream).and_return output

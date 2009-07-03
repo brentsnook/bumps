@@ -4,16 +4,10 @@ describe Pickle::ResultsPushFormatter do
   
   before do
     @step_mother = mock 'step_mother'
-    @io = mock 'io'
-    @captured_io = mock 'captured io', :null_object => true
-    StringIO.stub!(:new).and_return @captured_io
+    @io = mock('io').as_null_object
     @options = mock 'options'
     
-    @wrapped_formatter = mock 'wrapped formatter', :null_object => true
-  end
-  
-  def stub_wrapped_formatter
-    Cucumber::Formatter::Html.stub!(:new).and_return @wrapped_formatter
+    @features = mock('features').as_null_object
   end
   
   subject do
@@ -24,43 +18,107 @@ describe Pickle::ResultsPushFormatter do
     )
   end
   
-  it 'should use a new HTML formatter as the wrapped formatter' do
-    Cucumber::Formatter::Html.should_receive(:new).with(
-      @step_mother, anything, @options
-    ).and_return mock('formatter', :null_object => true)
+  it 'should capture results before pushing them' do
+    results = mock 'results'
     
-    subject.visit_features mock('features')
+    subject.should_receive(:results_of_running).with(@features).and_return results
+    subject.should_receive(:push).with results
+    
+    subject.visit_features @features
   end
   
-  it 'should capture io of wrapped formatter' do
-    Cucumber::Formatter::Html.should_receive(:new).with(
-      anything, @captured_io, anything
-    ).and_return mock('formatter', :null_object => true)
-    
-    subject.visit_features mock('features')
+  it 'should use the Cucumber HTML formatter as the wrapped formatter' do
+    subject.wrapped_formatter_class.should == Cucumber::Formatter::Html
   end
   
-  it 'should visit features using wrapped formatter' do
-    stub_wrapped_formatter
-    features = mock 'features', :accept => nil
+  describe 'when capturing results' do
     
-    @wrapped_formatter.should_receive(:visit_features).with features
+    before do
+      @formatter_class = mock 'formatter class'
+      subject.stub!(:wrapped_formatter_class).and_return @formatter_class
+    end
+ 
+    it 'should construct the wrapped formatter using the step mother' do
+      @formatter_class.should_receive(:new).with(
+        @step_mother, anything, anything
+      ).and_return mock('formatter').as_null_object
+ 
+      subject.results_of_running @features
+    end
     
-    subject.visit_features features
+    it 'should construct the wrapped formatter using the options' do
+      @formatter_class.should_receive(:new).with(
+        anything, anything, @options
+      ).and_return mock('formatter').as_null_object
+ 
+      subject.results_of_running @features
+    end
+    
+    it 'should return results of visiting features with wrapped formatter' do
+      
+      class FormatterTestDouble  
+        def initialize io
+          @io = io
+        end
+        
+        def visit_features features
+          @io << 'results'
+        end
+      end
+      
+      @formatter_class.stub!(:new) do |step_mother, io, options|
+        FormatterTestDouble.new(io)
+      end
+      
+      subject.results_of_running(@features).should =='results'
+    end
+
   end
   
-  it 'should close captured output stream after visiting features' do
-    stub_wrapped_formatter
+  describe 'when pushing results' do
     
-    @captured_io.should_receive :close
+    before do
+      @response = mock 'response'
+      @response.stub!(:code_type).and_return Net::HTTPOK
+    end
+  
+    it 'should post results to configured push URL' do
+      push_url = mock 'push url'
+      Pickle::Configuration.stub!(:push_url).and_return push_url
+      
+      Net::HTTP.should_receive(:post_form).with(push_url, anything).and_return([@response, ''])
+      
+      subject.push 'results'
+    end
     
-    subject.visit_features mock('features')
+    it 'should send captured results in request' do
+      Pickle::Configuration.stub! :push_url
+      
+      Net::HTTP.should_receive(:post_form).with(anything, {:results => 'results'}).and_return([@response, ''])
+      
+      subject.push 'results'
+    end
+  
+    it 'should output a success message if results were pushed successfully' do
+      Pickle::Configuration.stub!(:push_url).and_return 'http://push'
+      Net::HTTP.stub!(:post_form).and_return @response, ''
+      
+      @io.should_receive(:<<).with "Successfully pushed results to http://push\n\n"
+      
+      subject.push 'results'
+    end
+  
+    it 'should output a failure message if results could not be pushed' do
+      Pickle::Configuration.stub!(:push_url).and_return 'http://push'
+      @response.stub!(:code_type).and_return Net::HTTPInternalServerError
+      @response.stub!(:code).and_return 500
+      @response.stub!(:body).and_return 'response body'
+
+      Net::HTTP.stub!(:post_form).and_return @response, ''
+    
+      @io.should_receive(:<<).with "Failed to push results to http://push - HTTP 500: \nresponse body\n\n"
+    
+      subject.push 'results'
+    end
   end
-  
-  it 'should submit output of wrapped formatter after features are visited'
-  
-  it 'should output a success message if results were pushed successfully'
-  
-  it 'should output a failure message if results could not be pushed'
-  
 end

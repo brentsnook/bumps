@@ -2,7 +2,7 @@ require File.dirname(__FILE__) + '/../spec_helper.rb'
 
 describe Pickle::Configuration do
   
-  before {@output_stream = mock('output stream', :null_object => true)}
+  before {@output_stream = mock('output stream').as_null_object}
   subject {Pickle::Configuration}
 
   it 'should return STDOUT as the output stream' do

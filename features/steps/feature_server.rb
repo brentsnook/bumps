@@ -7,7 +7,6 @@ Given /^that a feature server is not running$/ do
 end
 
 Then /^the results of the feature run will be sent to the feature server$/ do
-  pending
   each_feature do |feature|
     push_request.should match(/#{feature}/)
   end

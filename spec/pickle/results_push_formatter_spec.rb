@@ -80,43 +80,41 @@ describe Pickle::ResultsPushFormatter do
     before do
       @response = mock 'response'
       @response.stub!(:code_type).and_return Net::HTTPOK
+      @push_url = 'http://push.com'
+      Pickle::Configuration.stub!(:push_url).and_return @push_url
     end
   
     it 'should post results to configured push URL' do
-      push_url = mock 'push url'
-      Pickle::Configuration.stub!(:push_url).and_return push_url
+      parsed_uri = mock 'parsed uri'
+      URI.stub!(:parse).with(@push_url).and_return parsed_uri
       
-      Net::HTTP.should_receive(:post_form).with(push_url, anything).and_return([@response, ''])
+      Net::HTTP.should_receive(:post_form).with(parsed_uri, anything).and_return([@response, ''])
       
       subject.push 'results'
     end
     
     it 'should send captured results in request' do
-      Pickle::Configuration.stub! :push_url
-      
       Net::HTTP.should_receive(:post_form).with(anything, {:results => 'results'}).and_return([@response, ''])
       
       subject.push 'results'
     end
   
     it 'should output a success message if results were pushed successfully' do
-      Pickle::Configuration.stub!(:push_url).and_return 'http://push'
       Net::HTTP.stub!(:post_form).and_return @response, ''
       
-      @io.should_receive(:<<).with "Successfully pushed results to http://push\n\n"
+      @io.should_receive(:<<).with "Successfully pushed results to #{@push_url}\n\n"
       
       subject.push 'results'
     end
   
     it 'should output a failure message if results could not be pushed' do
-      Pickle::Configuration.stub!(:push_url).and_return 'http://push'
       @response.stub!(:code_type).and_return Net::HTTPInternalServerError
       @response.stub!(:code).and_return 500
       @response.stub!(:body).and_return 'response body'
 
       Net::HTTP.stub!(:post_form).and_return @response, ''
     
-      @io.should_receive(:<<).with "Failed to push results to http://push - HTTP 500: \nresponse body\n\n"
+      @io.should_receive(:<<).with "Failed to push results to #{@push_url} - HTTP 500: \nresponse body\n\n"
     
       subject.push 'results'
     end

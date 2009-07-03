@@ -1,7 +1,6 @@
 -- ADD FORMATTER
 
-  - results push formatter
-
+  - get push formatter feature working - cant even find output in file
 
   - use same output stream as rest of cucumber? can you get this from formatter?
 

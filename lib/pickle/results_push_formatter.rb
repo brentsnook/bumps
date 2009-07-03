@@ -16,7 +16,8 @@ module Pickle
     end
     
     def push results
-      response, body = Net::HTTP.post_form Pickle::Configuration.push_url, {:results => results}
+      uri = URI.parse(Pickle::Configuration.push_url)
+      response, body = Net::HTTP.post_form uri, {:results => results}
       if response.code_type == Net::HTTPOK
         @io << "Successfully pushed results to #{Pickle::Configuration.push_url}\n\n"
       else

@@ -15,7 +15,7 @@ module Pickle::HookTasks
   end
   
   RegisterPushFormatterTask = lambda do
-    configuration.options[:formats]['Pickle::ResultsPushFormatter'] = @out_stream
+    configuration.options[:formats]['Pickle::ResultsPushFormatter'] = Pickle::Configuration.output_stream
   end
   
   SetOutputStreamTask = lambda do

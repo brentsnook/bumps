@@ -53,9 +53,8 @@ end
 describe Pickle::HookTasks::RegisterPushFormatterTask do
 
   before do
-    @out_stream = mock 'out stream'
+    @output_stream = mock 'output stream'
     @target = Target.new
-    @target.out_stream = @out_stream
     
     # law of demeter seems like an even better idea after mocking a chain of three objects
     @formats = mock 'formats'
@@ -67,20 +66,15 @@ describe Pickle::HookTasks::RegisterPushFormatterTask do
   subject {Pickle::HookTasks::RegisterPushFormatterTask}
 
   it 'should add the class name of the push formatter to the cucumber configuration' do
-    @formats.stub!(:values).and_return []
-    
     @formats.should_receive(:[]=).with('Pickle::ResultsPushFormatter', anything)
           
     @target.instance_eval &subject
   end
       
-  it 'should use the main output stream member for output' do
-    # this is also stomping over encapsulation but the member isn't otherwise available
-    
-    output = mock 'output'
-    @formats.stub!(:values).and_return [output, '']
-  
-    @formats.should_receive(:[]=).with(anything, @out_stream)
+  it 'should use the configured output stream for output' do
+    Pickle::Configuration.stub!(:output_stream).and_return @output_stream
+
+    @formats.should_receive(:[]=).with(anything, @output_stream)
           
     @target.instance_eval &subject
   end

@@ -1,5 +1,6 @@
 -- ADD FORMATTER
-  - add standard output to config
+  - change formatter to grab output stream from config
+
   - rip off cucumber process handling and see if it works OK
   - add scenarios to cover multiple directory levels?
   

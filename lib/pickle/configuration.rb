@@ -19,6 +19,10 @@ module Pickle
     def self.feature_directory= directory
       config[:feature_directory] = directory
     end
+    
+    def self.output_stream= output_stream
+      config[:output_stream] = output_stream
+    end
       
     private 
     

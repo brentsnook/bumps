@@ -5,8 +5,11 @@ describe Pickle::Configuration do
   before {@output_stream = mock('output stream').as_null_object}
   subject {Pickle::Configuration}
 
-  it 'should return STDOUT as the output stream' do
-    subject.output_stream.should == STDOUT
+  it 'should provide access to the output stream' do
+    out_stream = mock 'out stream'
+    subject.output_stream = out_stream
+    
+    subject.output_stream.should == out_stream
   end  
   
   it 'should allow configuration using a block' do

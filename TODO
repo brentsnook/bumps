@@ -1,6 +1,5 @@
 -- ADD FORMATTER
-
-  - push formatter should be outputting to @output_stream or verbose log
+  - add standard output to config
   - rip off cucumber process handling and see if it works OK
   - add scenarios to cover multiple directory levels?
   

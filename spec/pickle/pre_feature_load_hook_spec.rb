@@ -36,6 +36,7 @@ describe Pickle::PreFeatureLoadHook, 'when registered on a class' do
     # how can this be better expressed with an example?
     Pickle::PreFeatureLoadHook.tasks.should == [
       Pickle::HookTasks::SetFeatureDirectoryTask,
+      Pickle::HookTasks::SetOutputStreamTask,
       Pickle::HookTasks::PullFeaturesTask,
       Pickle::HookTasks::RegisterPushFormatterTask
     ]

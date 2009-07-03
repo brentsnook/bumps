@@ -18,4 +18,8 @@ module Pickle::HookTasks
     configuration.options[:formats]['Pickle::ResultsPushFormatter'] = @out_stream
   end
   
+  SetOutputStreamTask = lambda do
+    Pickle::Configuration.output_stream = @out_stream
+  end
+  
 end

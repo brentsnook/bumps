@@ -18,6 +18,7 @@ module Pickle
     def self.tasks
       [
         HookTasks::SetFeatureDirectoryTask,
+        Pickle::HookTasks::SetOutputStreamTask,
         HookTasks::PullFeaturesTask,
         HookTasks::RegisterPushFormatterTask
       ]

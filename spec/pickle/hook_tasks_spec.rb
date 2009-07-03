@@ -43,10 +43,6 @@ describe Pickle::HookTasks::PullFeaturesTask do
 
   subject {Pickle::HookTasks::PullFeaturesTask}
 
-  before do
-    @target = Target.new
-  end
-
   it 'should pull features' do
     Pickle::Feature.should_receive :pull
   
@@ -85,6 +81,23 @@ describe Pickle::HookTasks::RegisterPushFormatterTask do
     @formats.stub!(:values).and_return [output, '']
   
     @formats.should_receive(:[]=).with(anything, @out_stream)
+          
+    @target.instance_eval &subject
+  end
+end
+
+describe Pickle::HookTasks::SetOutputStreamTask do
+
+  before do
+    @out_stream = mock 'out stream'
+    @target = Target.new
+    @target.out_stream = @out_stream
+  end
+
+  subject {Pickle::HookTasks::SetOutputStreamTask}
+
+  it 'should use target class output stream' do
+    Pickle::Configuration.should_receive(:output_stream=).with @out_stream
           
     @target.instance_eval &subject
   end

@@ -46,7 +46,7 @@ module CucumberWorld
   def each_feature
     document = Nokogiri::XML(File.read pull_response_file)
     document.search('feature').each do |feature_element|
-      yield feature_element.text.strip.first
+      yield feature_element.text.strip.first.strip
     end
   end
   

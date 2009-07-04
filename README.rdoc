@@ -1,7 +1,5 @@
 = Bumps
 
-<b>IN PROGRESS!!!</b>
-
 * http://github.com/brentsnook/bumps
 
 Bumps shakes up {Cucumber}[http://cukes.info] by allowing you to pull feature content and push run results to and from a remote server. This means that your feature files no longer need to live with your steps and other code. This also means that you can publish the results of a Cucumber run to another system.
@@ -24,7 +22,7 @@ Grab the code from github:
 
 First, start up a server that meets the {push/pull contract}[[http://wiki.github.com/brentsnook/pushpullcontract].
 
-Secondly, bung this inside of your <b>env.rb</b> (or equivalent, just make sure it is under the feature directory):
+Secondly, bung this inside of your *env.rb* (or equivalent, just make sure it is under the feature directory):
 
   require 'bumps'
   Bumps.configure { use_server 'http://mycompliantserver.com' }

@@ -1,3 +1,5 @@
+- support custom push and pull URLs
+
 
 - test special characters in feature body (scenario required?)
 - complete README
@@ -7,9 +9,6 @@
 - make sure developer gem dependencies are correct
 - test gem install
 
-
-
-
   - Register new rubyforge project
   - Delete old Rubyforge project
   - Shift github repository and leave a redirection notice
@@ -17,15 +16,14 @@
   - add wiki documentation
 - release gem on rubyforge
 - register google group and update wiki doco
-- post to wave google group
-- post to cucumber google group
+- add blog post on what it is, how to use it and why
+- post to wave google group (links to blog)
+- post to cucumber google group (links to blog)
 
 
 --- LATER ---
 
-- are server URLs OK? More restful?
 - get rid of treetop giberish
-- support separate push and pull URL???
 - can it be more of a synch than a straight clobber??? for speed mainly
 - extract process control logic out into a new gem
 - support obtaining details for a single feature ???

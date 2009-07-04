@@ -1,18 +1,4 @@
 
--- CHANGE NAME
-
-  - Register new rubyforge project
-  - Delete old Rubyforge project
-  - Shift github repository and leave a redirection notice
-
-  - add wiki documentation
-
-
---- RELEASE ---
-
-
-
-
 - test special characters in feature body (scenario required?)
 - complete README
 - complete wiki pages
@@ -20,6 +6,15 @@
 - make sure dependent gem versions are correct
 - make sure developer gem dependencies are correct
 - test gem install
+
+
+
+
+  - Register new rubyforge project
+  - Delete old Rubyforge project
+  - Shift github repository and leave a redirection notice
+
+  - add wiki documentation
 - release gem on rubyforge
 - register google group and update wiki doco
 - post to wave google group

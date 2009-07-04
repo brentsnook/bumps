@@ -1,11 +1,8 @@
 
 -- CHANGE NAME
-  - Name replace through whole app
-  - Pickle is already taken.....crappp!
-  - Bumps?
-  - Dill?
-  - Brine?
-  - pushmepullu?
+
+  - check that path starts with feature directory
+
   - Register new rubyforge project
   - Delete old Rubyforge project
   - Shift github repository and leave a redirection notice

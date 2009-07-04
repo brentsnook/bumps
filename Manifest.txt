@@ -6,13 +6,13 @@ Rakefile
 features/development.feature
 features/steps/common.rb
 features/steps/env.rb
-lib/pickle.rb
+lib/bumps.rb
 script/console
 script/destroy
 script/generate
-spec/pickle_spec.rb
+spec/bumps_spec.rb
 spec/spec.opts
 spec/spec_helper.rb
 tasks/rspec.rake
 test/test_helper.rb
-test/test_pickle.rb
+test/test_bumps.rb

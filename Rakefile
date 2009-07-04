@@ -1,15 +1,15 @@
 %w[rubygems rake rake/clean fileutils newgem rubigen].each { |f| require f }
-require File.dirname(__FILE__) + '/lib/pickle'
+require File.dirname(__FILE__) + '/lib/bumps'
 
 # Generate all the Rake tasks
 # Run 'rake -T' to see list of generated tasks (from gem root directory)
-$hoe = Hoe.new('pickle', Pickle::VERSION) do |p|
+$hoe = Hoe.new('bumps', Bumps::VERSION) do |p|
   p.developer 'Brent Snook', 'brent@fuglylogic.com'
   p.summary = %q{Remote feature management for Cucumber.}
   p.changes = p.paragraphs_of("History.txt", 0..1).join("\n\n")
   p.rubyforge_name = p.name
   p.extra_deps = [
-    ['cucumber', ">= #{Pickle::LOWEST_SUPPORTED_CUCUMBER_VERSION}"],
+    ['cucumber', ">= #{Bumps::LOWEST_SUPPORTED_CUCUMBER_VERSION}"],
     ['nokogiri','>= 1.1.1'],
   ]
   p.extra_dev_deps = [

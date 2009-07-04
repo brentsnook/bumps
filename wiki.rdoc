@@ -4,15 +4,15 @@ TODO what is it?
 
 == Configuration
 
-Pickle is configured and activated using the configure call (to be placed inside of your <b>env.rb</b> or somewhere else suitable):
+Bumps is configured and activated using the configure call (to be placed inside of your <b>env.rb</b> or somewhere else suitable):
 
-  Pickle.configure { ... }
+  Bumps.configure { ... }
 
 === Server
 
   use_server 'http://mycompliantserver.com'
 
-Specifies the root URL of your push/pull server. Pickle will add <b>features/content</b> for the pull URL and <b>features/results</b> for the push URL. You should really specify this one if you don't want things to go haywire.
+Specifies the root URL of your push/pull server. Bumps will add <b>features/content</b> for the pull URL and <b>features/results</b> for the push URL. You should really specify this one if you don't want things to go haywire.
 
 === Results Formatter
 
@@ -28,19 +28,19 @@ A better default formatter will be added later when I've had more of a chance to
 
 == How does it work?
 
-Ease of use is paramount in Pickle. In order to achieve this, things can and do get a little hairy.
+Ease of use is paramount in Bumps. In order to achieve this, things can and do get a little hairy.
 
-To perform a feature pull, Pickle effectively needs to jump right in front of Cucumber at the point it attempts to read feature files. This way pickle has access to the same configuration options that will be used by Cucumber (like the feature directory). Pickle also has the opportunity to write the feature files to disk before Cucumber even knows what is going on.
+To perform a feature pull, Bumps effectively needs to jump right in front of Cucumber at the point it attempts to read feature files. This way bumps has access to the same configuration options that will be used by Cucumber (like the feature directory). Bumps also has the opportunity to write the feature files to disk before Cucumber even knows what is going on.
 
-To perform a push, Pickle needs to register a new custom formatter programatically.
+To perform a push, Bumps needs to register a new custom formatter programatically.
 
-These things require a spot of dark juju - opening up Cucumber and redefining the method that reads features to wedge Pickle tasks in front of it. This is brittle and stomps all over encapsulation and I'm totally open to any better suggestions. 
+These things require a spot of dark juju - opening up Cucumber and redefining the method that reads features to wedge Bumps tasks in front of it. This is brittle and stomps all over encapsulation and I'm totally open to any better suggestions. 
 
 Trying to have the required hooks added to Cucumber may be a future possibility.
 
 == Push pull contract
 
-Pickle talks to a single server that responds to both a push and pull URL.
+Bumps talks to a single server that responds to both a push and pull URL.
 
 === Pull
 
@@ -57,12 +57,12 @@ A server should respond like so:
 	  </feature>
 	</features>
 
-The <b>feature name</b> should be usable as a relative path to the feature. Pickle will attempt to create any directories that are not present.
+The <b>feature name</b> should be usable as a relative path to the feature. Bumps will attempt to create any directories that are not present.
 
 * the body of the <b>feature</b> element will be written as the feature file contents
 * the root <b>features</b> element can contain zero or more <b>feature</b> elements
 * <b>feature name</b> must be directly usable as a filesystem path
-* <b>feature name</b> can also contain Unix slashes in which case Pickle will attempt to create an appropriate directory structure under the feature directory
+* <b>feature name</b> can also contain Unix slashes in which case Bumps will attempt to create an appropriate directory structure under the feature directory
 
 === Push
 
@@ -76,7 +76,7 @@ You should TODO link to config section configure an appropriate results formatte
 
 === Limitations
 
-Please read this and understand the limitations before using Pickle, some of them are very important.
+Please read this and understand the limitations before using Bumps, some of them are very important.
 
 * takes for granted that the name you give it is a valid path relative to the supplied feature directory. You have the potential to cause some <b>major havok</b> given a malicious feature path/content.
 * doesn't support authentication in any way

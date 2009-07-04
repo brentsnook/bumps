@@ -1,25 +1,25 @@
-= Pickle
+= Bumps
 
 <b>IN PROGRESS!!!</b>
 
-* http://github.com/brentsnook/pickle
+* http://github.com/brentsnook/bumps
 
-Pickle adds some spice to {Cucumber}[http://cukes.info] by allowing you to pull features and push run results to and from a remote server. This means that your feature files no longer need to live with your steps and other code.
+Bumps adds some spice to {Cucumber}[http://cukes.info] by allowing you to pull features and push run results to and from a remote server. This means that your feature files no longer need to live with your steps and other code.
 
-Pickle has been designed to work with a {Google Wave robot}[http://code.google.com/apis/wave/extensions/robots/] to allow feature text to be stored and edited inside of a wave. It should remain usable with any server that confirms to the {push/pull contract}[[http://wiki.github.com/brentsnook/pushpullcontract] but will evolve in line with Wave technology.
+Bumps has been designed to work with a {Google Wave robot}[http://code.google.com/apis/wave/extensions/robots/] to allow feature text to be stored and edited inside of a wave. It should remain usable with any server that confirms to the {push/pull contract}[[http://wiki.github.com/brentsnook/pushpullcontract] but will evolve in line with Wave technology.
 
-See the {wiki}[http://wiki.github.com/brentsnook/pickle] for more details.
+See the {wiki}[http://wiki.github.com/brentsnook/bumps] for more details.
 
 == Installation
 
-  sudo gem install pickle
+  sudo gem install bumps
 
 === Building the Gem yourself
 
 Grab the code from github:
 
-  git clone git://github.com/brentsnook/pickle.git
-  cd pickle
+  git clone git://github.com/brentsnook/bumps.git
+  cd bumps
   rake install_gem
 
 == How do I use it?
@@ -28,14 +28,14 @@ First, start up a server that meets the {push/pull contract}[[http://wiki.github
 
 Secondly, bung this inside of your <b>env.rb</b> (or equivalent, just make sure it is under the feature directory):
 
-  require 'pickle'
-  Pickle.configure { use_server 'http://mycompliantserver.com' }
+  require 'bumps'
+  Bumps.configure { use_server 'http://mycompliantserver.com' }
 
 Lastly, just run Cukes as normal.
 
   cucumber myfeaturedirectory
 
-Pickle will pull feature files into the specified feature directory, run cukes and then push the results back to the server. It should also spit out some messages to this effect.
+Bumps will pull feature files into the specified feature directory, run cukes and then push the results back to the server. It should also spit out some messages to this effect.
 
 You must also remember the following things:
 

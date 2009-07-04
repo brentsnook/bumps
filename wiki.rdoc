@@ -1,11 +1,12 @@
 == Introduction
 
+TODO what is it?
+
 == Configuration
 
 Pickle is configured and activated using the configure call (to be placed inside of your <b>env.rb</b> or somewhere else suitable):
 
-
-  Pickle.configure { use_server 'http://mycompliantserver.com' }
+  Pickle.configure { ... }
 
 === Server
 
@@ -33,7 +34,9 @@ To perform a feature pull, Pickle effectively needs to jump right in front of Cu
 
 To perform a push, Pickle needs to register a new custom formatter programatically.
 
-These things require a spot of dark juju - opening up Cucumber and redefining the method that reads features to wedge Pickle tasks in front of it. This is brittle and stomps all over encapsulation and I'm totally open to any better suggestions.
+These things require a spot of dark juju - opening up Cucumber and redefining the method that reads features to wedge Pickle tasks in front of it. This is brittle and stomps all over encapsulation and I'm totally open to any better suggestions. 
+
+Trying to have the required hooks added to Cucumber may be a future possibility.
 
 == Push pull contract
 
@@ -41,30 +44,40 @@ Pickle talks to a single server that responds to both a push and pull URL.
 
 === Pull
 
-Features need to be pulled from a particular URL
+Features will be pulled from a particular URL using a GET request
   
-  http://myserver.com/pull-features
+  http://myserver.com/features/content
 
 A server should respond like so:
 
-<?xml version="1.0"?>
-<features>
-  <feature name="myfeature.feature">
-Feature: Do Stuff...
-  </feature>
-</features>
+	<?xml version="1.0"?>
+	<features>
+	  <feature name="myfeature.feature">
+	Feature: Do Stuff...
+	  </feature>
+	</features>
 
-The *feature* *name* should be usable as a relative path to the feature. Pickle will attempt to create any directories that are not present.
+The <b>feature name</b> should be usable as a relative path to the feature. Pickle will attempt to create any directories that are not present.
 
-The body of the *feature* element will be written as the feature file contents.
-
-The root *features* element can contain zero or more *feature* elements.
+* the body of the <b>feature</b> element will be written as the feature file contents
+* the root <b>features</b> element can contain zero or more <b>feature</b> elements
+* <b>feature name</b> must be directly usable as a filesystem path
+* <b>feature name</b> can also contain Unix slashes in which case Pickle will attempt to create an appropriate directory structure under the feature directory
 
 === Push
 
-Features need to be pushed to a particular URL
+Features results will be pushed using a POST request
   
-  http://myserver.com/push-results
+  http://myserver.com/features/results
 
-TODO: Add details of push request
-- multipart?
+The content of the results is sent in a parameter named <b>results</b>.
+
+You should TODO link to config section configure an appropriate results formatter to make sure your server will be able to interpret the content properly.
+
+=== Limitations
+
+Please read this and understand the limitations before using Pickle, some of them are very important.
+
+* takes for granted that the name you give it is a valid path relative to the supplied feature directory. You have the potential to cause some <b>major havok</b> given a malicious feature path/content.
+* doesn't support authentication in any way
+* hasn't been tried with large volumes of feature files; if the current design becomes a problem then it will be addressed

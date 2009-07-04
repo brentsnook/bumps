@@ -43,13 +43,6 @@ You must also remember the following things:
 * the feature argument you give cucumber must be creatable as a directory
 * don't feed your mogwai after midnight
 
-== Limitations
-
-* does not use same output stream as Cukes, if you redirect Cukes output via the -o option then Pickle output will not join it
-* takes for granted that the name you give it is a valid path relative to the supplied feature directory. You have the potential to cause some major havok given a malicious feature path/content.
-* hasn't been tried with large volumes of feature files; if the current design becomes a problem then it will be addressed
-* doesn't support authentication in any way
-
 == License
 
 (The MIT License)

@@ -1,12 +1,26 @@
 == Introduction
 
-TODO what is it?
+As you can see from the README, Bumps extends {Cucumber}[http://cukes.info] and allows you to <b>pull</b> feature content and <b>push</b> run results to and from a remote server.
+
+Bumps has been designed to work with a {Google Wave robot}[http://code.google.com/apis/wave/extensions/robots/] to allow feature text to be stored and edited inside of a wave. It should remain usable with any server that confirms to the {push/pull contract}[[http://wiki.github.com/brentsnook/pushpullcontract] but will evolve in line with Wave technology.
 
 == Configuration
 
 Bumps is configured and activated using the configure call (to be placed inside of your <b>env.rb</b> or somewhere else suitable):
 
   Bumps.configure { ... }
+
+== Running Cucumber with Bumps
+
+Ain't nothing to it, just run Cucumber as normal making sure to specify a feature directory:
+
+  cucumber my_feature_directory
+
+You must also remember the following things:
+
+* you may only give cucumber a single argument to specify feature
+* the feature argument you give cucumber must be creatable/writable as a directory
+* don't feed your mogwai after midnight
 
 === Server
 
@@ -22,27 +36,34 @@ Specifies the class of the TODO: link to cukes formatter page Cucumber formatter
 
 At the moment, this defaults to Cucumber::Formatter::Html. This formatter will produce output that contains a fair bit of information about the Cucumber run but is not entirely fun to parse. 
 
-You can easily write your own formatter and plug that in instead. So do that.
+You can easily write your own formatter and plug that in instead. Capture as little or as much information as your push server requires.
 
 A better default formatter will be added later when I've had more of a chance to play around with Google Wave.
 
 == How does it work?
 
-Ease of use is paramount in Bumps. In order to achieve this, things can and do get a little hairy.
+Ease of use is paramount in Bumps. In order to achieve this, things can and do get a little hairy under the hood.
 
 To perform a feature pull, Bumps effectively needs to jump right in front of Cucumber at the point it attempts to read feature files. This way bumps has access to the same configuration options that will be used by Cucumber (like the feature directory). Bumps also has the opportunity to write the feature files to disk before Cucumber even knows what is going on.
 
-To perform a push, Bumps needs to register a new custom formatter programatically.
+To perform a push, Bumps also needs to register a new custom formatter programatically.
 
 These things require a spot of dark juju - opening up Cucumber and redefining the method that reads features to wedge Bumps tasks in front of it. This is brittle and stomps all over encapsulation and I'm totally open to any better suggestions. 
 
 Trying to have the required hooks added to Cucumber may be a future possibility.
 
+=== Limitations
+
+* doesn't support authentication in any way
+* hasn't been tried with large volumes of feature files; if the current approach (bring everything over every time) becomes a problem then it will be addressed
+* there must be others, I just can't think of them right now
+
+
 == Push pull contract
 
 Bumps talks to a single server that responds to both a push and pull URL.
 
-=== Pull
+=== Feature Content Pull
 
 Features will be pulled from a particular URL using a GET request
   
@@ -50,12 +71,12 @@ Features will be pulled from a particular URL using a GET request
 
 A server should respond like so:
 
-	<?xml version="1.0"?>
-	<features>
-	  <feature name="myfeature.feature">
-	Feature: Do Stuff...
-	  </feature>
-	</features>
+  <?xml version="1.0"?>
+  <features>
+    <feature name="myfeature.feature">
+	  Feature: Do Stuff...
+	</feature>
+  </features>
 
 The <b>feature name</b> should be usable as a relative path to the feature. Bumps will attempt to create any directories that are not present.
 
@@ -64,20 +85,12 @@ The <b>feature name</b> should be usable as a relative path to the feature. Bump
 * <b>feature name</b> must be directly usable as a filesystem path
 * <b>feature name</b> can also contain Unix slashes in which case Bumps will attempt to create an appropriate directory structure under the feature directory
 
-=== Push
+=== Run Results Push
 
 Features results will be pushed using a POST request
   
   http://myserver.com/features/results
 
-The content of the results is sent in a parameter named <b>results</b>.
+The content of the results is sent in a parameter named <b>results</b>. Bumps does not care what is returned in the response, as long as the HTTP response code indicates that everything is hunky dory.
 
 You should TODO link to config section configure an appropriate results formatter to make sure your server will be able to interpret the content properly.
-
-=== Limitations
-
-Please read this and understand the limitations before using Bumps, some of them are very important.
-
-* takes for granted that the name you give it is a valid path relative to the supplied feature directory. You have the potential to cause some <b>major havok</b> given a malicious feature path/content.
-* doesn't support authentication in any way
-* hasn't been tried with large volumes of feature files; if the current design becomes a problem then it will be addressed

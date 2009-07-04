@@ -27,15 +27,19 @@ describe Pickle::ResultsPushFormatter do
     subject.visit_features @features
   end
   
-  it 'should use the Cucumber HTML formatter as the wrapped formatter' do
-    subject.wrapped_formatter_class.should == Cucumber::Formatter::Html
-  end
-  
   describe 'when capturing results' do
     
     before do
       @formatter_class = mock 'formatter class'
-      subject.stub!(:wrapped_formatter_class).and_return @formatter_class
+      Pickle::Configuration.stub!(:push_content_formatter).and_return @formatter_class
+    end
+    
+    it 'should obtain the push content formatter from the configuration' do
+      @formatter_class.stub!(:new).and_return mock('formatter').as_null_object 
+      
+      Pickle::Configuration.should_receive(:push_content_formatter).and_return @formatter_class
+      
+      subject.results_of_running @features
     end
  
     it 'should construct the wrapped formatter using the step mother' do

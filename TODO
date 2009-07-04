@@ -1,14 +1,7 @@
 -- ADD FORMATTER
-  - change formatter to grab output stream from config
 
-  - rip off cucumber process handling and see if it works OK
-  - add scenarios to cover multiple directory levels?
-  
-  - custom matcher for features (replace each_feature method)
-
-
-
-
+  - make formatter configurable
+    - defaults to HTML formatter
 
   - implement XmlFormatter - what is going to be the best way to use this information with text in Java???????????
    - how to reference steps - by line number?
@@ -37,8 +30,7 @@
 --- RELEASE ---
 
 
-- are server URLs OK? More restful?
-- get rid of treetop giberish
+
 
 - test special characters in feature body (scenario required?)
 - complete README
@@ -55,6 +47,8 @@
 
 --- LATER ---
 
+- are server URLs OK? More restful?
+- get rid of treetop giberish
 - support separate push and pull URL???
 - can it be more of a synch than a straight clobber??? for speed mainly
 - extract process control logic out into a new gem

@@ -25,13 +25,9 @@ module Pickle
       end
     end
     
-    def wrapped_formatter_class
-      Cucumber::Formatter::Html
-    end
-    
     def results_of_running features
       StringIO.open do |io|
-        formatter = wrapped_formatter_class.new step_mother, io, options
+        formatter = Pickle::Configuration.push_content_formatter.new step_mother, io, options
         formatter.visit_features features
         
         io.string

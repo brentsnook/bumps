@@ -15,7 +15,7 @@ module Pickle
     def initialize
       @config = {
         :output_stream => STDOUT,
-        :push_content_formatter => Cucumber::Formatter::Html
+        :results_formatter => Cucumber::Formatter::Html
       }
     end
     
@@ -31,6 +31,10 @@ module Pickle
     def use_server server
       @config[:pull_url] = URI.join(server, 'features/content').to_s
       @config[:push_url] = URI.join(server, 'features/results').to_s
+    end
+    
+    def format_results_with formatter_class
+      @config[:results_formatter] = formatter_class
     end
   end
 end  

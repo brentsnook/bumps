@@ -1,20 +1,6 @@
--- ADD FORMATTER
-
-  - make formatter configurable
-    - defaults to HTML formatter
-
-  - implement XmlFormatter - what is going to be the best way to use this information with text in Java???????????
-   - how to reference steps - by line number?
-   - should contain same information as HTML formatter
-     - step line number
-     - step status
-     - stack trace
-     - scenario status
-     - duration
-     - time of run
-
 
 -- CHANGE NAME
+  - Name replace through whole app
   - Pickle is already taken.....crappp!
   - Bumps?
   - Dill?
@@ -23,7 +9,7 @@
   - Register new rubyforge project
   - Delete old Rubyforge project
   - Shift github repository and leave a redirection notice
-  - Name replace through whole app
+
   - add wiki documentation
 
 

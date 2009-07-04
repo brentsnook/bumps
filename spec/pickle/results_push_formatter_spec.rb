@@ -31,13 +31,13 @@ describe Pickle::ResultsPushFormatter do
     
     before do
       @formatter_class = mock 'formatter class'
-      Pickle::Configuration.stub!(:push_content_formatter).and_return @formatter_class
+      Pickle::Configuration.stub!(:results_formatter).and_return @formatter_class
     end
     
-    it 'should obtain the push content formatter from the configuration' do
+    it 'should obtain the results formatter from the configuration' do
       @formatter_class.stub!(:new).and_return mock('formatter').as_null_object 
       
-      Pickle::Configuration.should_receive(:push_content_formatter).and_return @formatter_class
+      Pickle::Configuration.should_receive(:results_formatter).and_return @formatter_class
       
       subject.results_of_running @features
     end

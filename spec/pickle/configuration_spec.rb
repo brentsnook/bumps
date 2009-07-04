@@ -42,15 +42,16 @@ describe Pickle::Configuration do
     subject.feature_directory.should == 'feature_directory'
   end
   
-  it 'should allow the pushed content formatter to be set' do
-    formatter = mock 'formatter'
-    subject.push_content_formatter = formatter
+  it 'should allow results formatter to be specified' do
+    formatter_class = mock 'formatter class'
     
-    subject.push_content_formatter.should == formatter
+    subject.format_results_with formatter_class
+    
+    subject.results_formatter.should == formatter_class
   end
   
-  it 'should default the pushed content formatter to Cucumber HTML formatter' do
-    subject.push_content_formatter.should == Cucumber::Formatter::Html
+  it 'should default the results formatter to Cucumber HTML formatter' do
+    subject.results_formatter.should == Cucumber::Formatter::Html
   end
   
   it 'should allow access to configuration via class' do

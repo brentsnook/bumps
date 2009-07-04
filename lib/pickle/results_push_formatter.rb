@@ -27,7 +27,7 @@ module Pickle
     
     def results_of_running features
       StringIO.open do |io|
-        formatter = Pickle::Configuration.push_content_formatter.new step_mother, io, options
+        formatter = Pickle::Configuration.results_formatter.new step_mother, io, options
         formatter.visit_features features
         
         io.string

@@ -1,6 +1,29 @@
 == Introduction
 
+== Configuration
 
+Pickle is configured and activated using the configure call (to be placed inside of your <b>env.rb</b> or somewhere else suitable):
+
+
+  Pickle.configure { use_server 'http://mycompliantserver.com' }
+
+=== Server
+
+  use_server 'http://mycompliantserver.com'
+
+Specifies the root URL of your push/pull server. Pickle will add <b>features/content</b> for the pull URL and <b>features/results</b> for the push URL. You should really specify this one if you don't want things to go haywire.
+
+=== Results Formatter
+
+  format_results_with Cucumber::Formatter::Html
+
+Specifies the class of the TODO: link to cukes formatter page Cucumber formatter that will be used to format the pushed results.
+
+At the moment, this defaults to Cucumber::Formatter::Html. This formatter will produce output that contains a fair bit of information about the Cucumber run but is not entirely fun to parse. 
+
+You can easily write your own formatter and plug that in instead. So do that.
+
+A better default formatter will be added later when I've had more of a chance to play around with Google Wave.
 
 == How does it work?
 

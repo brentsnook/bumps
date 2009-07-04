@@ -1,8 +1,6 @@
 
 -- CHANGE NAME
 
-  - check that path starts with feature directory
-
   - Register new rubyforge project
   - Delete old Rubyforge project
   - Shift github repository and leave a redirection notice

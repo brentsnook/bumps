@@ -60,30 +60,48 @@ describe Bumps::Feature do
   end
 
   describe 'when writing self to file' do 
+    
+    it 'should determine absolute path before writing contents' do
+      subject.stub(:absolute_path_under).with('directory').and_return 'path'
+      
+      subject.should_receive(:write_content_to).with 'path'
+      
+      subject.write_to 'directory'
+    end
+  end
   
+  describe 'when determining absolute feature file path' do
+      
     it 'should construct file name from expanded directory and feature name' do
       subject.stub!(:name).and_return 'name'
-      File.stub!(:expand_path).with('directory/path/name').and_return 'expanded path'
-      File.should_receive(:open).with 'expanded path', anything
-    
-      subject.write_to 'directory/path'
+      
+      subject.absolute_path_under('/a/b/c/..').should == '/a/b/name'
     end
+      
+    it 'should fail if given path does not resolve to one below the feature directory' do
+      subject.stub!(:name).and_return '../../etc/bashrc'
+      File.stub! :open # just in case
+      
+      lambda {subject.absolute_path_under '/stuff/features'}.should raise_error 'Could not write feature to path /etc/bashrc, path is not below /stuff/features'
+    end
+  end
   
+  describe 'when writing content' do
+    
     it 'should overwrite existing files' do
       FileUtils.stub! :makedirs
       
       File.should_receive(:open).with anything, 'w'
      
-      subject.write_to ''
+      subject.write_content_to ''
     end
-    
+
     it 'should force the creation of directories in the feature name' do
-      File.stub!(:expand_path).and_return 'features_dir/subdir/featurename.feature'
-      File.stub :open
+      File.stub! :open
       
       FileUtils.should_receive(:makedirs).with 'features_dir/subdir'
       
-      subject.write_to ''
+      subject.write_content_to 'features_dir/subdir/featurename.feature'
     end
   
     it 'should write content to file' do
@@ -94,8 +112,8 @@ describe Bumps::Feature do
     
       @file.should_receive(:write).with 'content' 
     
-      subject.write_to ''
+      subject.write_content_to ''
     end
-    
   end
+
 end

@@ -24,10 +24,22 @@ module Bumps
     end
     
     def write_to directory
-      file_path = File.expand_path(File.join(directory, name))
+      write_content_to absolute_path_under(directory)
+    end
+    
+    def write_content_to file_path
       FileUtils.makedirs File.dirname(file_path)
       File.open(file_path, 'w') {|f| f.write(content) }
-    end 
+    end
+    
+    def absolute_path_under directory
+      expanded_directory = File.expand_path directory
+      file_path = File.expand_path(File.join(directory, name))
+      unless file_path.start_with? expanded_directory
+         raise "Could not write feature to path #{file_path}, path is not below #{expanded_directory}"
+       end
+      file_path
+    end
     
     def eql? match
       self.instance_variables.each do |attr|

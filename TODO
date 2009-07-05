@@ -2,6 +2,9 @@
 
 
 - test special characters in feature body (scenario required?)
+
+- test it on baldrick and numerouno and writing to STDOUT
+
 - complete README
 - complete wiki pages
 - polish up gem for release

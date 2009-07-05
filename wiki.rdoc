@@ -26,7 +26,19 @@ You must also remember the following things:
 
   use_server 'http://mycompliantserver.com'
 
-Specifies the root URL of your push/pull server. Bumps will add *features/content* for the pull URL and *features/results* for the push URL. You should really specify this one if you don't want things to go haywire.
+Specifies the root URL of your push/pull server. Bumps will add *features/content* for the pull URL and *features/results* for the push URL. You should really specify this one (or the push and pull URLs separately) if you don't want things to go haywire.
+
+=== Push URL
+
+  push_to 'http://mycompliantserver.com/features/results'
+
+Specifies a custom push URL. If you specify this you should also specify the pull URL.
+
+=== Push URL
+
+  pull_from 'http://mycompliantserver.com/features/content'
+
+Specifies a custom pull URL.
 
 === Results Formatter
 

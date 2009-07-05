@@ -11,12 +11,8 @@
 - make sure dependent gem versions are correct
 - make sure developer gem dependencies are correct
 - test gem install
-
-  - Register new rubyforge project
-  - Delete old Rubyforge project
-  - Shift github repository and leave a redirection notice
-
-  - add wiki documentation
+- Delete old Rubyforge project
+- add wiki documentation
 - release gem on rubyforge
 - register google group and update wiki doco
 - add blog post on what it is, how to use it and why

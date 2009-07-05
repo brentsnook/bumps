@@ -33,6 +33,14 @@ module Bumps
       @config[:push_url] = URI.join(server, 'features/results').to_s
     end
     
+    def push_to url
+      @config[:push_url] = url
+    end
+    
+    def pull_from url
+      @config[:pull_url] = url
+    end
+    
     def format_results_with formatter_class
       @config[:results_formatter] = formatter_class
     end

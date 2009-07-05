@@ -36,6 +36,18 @@ describe Bumps::Configuration do
     subject.pull_url.should match(/^http:\/\/server\/[a-z]/)
   end
   
+  it 'should allow a non-default push URL to be specified' do
+    subject.push_to 'http://url.com'
+    
+    subject.push_url.should == 'http://url.com'    
+  end
+
+  it 'should allow a non-default pull URL to be specified' do
+    subject.pull_from 'http://url.com'
+    
+    subject.pull_url.should == 'http://url.com'    
+  end
+    
   it 'should allow the feature directory to be set' do
     subject.feature_directory = 'feature_directory'
     

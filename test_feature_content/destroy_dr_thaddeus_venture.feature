@@ -1,6 +1,3 @@
-<?xml version="1.0"?>
-<features>
-  <feature name="destroy_dr_thaddeus_venture.feature">
 Feature: Destroy Dr Thaddeus Venture
 
   As The Monarch
@@ -13,5 +10,3 @@ Feature: Destroy Dr Thaddeus Venture
     When Brock Samson shows up
     Then all henchmen will be killed
     And the plan will fail
-  </feature>
-</features>

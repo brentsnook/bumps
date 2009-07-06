@@ -1,0 +1,41 @@
+require 'webrick'
+require 'stringio'
+
+server = WEBrick::HTTPServer.new :Port => 1726
+
+feature_content_dir = ARGV[0]
+
+server.mount_proc("/features/content") do |request, response|
+  content = StringIO.new 
+  content.puts '<?xml version="1.0"?>'
+  content.puts '<features>'
+
+  Dir.glob(File.join(feature_content_dir, '**', '*')).each do |feature_file|
+    if File.file? feature_file
+      relative_path = feature_file[(feature_content_dir.length)..-1]
+      content.puts "  <feature name=\"#{relative_path}\">"
+      content << IO.read(feature_file)
+      content.puts "  </feature>"
+    end
+  end
+
+  content.puts '</features>'
+
+  response.body = content.string
+  response['Content-Type'] = 'text/xml' 
+end
+
+server.mount_proc("/features/results") do |request, response|
+  File.open(ARGV[1], 'w'){ |f| f.write(request.query['results']) }
+  response.body = ""
+  response['Content-Type'] = 'text/html' 
+end
+
+%w(INT TERM).each do |signal|
+  trap signal do
+    server.shutdown
+    exit!
+  end
+end
+
+server.start

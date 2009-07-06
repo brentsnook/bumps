@@ -14,7 +14,7 @@ $hoe = Hoe.new('bumps', Bumps::VERSION) do |p|
   ]
   p.extra_dev_deps = [
     ['newgem', ">= #{::Newgem::VERSION}"],
-    ['rspec', '>= 1.1.12'],
+    ['rspec', '>= 1.2.7'],
   ]
 
   p.clean_globs |= %w[**/.DS_Store tmp *.log]

@@ -4,12 +4,6 @@ As you can see from the README, Bumps extends {Cucumber}[http://cukes.info] and 
 
 Bumps has been designed to work with a {Google Wave robot}[http://code.google.com/apis/wave/extensions/robots/] to allow feature text to be stored and edited inside of a wave. It should remain usable with any server that confirms to the {push/pull contract}[[http://wiki.github.com/brentsnook/pushpullcontract] but will evolve in line with Wave technology.
 
-== Configuration
-
-Bumps is configured and activated using the configure call (to be placed inside of your *env.rb* or somewhere else suitable):
-
-  Bumps.configure { ... }
-
 == Running Cucumber with Bumps
 
 Ain't nothing to it, just run Cucumber as normal making sure to specify a feature directory:
@@ -22,19 +16,21 @@ You must also remember the following things:
 * the feature argument you give cucumber must be creatable/writable as a directory
 * don't feed your mogwai after midnight
 
-=== Server
+== Configuration
+
+Bumps is configured and activated using the configure call (to be placed inside of your *env.rb* or somewhere else suitable):
+
+  Bumps.configure { ... }
+
+=== Push/Pull URLs
 
   use_server 'http://mycompliantserver.com'
 
-Specifies the root URL of your push/pull server. Bumps will add *features/content* for the pull URL and *features/results* for the push URL. You should really specify this one (or the push and pull URLs separately) if you don't want things to go haywire.
-
-=== Push URL
+Specifies the root URL of your push/pull server. Bumps will add *features/content* for the pull URL and *features/results* for the push URL.
 
   push_to 'http://mycompliantserver.com/features/results'
 
-Specifies a custom push URL. If you specify this you should also specify the pull URL.
-
-=== Push URL
+Specifies a custom push URL.
 
   pull_from 'http://mycompliantserver.com/features/content'
 

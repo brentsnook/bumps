@@ -1,27 +1,31 @@
-- support custom push and pull URLs
-
-
-- test special characters in feature body (scenario required?)
+- test gem install
 
 - test it on baldrick and numerouno and writing to STDOUT
+- test special characters in feature body (scenario required?)
+
+- change webrick port to something different
+- tidy up example server code
 
 - complete README
 - complete wiki pages
-- polish up gem for release
-- make sure dependent gem versions are correct
-- make sure developer gem dependencies are correct
-- test gem install
-- Delete old Rubyforge project
 - add wiki documentation
+
+- update history
+- final manifest check
+- test final gem install with FRESH GEM HOME!!
 - release gem on rubyforge
+- tag release
 - register google group and update wiki doco
 - add blog post on what it is, how to use it and why
+- publish on twitter
 - post to wave google group (links to blog)
 - post to cucumber google group (links to blog)
 
+- Delete old Rubyforge project
 
 --- LATER ---
 
+- add validation for config and some nicer messages?
 - get rid of treetop giberish
 - can it be more of a synch than a straight clobber??? for speed mainly
 - extract process control logic out into a new gem

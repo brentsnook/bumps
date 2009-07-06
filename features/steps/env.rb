@@ -20,7 +20,7 @@ module CucumberWorld
   end
   
   def feature_server_script
-    File.expand_path File.join(root, 'features', 'resources', 'feature_server')
+    File.expand_path File.join(root, 'examples', 'feature_server')
   end
 
   def push_request_file
@@ -40,13 +40,13 @@ module CucumberWorld
   end
   
   def feature_server_command
-    "ruby #{feature_server_script} #{pull_response_file} #{push_request_file}"
+    "ruby #{feature_server_script} #{remote_features_directory} #{push_request_file}"
   end  
   
   def each_feature
-    document = Nokogiri::XML(File.read pull_response_file)
-    document.search('feature').each do |feature_element|
-      yield feature_element.text.strip.first.strip
+    Dir.glob("#{remote_features_directory}/**/*") do |feature_file|
+      content = IO.read(feature_file).strip
+      yield content.first.strip
     end
   end
   
@@ -75,8 +75,8 @@ module CucumberWorld
     File.expand_path File.join(root, 'tmp', 'cucumber.log')
   end
   
-  def pull_response_file
-    File.expand_path File.join(root, 'features', 'resources', 'pull_all_features_response.xml')
+  def remote_features_directory
+    File.expand_path File.join(root, 'test_feature_content')
   end
 
 end

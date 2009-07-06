@@ -32,11 +32,11 @@ module CucumberWorld
   end
   
   def test_require_file
-    File.expand_path File.join(test_cucumber_directory, 'env.rb')
+    File.expand_path File.join(root, 'test_features', 'requires', 'env.rb')
   end
   
   def test_features_directory
-    File.expand_path File.join(test_cucumber_directory, 'features')
+    File.expand_path File.join(root, 'tmp')
   end
   
   def feature_server_command
@@ -67,16 +67,12 @@ module CucumberWorld
     File.expand_path File.join(File.dirname(__FILE__), '..', '..')
   end
   
-  def test_cucumber_directory
-    File.expand_path File.join(root, 'test_features')
-  end
-  
   def command_output_file
     File.expand_path File.join(root, 'tmp', 'cucumber.log')
   end
   
   def remote_features_directory
-    File.expand_path File.join(root, 'test_feature_content')
+    File.expand_path File.join(root, 'test_features', 'remote_content')
   end
 
 end

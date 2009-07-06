@@ -1,14 +1,12 @@
-- test gem install
+- how can you send japanese characters via XML? there are currently some characters being dropped from the steps when using the cucumber example
 
-- test it on baldrick and numerouno and writing to STDOUT
-- test special characters in feature body (scenario required?)
+- test gem install - how do you install to a fresh GEM_HOME?
+  - check that normal and developer dependencies are both covered
 
-- change webrick port to something different, make it configurable???
 - tidy up example server code
 
 - complete README
-- complete wiki pages
-- add wiki documentation
+- add wiki documentation - don't forget page on example server
 
 - update history
 - final manifest check

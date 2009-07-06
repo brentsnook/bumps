@@ -32,7 +32,6 @@ spec/bumps_spec.rb
 spec/spec.opts
 spec/spec_helper.rb
 tasks/rspec.rake
-test_feature_content/destroy_dr_thaddeus_venture.feature
-test_features/env.rb
-test_features/features/destroy_dr_thaddeus_venture.feature
+test_features/remote_content/destroy_dr_thaddeus_venture.feature
+test_features/requires/env.rb
 wiki.rdoc

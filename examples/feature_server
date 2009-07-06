@@ -1,7 +1,7 @@
 require 'webrick'
 require 'stringio'
 
-server = WEBrick::HTTPServer.new :Port => 1726
+server = WEBrick::HTTPServer.new :Port => 1981
 
 feature_content_dir = ARGV[0]
 

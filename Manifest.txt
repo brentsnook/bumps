@@ -3,10 +3,9 @@ Manifest.txt
 README.rdoc
 Rakefile
 TODO
+examples/feature_server
 features/pull_remote_features.feature
 features/push_feature_results.feature
-features/resources/feature_server
-features/resources/pull_all_features_response.xml
 features/steps/command_output.rb
 features/steps/cucumber_run.rb
 features/steps/env.rb
@@ -33,6 +32,7 @@ spec/bumps_spec.rb
 spec/spec.opts
 spec/spec_helper.rb
 tasks/rspec.rake
+test_feature_content/destroy_dr_thaddeus_venture.feature
 test_features/env.rb
 test_features/features/destroy_dr_thaddeus_venture.feature
 wiki.rdoc

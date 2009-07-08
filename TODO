@@ -1,10 +1,8 @@
-- update history
-- final manifest check
-- test final gem install with FRESH GEM HOME!!
-
-- release gem on rubyforge
 - tag release
+- release gem on rubyforge
+
 - register google group and update wiki doco
+
 
 - add blog post on what it is, how to use it and why
 

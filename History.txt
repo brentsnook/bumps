@@ -1,4 +1,5 @@
-== 0.0.1 2009-06-04
+== 0.0.1 2009-07-09
 
 * 1 major enhancement:
   * Initial release
+  * mmmm...has that new gem smell

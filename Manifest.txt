@@ -34,4 +34,3 @@ spec/spec_helper.rb
 tasks/rspec.rake
 test_features/remote_content/destroy_dr_thaddeus_venture.feature
 test_features/requires/env.rb
-wiki.rdoc

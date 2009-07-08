@@ -1,12 +1,7 @@
-- how can you send japanese characters via XML? there are currently some characters being dropped from the steps when using the cucumber example
-
 - test gem install - how do you install to a fresh GEM_HOME?
   - check that normal and developer dependencies are both covered
 
 - tidy up example server code
-
-- complete README
-- add wiki documentation - don't forget page on example server
 
 - update history
 - final manifest check

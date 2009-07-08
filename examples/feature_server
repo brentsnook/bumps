@@ -17,9 +17,8 @@ class PullServlet < HTTPServlet::AbstractServlet
     content.puts '<?xml version="1.0"?>'
     content.puts '<features>'
 
-    features_pattern = File.join @options[0], '**', '*'
     Dir.glob(features_pattern).each do |file|
-      add_feature_to(content, file) if File.file?(file)
+      content << feature_within(file) if File.file?(file)
     end
 
     content.puts '</features>'
@@ -27,11 +26,13 @@ class PullServlet < HTTPServlet::AbstractServlet
     content.string
   end
 
-  def add_feature_to content, file
+  def feature_within file
     relative_path = file[(@options[0].length)..-1]
-    content.puts "  <feature name=\"#{relative_path}\">"
-    content << IO.read(file)
-    content.puts "  </feature>"
+    "<feature name=\"#{relative_path}\"> #{IO.read(file)}\n  </feature>"
+  end
+
+  def features_pattern
+    File.join @options[0], '**', '*'
   end
 
 end

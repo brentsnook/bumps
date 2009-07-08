@@ -3,7 +3,7 @@
 * http://github.com/brentsnook/bumps
 * http://groups.google.com/group/bumps-for-cucumber
 
-Bumps shakes up {Cucumber}[http://cukes.info] by allowing you to pull feature content and push run results to and from a remote server. This means that your feature files no longer need to live with your steps and other code. This also means that you can publish the results of a Cucumber run to another system.
+Bumps extends {Cucumber}[http://cukes.info] by allowing you to pull feature content and push run results to and from a remote server. This means that your feature files no longer need to live with your steps and other code. This also means that you can publish the results of a Cucumber run to another system.
 
 See the {wiki}[http://wiki.github.com/brentsnook/bumps] for more details.
 

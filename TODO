@@ -1,25 +1,21 @@
-- test gem install - how do you install to a fresh GEM_HOME?
-  - check that normal and developer dependencies are both covered
-
-- tidy up example server code
-
 - update history
 - final manifest check
 - test final gem install with FRESH GEM HOME!!
+
 - release gem on rubyforge
 - tag release
 - register google group and update wiki doco
+
 - add blog post on what it is, how to use it and why
+
 - publish on twitter
 - post to wave google group (links to blog)
 - post to cucumber google group (links to blog)
 
-- Delete old Rubyforge project
-
 --- LATER ---
 
 - add validation for config and some nicer messages?
-- get rid of treetop giberish
+- get rid of treetop gibberish
 - can it be more of a synch than a straight clobber??? for speed mainly
 - extract process control logic out into a new gem
 - support obtaining details for a single feature ???

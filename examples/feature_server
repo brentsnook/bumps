@@ -1,35 +1,54 @@
 require 'webrick'
 require 'stringio'
 
-server = WEBrick::HTTPServer.new :Port => 1981
+include WEBrick
 
-feature_content_dir = ARGV[0]
+class PullServlet < HTTPServlet::AbstractServlet
 
-server.mount_proc("/features/content") do |request, response|
-  content = StringIO.new 
-  content.puts '<?xml version="1.0"?>'
-  content.puts '<features>'
-
-  Dir.glob(File.join(feature_content_dir, '**', '*')).each do |feature_file|
-    if File.file? feature_file
-      relative_path = feature_file[(feature_content_dir.length)..-1]
-      content.puts "  <feature name=\"#{relative_path}\">"
-      content << IO.read(feature_file)
-      content.puts "  </feature>"
-    end
+  def do_GET(request, response)
+    response.body = feature_content
+    response['Content-Type'] = 'text/xml'
   end
 
-  content.puts '</features>'
+  private
 
-  response.body = content.string
-  response['Content-Type'] = 'text/xml' 
+  def feature_content
+    content = StringIO.new 
+    content.puts '<?xml version="1.0"?>'
+    content.puts '<features>'
+
+    features_pattern = File.join @options[0], '**', '*'
+    Dir.glob(features_pattern).each do |file|
+      add_feature_to(content, file) if File.file?(file)
+    end
+
+    content.puts '</features>'
+
+    content.string
+  end
+
+  def add_feature_to content, file
+    relative_path = file[(@options[0].length)..-1]
+    content.puts "  <feature name=\"#{relative_path}\">"
+    content << IO.read(file)
+    content.puts "  </feature>"
+  end
+
 end
 
-server.mount_proc("/features/results") do |request, response|
-  File.open(ARGV[1], 'w'){ |f| f.write(request.query['results']) }
-  response.body = ""
-  response['Content-Type'] = 'text/html' 
+class PushServlet < HTTPServlet::AbstractServlet
+
+  def do_POST(request, response)
+    File.open(@options[0], 'w'){ |f| f.write(request.query['results']) }
+    response['Content-Type'] = 'text/html'
+  end
+
 end
+
+server = WEBrick::HTTPServer.new :Port => 1981
+
+server.mount "/features/content", PullServlet, ARGV[0]
+server.mount "/features/results", PushServlet, ARGV[1]
 
 %w(INT TERM).each do |signal|
   trap signal do

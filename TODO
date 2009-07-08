@@ -1,10 +1,7 @@
-- tag release
-- release gem on rubyforge
-
-- register google group and update wiki doco
-
 
 - add blog post on what it is, how to use it and why
+
+- final test with rubyforge gem install
 
 - publish on twitter
 - post to wave google group (links to blog)

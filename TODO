@@ -14,4 +14,3 @@
 - can it be more of a synch than a straight clobber??? for speed mainly
 - extract process control logic out into a new gem
 - support obtaining details for a single feature ???
-- create lighthouse project

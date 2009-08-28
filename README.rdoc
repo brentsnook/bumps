@@ -7,6 +7,10 @@ Bumps extends {Cucumber}[http://cukes.info] by allowing you to pull feature cont
 
 See the {wiki}[http://wiki.github.com/brentsnook/bumps] for more details.
 
+<b>UPDATE: </b> Bumps is currently well and truly busted as of Cucumber release 0.3.96 (possibly lower). The only known version it will work with is 0.3.11.
+
+A fix is in the works, see http://groups.google.com/group/bumps-for-cucumber/browse_thread/thread/24c5341eaa8f3e18 for updates.
+
 == Installation
 
   sudo gem install bumps

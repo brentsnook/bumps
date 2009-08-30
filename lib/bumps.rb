@@ -9,6 +9,7 @@ require 'cucumber'
   'feature',
   'configuration',
   'results_push_formatter',
+  'cucumber_config',
   'hook_tasks',
   'pre_feature_load_hook'
 ].each {|file| require "bumps/#{file}"}

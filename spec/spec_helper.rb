@@ -6,5 +6,4 @@ rescue LoadError
   require 'spec'
 end
 
-$:.unshift(File.dirname(__FILE__) + '/../lib')
-require 'bumps'
+require File.expand_path(File.dirname(__FILE__) + '/../lib/bumps_core')

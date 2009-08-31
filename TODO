@@ -1,5 +1,16 @@
 
+--- 0.3.96 fix
 
+  - update wiki
+
+--- AFTER CUKES RELEASE
+
+  - update gem dependency information to ensure latest Cukes is installed
+  - readme
+  - History
+  - publish gem
+  - announce on twitter, mailing list, cukes list
+   
 
 --- LATER ---
 
@@ -8,55 +19,6 @@
 - can it be more of a synch than a straight clobber??? for speed mainly
 - extract process control logic out into a new gem
 - support obtaining details for a single feature ???
-
-
---- CHANGES REQUIRED TO CUKES ---
-
-proposal: post-configuration hook and pluggable feature loaders
-
-Hi,
-
-I'd like to propose that a few features be added to Cucumber to make extending it easier.
-
-For my recent gem, Bumps (URL???) I extended Cucumber to load features from a remote server among other things. This involved a spot of dubious metaprogramming and while everything worked fine with 0.3.11, 0.3.96 does not work at all. I knew this would happen sooner or later but I really couldn't see a less brittle approach.
-
-I'd like to suggest some potential changes that would make Cucumber easier to extend (at least in my case)
-
-- make feature loading pluggable
-- add a post-configuration hook
-- make Cucumber configuration available to the hook
-
--- Make feature loading pluggable
-
-It would be great if I could plug in my own feature loader class. 
-
-  - can pull in features and then use standard loader
-  - could ideally be registered programatically via pre-load hook
-
--- Add a post-configuration hook
-
-SUGGEST
-
-- make the configuration object available
-- make the output stream of the class available
-- make feature directory location available
-
-
-- need to make output stream from class available
-- need to register the formatter to collect output
-- need to check and set feature directory
-- need to perform feature push
-
-- allows things to happen seamlessly
-- runs post configuration and then makes configuration available
-
-
-SHOULD THIS BE ON THE MAILING LIST OR THE ISSUE MGMT SYSTEM???
-CHECK THAT THESE THINGS ARE POSSIBLE
-
-
-
-CHECK OUT SCRUM FROM HELL
 
 
 

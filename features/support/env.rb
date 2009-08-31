@@ -1,10 +1,3 @@
-require File.dirname(__FILE__) + "/../../lib/bumps"
-
-gem 'cucumber'
-require 'cucumber'
-gem 'rspec'
-require 'spec'
-
 module CucumberWorld
 
   def feature_report_file
@@ -32,7 +25,7 @@ module CucumberWorld
   end
   
   def test_require_file
-    File.expand_path File.join(root, 'test_features', 'requires', 'env.rb')
+    File.expand_path File.join(root, 'test_features', 'requires', 'support', 'env.rb')
   end
   
   def test_features_directory
@@ -46,7 +39,7 @@ module CucumberWorld
   def each_feature
     Dir.glob("#{remote_features_directory}/**/*") do |feature_file|
       content = IO.read(feature_file).strip
-      yield content.first.strip
+      yield content.split("\n").first.strip
     end
   end
   

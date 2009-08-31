@@ -59,7 +59,7 @@ describe Bumps::CucumberConfig, 'processing' do
     end
     
     it 'should add the class name of the push formatter to the cucumber configuration' do
-      @formats.should_receive(:[]=).with('Bumps::ResultsPushFormatter', anything)
+      @formats.should_receive(:<<).with ['Bumps::ResultsPushFormatter', anything]
 
       @config.register_formatter
     end
@@ -68,7 +68,7 @@ describe Bumps::CucumberConfig, 'processing' do
       output_stream = mock 'output stream'
       Bumps::Configuration.stub!(:output_stream).and_return output_stream
 
-      @formats.should_receive(:[]=).with(anything, output_stream)
+      @formats.should_receive(:<<).with [anything, output_stream]
 
       @config.register_formatter
     end

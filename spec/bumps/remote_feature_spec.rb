@@ -23,10 +23,10 @@ describe Bumps::RemoteFeature do
   
   describe 'when parsing' do
     it 'should extract all features from XML' do
-      features = 2.times.collect do |index|
+      features = (0..1).collect do |idx|
         feature = Bumps::Feature.new
-        feature.name = "feature #{index}"
-        feature.content = "I am the content for feature #{index}"
+        feature.name = "feature #{idx}"
+        feature.content = "I am the content for feature #{idx}"
         feature
       end
       

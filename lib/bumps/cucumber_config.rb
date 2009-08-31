@@ -23,7 +23,7 @@ module Bumps
     end
     
     def register_formatter
-      @source_config.options[:formats]['Bumps::ResultsPushFormatter'] = Bumps::Configuration.output_stream  
+      @source_config.options[:formats] << ['Bumps::ResultsPushFormatter', Bumps::Configuration.output_stream]
     end
   end
 end

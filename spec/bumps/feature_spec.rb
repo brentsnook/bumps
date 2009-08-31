@@ -14,7 +14,7 @@ describe Bumps::Feature do
       Bumps::Configuration.stub!(:feature_directory).and_return 'feature_directory'
       Bumps::Configuration.stub!(:pull_url).and_return 'location'
   
-      features = 3.times.collect do |index|
+      features = (1..3).collect do |index|
         feature = mock "feature #{index}"
         feature.should_receive(:write_to).with 'feature_directory'
         feature  
@@ -48,7 +48,7 @@ describe Bumps::Feature do
     end  
     
     it 'should display the total number of features retrieved and location they were written to' do
-      features = 3.times.collect{|index| mock("feature #{index}").as_null_object}
+      features = (1..3).collect{|index| mock("feature #{index}").as_null_object}
       Bumps::RemoteFeature.stub!(:fetch).and_return features
       Bumps::Configuration.stub!(:feature_directory).and_return 'feature_directory'
       Bumps::Configuration.stub! :pull_url
@@ -82,7 +82,7 @@ describe Bumps::Feature do
       subject.stub!(:name).and_return '../../etc/bashrc'
       File.stub! :open # just in case
       
-      lambda {subject.absolute_path_under '/stuff/features'}.should raise_error 'Could not write feature to path /etc/bashrc, path is not below /stuff/features'
+      lambda {subject.absolute_path_under '/stuff/features'}.should raise_error('Could not write feature to path /etc/bashrc, path is not below /stuff/features')
     end
   end
   

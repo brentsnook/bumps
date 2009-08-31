@@ -27,7 +27,7 @@ Grab the code from github:
 
 First, start up a server that meets the {push/pull contract}[http://wiki.github.com/brentsnook/bumps/push-pull-contract].
 
-Secondly, bung this inside of your <b>env.rb</b> (or equivalent, just make sure it is under the feature directory):
+Secondly, bung this inside of your <b>support/env.rb</b> (or equivalent, just make sure it is under a directory named <b>support</b> under the feature directory):
 
   require 'bumps'
   Bumps.configure { use_server 'http://mycompliantserver.com' }

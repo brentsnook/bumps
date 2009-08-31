@@ -21,7 +21,8 @@ module Bumps
     
     def method_missing method, *args
       return @config[method] if @config.has_key?(method)
-      method.to_s.end_with?('=') ? @config[method.to_s.chop.to_sym] = args[0] : super(method, args)
+      method_name = method.to_s
+      method_name =~ /=$/ ? @config[method_name.chop.to_sym] = args[0] : super(method, args)
     end
     
     def configure &block

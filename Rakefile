@@ -1,5 +1,5 @@
 %w[rubygems rake rake/clean fileutils newgem rubigen].each { |f| require f }
-require File.dirname(__FILE__) + '/lib/bumps'
+require File.expand_path(File.dirname(__FILE__) + '/lib/bumps_core')
 
 # Generate all the Rake tasks
 # Run 'rake -T' to see list of generated tasks (from gem root directory)
@@ -9,7 +9,7 @@ $hoe = Hoe.new('bumps', Bumps::VERSION) do |p|
   p.changes = p.paragraphs_of("History.txt", 0..1).join("\n\n")
   p.rubyforge_name = p.name
   p.extra_deps = [
-    ['cucumber', ">= #{Bumps::LOWEST_SUPPORTED_CUCUMBER_VERSION}"],
+    ['cucumber', ">= 0.3.98"],
     ['nokogiri','>= 1.1.1'],
   ]
   p.extra_dev_deps = [
@@ -26,4 +26,5 @@ end
 require 'newgem/tasks' # load /tasks/*.rake
 Dir['tasks/**/*.rake'].each { |t| load t }
 
+Rake::Task[:default].clear_prerequisites # clear out test-unit
 task :default => [:spec, :features]

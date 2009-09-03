@@ -9,7 +9,7 @@ $hoe = Hoe.new('bumps', Bumps::VERSION) do |p|
   p.changes = p.paragraphs_of("History.txt", 0..1).join("\n\n")
   p.rubyforge_name = p.name
   p.extra_deps = [
-    ['cucumber', ">= 0.3.98"],
+    ['cucumber', ">= 0.3.99"],
     ['nokogiri','>= 1.1.1'],
   ]
   p.extra_dev_deps = [

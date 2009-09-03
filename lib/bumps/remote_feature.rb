@@ -5,7 +5,7 @@ require 'open-uri'
 module Bumps
   
   class RemoteFeature
-    
+
     def self.fetch location
       parse(open(location){|f| f.read})
     end
@@ -18,6 +18,7 @@ module Bumps
         feature.name = feature_element.attribute('name').to_s
         feature
       end  
-    end  
+    end
+    
   end
 end  

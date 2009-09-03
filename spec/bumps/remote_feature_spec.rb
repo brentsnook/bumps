@@ -65,6 +65,19 @@ XML
 XML
       subject.parse(xml).should eql([])
     end
- 
+
+    it 'should preserve CDATA in feature content' do
+      xml = <<-XML
+<?xml version="1.0"?>
+<features>
+  <feature name="feature 0">
+    <![CDATA[content contains <b>CDATA</b> & it should be preserved]]>
+  </feature>
+</features>
+XML
+      
+      subject.parse(xml).first.content.should match(%r{content contains <b>CDATA</b> & it should be preserved})
+    end
+         
   end
 end

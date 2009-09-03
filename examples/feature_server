@@ -28,7 +28,7 @@ class PullServlet < HTTPServlet::AbstractServlet
 
   def feature_within file
     relative_path = file[(@options[0].length)..-1]
-    "<feature name=\"#{relative_path}\"> #{IO.read(file)}\n  </feature>"
+    "<feature name=\"#{relative_path}\"><![CDATA[#{IO.read(file)}\n]]></feature>"
   end
 
   def features_pattern

@@ -1,3 +1,8 @@
+== 0.0.3
+
+* Compatibility with Cucumber 0.3.104 and above
+  * Uses new formatter contract
+
 == 0.0.2 2009-09-03
 
 * Compatibility with Cucumber 0.3.99 and above

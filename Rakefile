@@ -1,31 +1,25 @@
 %w[rubygems rake rake/clean hoe fileutils newgem rubigen].each { |f| require f }
-require File.expand_path(File.join(File.dirname(__FILE__) , '/lib/bumps_core'))
-require File.expand_path(File.join(File.dirname(__FILE__) , 'environment.rb'))
+['/lib/bumps_core', 'environment'].each do |f|
+  require File.expand_path(File.join(File.dirname(__FILE__) , f))
+end
 
 Hoe.spec 'bumps' do
-  
   self.version = Bumps::VERSION
-  
   developer 'Brent Snook', 'brent@fuglylogic.com'
-  self.summary = 'Remote feature management for Cucumber.'
-  self.changes = paragraphs_of("History.txt", 0..1).join("\n\n")
-  self.rubyforge_name = name
+  self.readme_file = 'README.rdoc'
+  self.clean_globs |= %w[**/.DS_Store tmp *.log]
+  self.rsync_args = '-av --delete --ignore-errors' # is this needed?
   
-  [
-    ['cucumber', ">= 0.3.103"],
+  self.extra_deps = [
+    ['cucumber', ">= 0.3.104"],
     ['nokogiri','>= 1.3.3'],
-  ].each { |dep| extra_deps << dep }
+  ]
   
-  [
+  self.extra_dev_deps = [
     ['rspec', '>= 1.2.8'],
     ['newgem', ">= #{::Newgem::VERSION}"],
-  ].each { |dep| extra_dev_deps << dep }
-
-  self.clean_globs |= %w[**/.DS_Store tmp *.log]
-  path = (rubyforge_name == name) ? rubyforge_name : "\#{rubyforge_name}/\#{name}"
-  self.remote_rdoc_dir = File.join(path.gsub(/^#{rubyforge_name}\/?/,''), 'rdoc')
-  self.rsync_args = '-av --delete --ignore-errors'
-  self.readme_file = 'README.rdoc'
+    ['sinatra', '>=0.9.4'],
+  ]
 end
 
 require 'cucumber/rake/task'

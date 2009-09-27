@@ -1,13 +1,5 @@
-- make sure all hoe crap is set
-- upgrade formatter
-  - add note about feature server requiring sinatra
-  - add sinatra developer gem dep
-  - check correct lifecycle methods are being called
-
-
-- make sure dependencies are correct - use latest cukes with fix (104?)
-
-- check manifest
+- update history with date
+- gem install and test
 - release
   - tag
   - release to rubyforge

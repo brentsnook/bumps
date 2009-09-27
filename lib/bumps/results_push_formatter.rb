@@ -37,9 +37,9 @@ module Bumps
     def method_missing(method, *args, &block)
       formatter.send(method, *args, &block)
     end
-    
-    def respond_to?(message, does_rspec_mocking_need_this='')
-      super(message) || formatter.respond_to?(message)
+
+    def respond_to?(message, include_private = false)
+      super(message, include_private) || formatter.respond_to?(message, include_private)
     end
     
   end

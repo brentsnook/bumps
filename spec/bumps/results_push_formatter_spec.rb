@@ -34,14 +34,14 @@ describe Bumps::ResultsPushFormatter do
       end
       
       it 'should recognise events that the wrapped formatter handles' do
-        @formatter.stub!(:respond_to?).with('event').and_return true
+        @formatter.stub!(:respond_to?).with('event', anything).and_return true
        
         subject.before_features @features
         subject.respond_to?('event').should == true
       end
       
       it 'should recognise events that it handles on its own' do
-        @formatter.stub!(:respond_to?).with('after_features').and_return false
+        @formatter.stub!(:respond_to?).with('after_features', anything).and_return false
     
         subject.before_features @features
         subject.respond_to?('after_features').should == true

@@ -25,6 +25,7 @@ Hoe.spec 'bumps' do
   path = (rubyforge_name == name) ? rubyforge_name : "\#{rubyforge_name}/\#{name}"
   self.remote_rdoc_dir = File.join(path.gsub(/^#{rubyforge_name}\/?/,''), 'rdoc')
   self.rsync_args = '-av --delete --ignore-errors'
+  self.readme_file = 'README.rdoc'
 end
 
 require 'cucumber/rake/task'

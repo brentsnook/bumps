@@ -1,12 +1,12 @@
+- make sure all hoe crap is set
 - upgrade formatter
-  - pushed results contain no features!
-  - check correct lifecycle methods are being called
   - add note about feature server requiring sinatra
   - add sinatra developer gem dep
-  - check out extra parameter in respond_to? - does rspec need it? - patch?
+  - check correct lifecycle methods are being called
+
+
 - make sure dependencies are correct - use latest cukes with fix (104?)
-- make sure all hoe crap is set
-- get rid of hoe message
+
 - check manifest
 - release
   - tag

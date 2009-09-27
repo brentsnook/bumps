@@ -1,3 +1,8 @@
+- force creation of tmp directory
+- hoe update
+- make sure it works with directory not being specified
+- make sure dependencies are correct
+- upgrade formatter - read upgrade thread
 
 --- LATER ---
 

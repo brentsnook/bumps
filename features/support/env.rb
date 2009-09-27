@@ -1,7 +1,7 @@
 module CucumberWorld
 
   def feature_report_file
-    File.expand_path File.join(root, 'tmp', 'cucumber.out')
+    File.expand_path File.join(ENV['BUMPS_TEMP'], 'cucumber.out')
   end
   
   def feature_report
@@ -17,7 +17,7 @@ module CucumberWorld
   end
 
   def push_request_file
-    File.expand_path File.join(root, 'tmp', 'results.xml')
+    File.expand_path File.join(ENV['BUMPS_TEMP'], 'results.xml')
   end
   
   def push_request
@@ -29,7 +29,7 @@ module CucumberWorld
   end
   
   def test_features_directory
-    File.expand_path File.join(root, 'tmp')
+    ENV['BUMPS_TEMP']
   end
   
   def feature_server_command
@@ -61,7 +61,7 @@ module CucumberWorld
   end
   
   def command_output_file
-    File.expand_path File.join(root, 'tmp', 'cucumber.log')
+    File.expand_path File.join(ENV['BUMPS_TEMP'], 'cucumber.log')
   end
   
   def remote_features_directory

@@ -46,7 +46,7 @@ class ScenarioProcess
   private
   
   def log
-    File.expand_path(File.dirname(__FILE__) + "/../../../tmp/#{@name}.log")
+    File.expand_path(File.join(ENV['BUMPS_TEMP'], "#{@name}.log"))
   end 
   
   def remove file

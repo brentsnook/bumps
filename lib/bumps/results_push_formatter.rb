@@ -4,14 +4,24 @@ require 'net/http'
 module Bumps
   class ResultsPushFormatter
     
+    attr_reader :formatter, :results
+    
     def initialize(step_mother, io, options)
       @step_mother = step_mother
       @io = io
       @options = options
     end
-
-    def visit_features features
-      push results_of_running(features)
+    
+    def before_features features
+      @results = StringIO.open
+      @formatter = Bumps::Configuration.results_formatter.new @step_mother, results, @options
+      formatter.before_features features
+    end
+    
+    def after_features features
+      formatter.after_features features
+      results.close
+      push results.string
     end
     
     def push results
@@ -24,13 +34,8 @@ module Bumps
       end
     end
     
-    def results_of_running features
-      StringIO.open do |io|
-        formatter = Bumps::Configuration.results_formatter.new step_mother, io, options
-        formatter.visit_features features
-        
-        io.string
-      end
+    def method_missing(method, *args, &block)
+      formatter.send(method, *args, &block)
     end
   end
 end

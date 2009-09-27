@@ -1,9 +1,11 @@
-- upgrade formatter - read upgrade thread
-  - formatter should delegate all missing methods to wrapped
-  - formatter should still delegate after_features to wrapped
-  - formatter should push after features
+- upgrade formatter
+  - pushed results contain no features!
+  - check correct lifecycle methods are being called
+  - add note about feature server requiring sinatra
+  - add sinatra developer gem dep
 - make sure dependencies are correct - use latest cukes with fix (104?)
 - make sure all hoe crap is set
+- get rid of hoe message
 - check manifest
 - release
   - tag
@@ -13,7 +15,6 @@
 --- LATER ---
 
 - add validation for config and some nicer messages?
-- get rid of treetop gibberish
 - can it be more of a synch than a straight clobber??? for speed mainly
 - extract process control logic out into a new gem
 - support obtaining details for a single feature ???

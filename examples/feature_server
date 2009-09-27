@@ -1,61 +1,39 @@
-require 'webrick'
-require 'stringio'
+require 'rubygems'
+require 'sinatra'
 
-include WEBrick
+FEATURE_DIR, RESULTS_FILE = ARGV[0..1]
 
-class PullServlet < HTTPServlet::AbstractServlet
+set :port, 1981
 
-  def do_GET(request, response)
-    response.body = feature_content
-    response['Content-Type'] = 'text/xml'
+def feature_content
+  content = StringIO.new 
+  content.puts '<?xml version="1.0"?>'
+  content.puts '<features>'
+
+  Dir.glob(features_pattern).each do |file|
+    content << feature_within(file) if File.file?(file)
   end
 
-  private
+  content.puts '</features>'
 
-  def feature_content
-    content = StringIO.new 
-    content.puts '<?xml version="1.0"?>'
-    content.puts '<features>'
-
-    Dir.glob(features_pattern).each do |file|
-      content << feature_within(file) if File.file?(file)
-    end
-
-    content.puts '</features>'
-
-    content.string
-  end
-
-  def feature_within file
-    relative_path = file[(@options[0].length)..-1]
-    "<feature name=\"#{relative_path}\"><![CDATA[#{IO.read(file)}\n]]></feature>"
-  end
-
-  def features_pattern
-    File.join @options[0], '**', '*'
-  end
-
+  content.string
 end
 
-class PushServlet < HTTPServlet::AbstractServlet
-
-  def do_POST(request, response)
-    File.open(@options[0], 'w'){ |f| f.write(request.query['results']) }
-    response['Content-Type'] = 'text/html'
-  end
-
+def feature_within file
+  relative_path = file[(FEATURE_DIR.length)..-1]
+  "<feature name=\"#{relative_path}\"><![CDATA[#{IO.read(file)}\n]]></feature>"
 end
 
-server = WEBrick::HTTPServer.new :Port => 1981
-
-server.mount "/features/content", PullServlet, ARGV[0]
-server.mount "/features/results", PushServlet, ARGV[1]
-
-%w(INT TERM).each do |signal|
-  trap signal do
-    server.shutdown
-    exit!
-  end
+def features_pattern
+  File.join FEATURE_DIR, '**', '*'
 end
 
-server.start
+get '/features/content' do
+  content_type 'text/xml'
+  feature_content
+end
+
+post '/features/results' do
+  content_type 'text/html'
+  File.open(RESULTS_FILE, 'w'){ |f| f.write(params[:results]) }
+end

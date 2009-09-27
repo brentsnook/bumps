@@ -25,6 +25,28 @@ describe Bumps::ResultsPushFormatter do
       @formatter = mock('formatter').as_null_object
       Bumps::Configuration.stub!(:results_formatter).and_return @formatter_class
     end
+    
+    describe 'responding to events' do
+      
+      before do
+        @formatter_class.stub!(:new).and_return @formatter
+        Bumps::Configuration.stub!(:results_formatter).and_return @formatter_class
+      end
+      
+      it 'should recognise events that the wrapped formatter handles' do
+        @formatter.stub!(:respond_to?).with('event').and_return true
+       
+        subject.before_features @features
+        subject.respond_to?('event').should == true
+      end
+      
+      it 'should recognise events that it handles on its own' do
+        @formatter.stub!(:respond_to?).with('after_features').and_return false
+    
+        subject.before_features @features
+        subject.respond_to?('after_features').should == true
+      end
+    end
        
     describe 'before the running of features' do
       

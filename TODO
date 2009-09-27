@@ -1,15 +1,4 @@
 
---- 0.3.96 fix
-
-  - test with different ruby versions
-
-  - publish gem
-  - add to tools page on Cukes wiki
-  - announce on twitter, Bumps mailing list, Cukes mailing list, Wave list
-
-  - delete fork
-   
-
 --- LATER ---
 
 - add validation for config and some nicer messages?

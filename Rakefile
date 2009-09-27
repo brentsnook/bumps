@@ -1,26 +1,32 @@
-%w[rubygems rake rake/clean fileutils newgem rubigen].each { |f| require f }
+%w[rubygems rake rake/clean hoe fileutils newgem rubigen].each { |f| require f }
 require File.expand_path(File.dirname(__FILE__) + '/lib/bumps_core')
 
-# Generate all the Rake tasks
-# Run 'rake -T' to see list of generated tasks (from gem root directory)
-$hoe = Hoe.new('bumps', Bumps::VERSION) do |p|
-  p.developer 'Brent Snook', 'brent@fuglylogic.com'
-  p.summary = %q{Remote feature management for Cucumber.}
-  p.changes = p.paragraphs_of("History.txt", 0..1).join("\n\n")
-  p.rubyforge_name = p.name
-  p.extra_deps = [
-    ['cucumber', ">= 0.3.99"],
-    ['nokogiri','>= 1.1.1'],
+Hoe.spec 'bumps' do
+  
+  version = Bumps::VERSION
+  
+  developer 'Brent Snook', 'brent@fuglylogic.com'
+  summary = %q{Remote feature management for Cucumber.}
+  changes = paragraphs_of("History.txt", 0..1).join("\n\n")
+  rubyforge_name = name
+  extra_deps = [
+    ['cucumber', ">= 0.3.103"],
+    ['nokogiri','>= 1.3.3'],
   ]
-  p.extra_dev_deps = [
+  extra_dev_deps = [
+    ['rspec', '>= 1.2.8'],
     ['newgem', ">= #{::Newgem::VERSION}"],
-    ['rspec', '>= 1.2.7'],
   ]
 
-  p.clean_globs |= %w[**/.DS_Store tmp *.log]
-  path = (p.rubyforge_name == p.name) ? p.rubyforge_name : "\#{p.rubyforge_name}/\#{p.name}"
-  p.remote_rdoc_dir = File.join(path.gsub(/^#{p.rubyforge_name}\/?/,''), 'rdoc')
-  p.rsync_args = '-av --delete --ignore-errors'
+  clean_globs |= %w[**/.DS_Store tmp *.log]
+  path = (rubyforge_name == name) ? rubyforge_name : "\#{rubyforge_name}/\#{name}"
+  remote_rdoc_dir = File.join(path.gsub(/^#{rubyforge_name}\/?/,''), 'rdoc')
+  rsync_args = '-av --delete --ignore-errors'
+end
+
+require 'cucumber/rake/task'
+Cucumber::Rake::Task.new(:features) do |t|
+  t.cucumber_opts = "features --format pretty"
 end
 
 require 'newgem/tasks' # load /tasks/*.rake

@@ -1,3 +1,5 @@
+require File.expand_path(File.dirname(__FILE__) + '../../../environment.rb')
+
 module CucumberWorld
 
   def feature_report_file

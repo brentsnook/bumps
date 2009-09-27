@@ -1,8 +1,14 @@
-- force creation of tmp directory
-- hoe update
-- make sure it works with directory not being specified
-- make sure dependencies are correct
 - upgrade formatter - read upgrade thread
+  - formatter should delegate all missing methods to wrapped
+  - formatter should still delegate after_features to wrapped
+  - formatter should push after features
+- make sure dependencies are correct - use latest cukes with fix (104?)
+- make sure all hoe crap is set
+- check manifest
+- release
+  - tag
+  - release to rubyforge
+  - announce on bumps group + twitter
 
 --- LATER ---
 

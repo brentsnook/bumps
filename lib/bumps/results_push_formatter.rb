@@ -2,10 +2,9 @@ require 'cucumber/formatter/html'
 require 'net/http'
 
 module Bumps
-  class ResultsPushFormatter < Cucumber::Ast::Visitor
+  class ResultsPushFormatter
     
     def initialize(step_mother, io, options)
-      super step_mother
       @step_mother = step_mother
       @io = io
       @options = options

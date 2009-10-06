@@ -26,12 +26,15 @@ module Bumps
     
     def push results
       uri = URI.parse(Bumps::Configuration.push_url)
-      response, body = Net::HTTP.post_form uri, {:results => results}
-      if response.code_type == Net::HTTPOK
-        @io << "Successfully pushed results to #{Bumps::Configuration.push_url}\n\n"
-      else
-        @io << "Failed to push results to #{Bumps::Configuration.push_url} - HTTP #{response.code}: \n#{response.body}\n\n"
+      begin
+        response, body = Net::HTTP.post_form uri, {:results => results}
+      rescue Exception => e
+        @io << failure_message(e.message)
+        return
       end
+      
+      response_ok = response.code_type == Net::HTTPOK 
+      @io << (response_ok ? success_message : failure_message("HTTP #{response.code}: \n#{response.body}"))
     end
     
     def method_missing(method, *args, &block)
@@ -42,5 +45,14 @@ module Bumps
       super(message, include_private) || formatter.respond_to?(message, include_private)
     end
     
+    private
+    
+    def failure_message(message)
+      "Failed to push results to #{Bumps::Configuration.push_url} - #{message}\n"
+    end
+    
+    def success_message
+      "Successfully pushed results to #{Bumps::Configuration.push_url}\n"
+    end  
   end
 end

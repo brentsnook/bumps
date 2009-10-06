@@ -180,19 +180,27 @@ describe Bumps::ResultsPushFormatter do
     it 'should output a success message if results were pushed successfully' do
       Net::HTTP.stub!(:post_form).and_return @response, ''
       
-      @io.should_receive(:<<).with "Successfully pushed results to #{@push_url}\n\n"
+      @io.should_receive(:<<).with "Successfully pushed results to #{@push_url}\n"
       
       subject.push 'results'
     end
   
-    it 'should output a failure message if results could not be pushed' do
+    it "should output a failure message if push server doesn't respond with OK" do
       @response.stub!(:code_type).and_return Net::HTTPInternalServerError
       @response.stub!(:code).and_return 500
       @response.stub!(:body).and_return 'response body'
 
       Net::HTTP.stub!(:post_form).and_return @response, ''
     
-      @io.should_receive(:<<).with "Failed to push results to #{@push_url} - HTTP 500: \nresponse body\n\n"
+      @io.should_receive(:<<).with "Failed to push results to #{@push_url} - HTTP 500: \nresponse body\n"
+    
+      subject.push 'results'
+    end
+    
+    it "should output a failure message if request to push server fails" do
+      Net::HTTP.stub!(:post_form).and_raise 'exception message'
+    
+      @io.should_receive(:<<).with "Failed to push results to #{@push_url} - exception message\n"
     
       subject.push 'results'
     end

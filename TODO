@@ -1,7 +1,5 @@
-- release
-  - tag
-  - release to rubyforge
-  - announce on bumps group + twitter
+  - make Bumps handle missing server more gracefully during push
+  - announce on bumps group + twitter + rubyforge
 
 --- LATER ---
 

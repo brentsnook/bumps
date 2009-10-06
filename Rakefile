@@ -31,5 +31,6 @@ task :features => :create_tmp
 require 'newgem/tasks' # load /tasks/*.rake
 Dir['tasks/**/*.rake'].each { |t| load t }
 
+# IS THIS NEEDED?
 Rake::Task[:default].clear_prerequisites # clear out test-unit
 task :default => [:spec, :features]

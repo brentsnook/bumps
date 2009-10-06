@@ -9,11 +9,11 @@ module Bumps
     end  
     
     def self.pull
-      Configuration.output_stream << "\nRetrieving features from #{Configuration.pull_url} ...\n"
+      Configuration.output_stream << "Retrieving features from #{Configuration.pull_url} ...\n"
       begin
         features = RemoteFeature.fetch(Configuration.pull_url)
       rescue Exception => e
-        Configuration.output_stream << "\nCould not pull features: #{e}\n"
+        Configuration.output_stream << "Could not pull features: #{e}\n"
         features = []
       end
         

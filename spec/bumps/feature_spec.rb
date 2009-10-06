@@ -32,7 +32,7 @@ describe Bumps::Feature do
       Bumps::Configuration.stub! :feature_directory
       Bumps::RemoteFeature.stub!(:fetch).and_raise "exception message"
       
-      @output_stream.should_receive(:<<).with "\nCould not pull features: exception message\n" 
+      @output_stream.should_receive(:<<).with "Could not pull features: exception message\n" 
       
       subject.pull
     end
@@ -42,7 +42,7 @@ describe Bumps::Feature do
       Bumps::Configuration.stub!(:pull_url).and_return 'pull_url'
       Bumps::Configuration.stub! :feature_directory
       
-      @output_stream.should_receive(:<<).with "\nRetrieving features from pull_url ...\n"
+      @output_stream.should_receive(:<<).with "Retrieving features from pull_url ...\n"
       
       subject.pull
     end  

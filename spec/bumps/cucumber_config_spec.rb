@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/../spec_helper.rb'
 
-describe Bumps::CucumberConfig, 'processing' do
+describe Bumps::CucumberConfig do
   before do
     @source_config = mock('source Cucumber config')
     @config = Bumps::CucumberConfig.new @source_config
@@ -8,7 +8,7 @@ describe Bumps::CucumberConfig, 'processing' do
   
   describe 'processing' do
 
-    it 'should validate cucumber configuration, update Bumps config then register formatter' do
+    it 'validates cucumber configuration, updates Bumps config then registers formatter' do
       @config.should_receive(:validate).ordered
       @config.should_receive(:update_bumps_config).ordered
       @config.should_receive(:register_formatter).ordered
@@ -20,13 +20,13 @@ describe Bumps::CucumberConfig, 'processing' do
   
   describe 'validation' do
     
-    it 'should succeed if a single directory is specified' do
+    it 'passes when a single directory is specified' do
       @source_config.stub!(:feature_dirs).and_return ['one']
 
       lambda{ @config.validate }.should_not raise_error
     end
     
-    it 'should fail if there is more than one feature directory specified' do
+    it 'fails when there is more than one feature directory specified' do
       @source_config.stub!(:feature_dirs).and_return ['one', 'two']
 
       lambda{ @config.validate }.should raise_error('More than one feature directory/file was specified. Please only specify a single feature directory when using bumps')
@@ -34,9 +34,9 @@ describe Bumps::CucumberConfig, 'processing' do
     
   end
   
-  describe 'updating Bumps configuration' do
+  describe 'update' do
     
-    it 'should use fields from source Cucumber config' do
+    it 'uses fields from source Cucumber config' do
       @source_config.stub!(:feature_dirs).and_return ['dir']
       @source_config.stub!(:out_stream).and_return 'out stream'
       
@@ -48,7 +48,7 @@ describe Bumps::CucumberConfig, 'processing' do
     
   end
   
-  describe 'registering formatter' do
+  describe 'registering a formatter' do
     
     before do
       # law of demeter seems like an even better idea after mocking a chain of three objects
@@ -58,13 +58,13 @@ describe Bumps::CucumberConfig, 'processing' do
       @source_config.stub!(:options).and_return options
     end
     
-    it 'should add the class name of the push formatter to the cucumber configuration' do
+    it 'adds the class name of the push formatter to the Cucumber configuration' do
       @formats.should_receive(:<<).with ['Bumps::ResultsPushFormatter', anything]
 
       @config.register_formatter
     end
     
-    it 'should use the configured output stream for output' do
+    it 'uses the configured output stream to write messages' do
       output_stream = mock 'output stream'
       Bumps::Configuration.stub!(:output_stream).and_return output_stream
 

@@ -4,15 +4,15 @@ describe Bumps::RemoteFeature do
   
   subject {Bumps::RemoteFeature}
   
-  describe 'when fetching' do
-    it 'should retrieve features from the given location' do
+  describe 'fetching' do
+    it 'uses the given location' do
       subject.should_receive(:open).with('location')
       subject.stub! :parse
       
       subject.fetch 'location'
     end
     
-    it 'should parse the given document to obtain features' do
+    it 'parses the given document to obtain features' do
       subject.stub!(:open).and_return 'document'
       
       subject.should_receive(:parse).with 'document'
@@ -21,8 +21,8 @@ describe Bumps::RemoteFeature do
     end  
   end
   
-  describe 'when parsing' do
-    it 'should extract all features from XML' do
+  describe 'parsing' do
+    it 'extracts all features from XML' do
       features = (0..1).collect do |idx|
         feature = Bumps::Feature.new
         feature.name = "feature #{idx}"
@@ -41,7 +41,7 @@ XML
       subject.parse(xml).should eql(features)
     end 
     
-    it 'should trim leading and trailing whitespace from content' do
+    it 'trims leading and trailing whitespace from content' do
       xml = <<-XML
 <?xml version="1.0"?>
 <features>
@@ -57,7 +57,7 @@ XML
       subject.parse(xml).first.content.should == 'I am the content for feature 0'
     end  
     
-    it 'should return an empty feature list when none were found' do
+    it 'returns an empty list when no features were found' do
       xml = <<-XML
 <?xml version="1.0"?>
 <features>
@@ -66,7 +66,7 @@ XML
       subject.parse(xml).should eql([])
     end
 
-    it 'should preserve CDATA in feature content' do
+    it 'preserves CDATA in feature content' do
       xml = <<-XML
 <?xml version="1.0"?>
 <features>

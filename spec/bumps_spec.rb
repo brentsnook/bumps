@@ -7,9 +7,9 @@ end
 
 describe Bumps do
     
-  describe 'execution of Cucumber AfterConfiguration hook' do
+  describe 'AfterConfiguration hook' do
 
-    it 'should process Cucumber config then perform a feature pull' do
+    it 'processes the Cucumber config then performs a feature pull' do
       Bumps::CucumberConfig.stub!(:new).with('source config').and_return(cukes_config = mock('Cukes config'))
       cukes_config.should_receive(:process!).ordered
       Bumps::Feature.should_receive(:pull).ordered
@@ -19,16 +19,12 @@ describe Bumps do
 
   end
     
-  describe 'configuration' do
+  it 'is configured using the given directives' do
 
-    it 'should configure the new configuration using the given directives' do
-
-      # how can we specify that it should be passed a reference to a block?
-      Bumps::Configuration.should_receive(:configure)
-    
-      Bumps.configure {}
-    end
-
+    # how can we specify that it should be passed a reference to a block?
+    Bumps::Configuration.should_receive(:configure)
+  
+    Bumps.configure {}
   end
 
 end

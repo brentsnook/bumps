@@ -1,27 +1,29 @@
 require 'rubygems'
 require 'sinatra'
+require 'json'
 
 FEATURE_DIR, RESULTS_FILE = ARGV[0..1]
 
 set :port, 1981
 
 def feature_content
-  content = StringIO.new 
-  content.puts '<?xml version="1.0"?>'
-  content.puts '<features>'
+  features = {}
 
-  Dir.glob(features_pattern).each do |file|
-    content << feature_within(file) if File.file?(file)
+  Dir.glob(features_pattern).each_with_index do |file, index|
+    features[index] = feature_within(file) if File.file?(file)
   end
 
-  content.puts '</features>'
-
-  content.string
+  JSON.generate({'features' => features})
 end
 
 def feature_within file
   relative_path = file[(FEATURE_DIR.length)..-1]
-  "<feature name=\"#{relative_path}\"><![CDATA[#{IO.read(file)}\n]]></feature>"
+  content = IO.read(file)
+  {
+    'name' => content.match(/Feature: (.*)$/)[1],
+    'version' => '1',
+    'content' => content
+  }
 end
 
 def features_pattern
@@ -29,7 +31,7 @@ def features_pattern
 end
 
 get '/features/content' do
-  content_type 'text/xml'
+  content_type 'application/json'
   feature_content
 end
 

@@ -3,8 +3,9 @@
 - feature constructor to take all arguments [X]
 - embed metadata as tags [X][-] 
 - force robot to return version as string
+- remove nokogiri dependency and xml remote feature, change feature server [X]
 - make sure can post to bumps push URL and try with bumps [X][]
-- remove nokogiri dependency and xml remote feature, change feature server []
+
 - add aruba for command line testing []
 ......
 - make bot spit out pull URL, bumps address and example bumps config snippet
@@ -23,6 +24,7 @@ LAST
   - add notes about new formatter?
   - add notes about new compliant format
   - limitations on feature name - will be converted into file path
+  - can override file path by supplying it as name in feature - will first attempt to force to lowercase and replace spaces with underscores
   - can use slashes to create directories e.g. Payment/Pay For A Transaction => payment/pay_for_a_transaction.feature
   - tag, release, announce (twitter,mailing list)
 - update presentation []

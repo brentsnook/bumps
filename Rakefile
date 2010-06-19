@@ -12,8 +12,7 @@ Hoe.spec 'bumps' do
   
   self.extra_deps = [
     ['cucumber', '>= 0.3.104'],
-    ['json', '>=1.4.3'],
-    ['nokogiri','>= 1.3.3'],
+    ['json', '>=1.4.3']
   ]
   
   self.extra_dev_deps = [

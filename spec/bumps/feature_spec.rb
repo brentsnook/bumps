@@ -20,7 +20,7 @@ describe Bumps::Feature do
         feature  
       end
      
-      Bumps::XmlRemoteFeature.stub!(:fetch).with('location').and_return features 
+      Bumps::RemoteFeature.stub!(:fetch).with('location').and_return features 
     
       Bumps::Configuration.stub!(:feature_directory).and_return 'feature_directory'
 
@@ -30,7 +30,7 @@ describe Bumps::Feature do
     it 'displays an error message if the features could not be fetched' do
       Bumps::Configuration.stub! :pull_url
       Bumps::Configuration.stub! :feature_directory
-      Bumps::XmlRemoteFeature.stub!(:fetch).and_raise "exception message"
+      Bumps::RemoteFeature.stub!(:fetch).and_raise "exception message"
       
       @output_stream.should_receive(:<<).with "Could not pull features: exception message\n" 
       
@@ -38,7 +38,7 @@ describe Bumps::Feature do
     end
     
     it 'displays which location the features are being retrieved from' do
-      Bumps::XmlRemoteFeature.stub!(:fetch).and_return []
+      Bumps::RemoteFeature.stub!(:fetch).and_return []
       Bumps::Configuration.stub!(:pull_url).and_return 'pull_url'
       Bumps::Configuration.stub! :feature_directory
       
@@ -49,7 +49,7 @@ describe Bumps::Feature do
     
     it 'displays the total number of features retrieved and location they were written to' do
       features = (1..3).collect{|index| mock("feature #{index}").as_null_object}
-      Bumps::XmlRemoteFeature.stub!(:fetch).and_return features
+      Bumps::RemoteFeature.stub!(:fetch).and_return features
       Bumps::Configuration.stub!(:feature_directory).and_return 'feature_directory'
       Bumps::Configuration.stub! :pull_url
       

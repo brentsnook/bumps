@@ -54,7 +54,7 @@ module Bumps
     private
     
     def file_name
-      "#{name.downcase.gsub(' ', '_')}.feature"
+      "#{name.downcase.strip.gsub(' ', '_')}.feature"
     end
   end
 end  

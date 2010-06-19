@@ -78,7 +78,7 @@ describe Bumps::Feature do
     end
     
     it 'creates a file name using feature name' do
-      subject.stub!(:name).and_return 'Do some stuff'
+      subject.stub!(:name).and_return '  Do some stuff  '
       
       subject.absolute_path_under('/').should == '/do_some_stuff.feature'      
     end

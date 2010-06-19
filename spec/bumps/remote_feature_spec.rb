@@ -23,31 +23,50 @@ describe Bumps::RemoteFeature do
   end
   
   describe 'parse' do
-    it 'reads all features' do
-      features = (0..1).collect do |idx|
-        Bumps::Feature.new("feature #{idx}", "I am the content for feature #{idx}")
-      end
-      
-      document = {
-        "features" => {
-          "0" => {
-            "content" => "I am the content for feature 0", 
-            "version" => "3",
-            "name" => "feature 0"
-          },
-          "1" => {
-            "content" => "I am the content for feature 1", 
-            "version" => "3",
-            "name" => "feature 1"
-          },
+    
+    it 'reads the name of a feature' do
+      document = { "features" => {
+        "" => {
+          "content" => "Feature: do stuff", 
+          "version" => "",
+          "name" => "Feature name"
         }
-      }
+      }}
 
-      subject.parse(json_from(document)).should eql(features)
+      subject.parse(json_from(document)).first.name.should == 'Feature name'
     end
     
-    it 'reads all content for a single feature'
-    it 'embeds metadata about a feature'
+    it 'reads the content of a feature' do
+      document = { "features" => {
+        "" => {
+          "content" => "Feature: do stuff", 
+          "version" => "",
+          "name" => "feature 0"
+        }
+      }}
+
+      subject.parse(json_from(document)).first.content.should match(/Feature: do stuff/)
+    end
+    
+    it 'reads all features' do      
+      document = { "features" => {
+        "0" => {
+          "content" => "Feature: 0\nI am the content for feature 0", 
+          "version" => "3",
+          "name" => "feature 0"
+        },
+        "1" => {
+          "content" => "Feature: 1\nI am the content for feature 1", 
+          "version" => "3",
+          "name" => "feature 1"
+        }
+      }}
+
+      subject.parse(json_from(document)).size.should == 2
+    end
+ 
+    it 'embeds metadata about a feature within its content'
+    it 'returns an empty list when no features are found'
     
     def json_from document
       JSON.generate document

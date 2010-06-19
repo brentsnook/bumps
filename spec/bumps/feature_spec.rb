@@ -76,6 +76,8 @@ describe Bumps::Feature do
       
       subject.absolute_path_under('/a/b/c/..').should == '/a/b/name'
     end
+    
+    it 'creates a file name using feature name'
       
     it 'fails if given path does not resolve to one below the feature directory' do
       subject.stub!(:name).and_return '../../etc/bashrc'

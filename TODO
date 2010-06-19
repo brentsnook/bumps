@@ -1,7 +1,7 @@
 - refactor to allow for JSON input [X]
 - handle JSON input including determining file name [X]
-- feature constructor to take all arguments
-- embed metadata as tags [][] 
+- feature constructor to take all arguments [X]
+- embed metadata as tags [X][] 
 - force robot to return version as string
 - make sure can post to bumps push URL and try with bumps []
 - remove nokogiri dependency and xml remote feature

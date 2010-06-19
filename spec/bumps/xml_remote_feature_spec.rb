@@ -24,10 +24,7 @@ describe Bumps::XmlRemoteFeature do
   describe 'parsing' do
     it 'extracts all features from XML' do
       features = (0..1).collect do |idx|
-        feature = Bumps::Feature.new
-        feature.name = "feature #{idx}"
-        feature.content = "I am the content for feature #{idx}"
-        feature
+        Bumps::Feature.new("feature #{idx}", "I am the content for feature #{idx}")
       end
       
       xml = <<-XML

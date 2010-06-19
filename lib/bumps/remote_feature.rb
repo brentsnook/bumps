@@ -10,11 +10,8 @@ module Bumps
     end
     
     def self.parse json
-      document = JSON.parse json
-      document['features'].collect do |id, feature_document|
-        feature = Feature.new
-        feature.name, feature.content = feature_document['name'], feature_document['content']
-        feature
+      JSON.parse(json)['features'].collect do |id, feature|
+        Feature.new(feature['name'], feature['content'])
       end
     end
     

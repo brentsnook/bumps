@@ -1,29 +1,27 @@
 - refactor to allow for JSON input [X]
-- handle JSON input including determining file name and embedding metadata as tags []
+- handle JSON input including determining file name [X]
 - feature constructor to take all arguments
+- embed metadata as tags [][] 
 - force robot to return version as string
 - make sure can post to bumps push URL and try with bumps []
 - remove nokogiri dependency and xml remote feature
 - add aruba for command line testing []
 ......
-- presentation [][][]
-
+- presentation [][][][]
 ......
-- make robot pull add blip version and id
 - formatter for JSON output
-  - line numbers with blip id, version and status
-  - time of last run
-- make robot handle push: highlight feature lines
-- make robot update or insert blip after feature name
-  - time of last run
+  - line numbers with blip id, version and status [][]
+  - time of last run []
+- make robot handle push: highlight feature lines [][][][]
+- make robot update or insert blip after feature name with time of last run [][]
 ......
 LAST
-- release bumps
+- release bumps [][]
   - add notes about using json ext or pure for performance http://flori.github.com/json/doc/index.html
   - add notes about removing xml format
   - add notes about new formatter?
   - tag, release, announce
-- update presentation
+- update presentation []
 
 --- LATER ---
 

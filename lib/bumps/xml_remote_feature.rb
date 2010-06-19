@@ -10,12 +10,8 @@ module Bumps
     end
     
     def self.parse xml
-      document = Nokogiri::XML xml
-      document.search('feature').collect do |feature_element|
-        feature = Feature.new
-        feature.content = feature_element.text.strip
-        feature.name = feature_element.attribute('name').to_s
-        feature
+      Nokogiri::XML(xml).search('feature').collect do |feature|
+        Feature.new(feature.attribute('name').to_s, feature.text.strip)
       end  
     end
     

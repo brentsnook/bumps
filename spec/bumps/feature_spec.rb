@@ -61,6 +61,8 @@ describe Bumps::Feature do
 
   describe 'writing to file' do 
     
+    subject {Bumps::Feature.new('', '')}
+    
     it 'uses absolute path' do
       subject.stub(:absolute_path_under).with('directory').and_return 'path'
       

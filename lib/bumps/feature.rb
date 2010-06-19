@@ -34,7 +34,7 @@ module Bumps
     
     def absolute_path_under directory
       expanded_directory = File.expand_path directory
-      file_path = File.expand_path(File.join(directory, name))
+      file_path = File.expand_path(File.join(directory, file_name))
       unless file_path =~ /^#{expanded_directory}/
          raise "Could not write feature to path #{file_path}, path is not below #{expanded_directory}"
        end
@@ -50,5 +50,11 @@ module Bumps
         
       true
     end   
+    
+    private
+    
+    def file_name
+      "#{name.downcase.gsub(' ', '_')}.feature"
+    end
   end
 end  

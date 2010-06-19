@@ -74,16 +74,20 @@ describe Bumps::Feature do
     it 'uses expanded directory and feature name' do
       subject.stub!(:name).and_return 'name'
       
-      subject.absolute_path_under('/a/b/c/..').should == '/a/b/name'
+      subject.absolute_path_under('/a/b/c/..').should match(%r{^/a/b/name})
     end
     
-    it 'creates a file name using feature name'
+    it 'creates a file name using feature name' do
+      subject.stub!(:name).and_return 'Do some stuff'
+      
+      subject.absolute_path_under('/').should == '/do_some_stuff.feature'      
+    end
       
     it 'fails if given path does not resolve to one below the feature directory' do
       subject.stub!(:name).and_return '../../etc/bashrc'
       File.stub! :open # just in case
       
-      lambda {subject.absolute_path_under '/stuff/features'}.should raise_error('Could not write feature to path /etc/bashrc, path is not below /stuff/features')
+      lambda {subject.absolute_path_under '/stuff/features'}.should raise_error('Could not write feature to path /etc/bashrc.feature, path is not below /stuff/features')
     end
     
     it 'overwrites existing files' do

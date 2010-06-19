@@ -1,12 +1,13 @@
 - refactor to allow for JSON input [X]
 - handle JSON input including determining file name [X]
 - feature constructor to take all arguments [X]
-- embed metadata as tags [X][] 
+- embed metadata as tags [X][-] 
 - force robot to return version as string
-- make sure can post to bumps push URL and try with bumps []
-- remove nokogiri dependency and xml remote feature
+- make sure can post to bumps push URL and try with bumps [X][]
+- remove nokogiri dependency and xml remote feature, change feature server []
 - add aruba for command line testing []
 ......
+- make bot spit out pull URL, bumps address and example bumps config snippet
 - presentation [][][][]
 ......
 - formatter for JSON output
@@ -20,7 +21,10 @@ LAST
   - add notes about using json ext or pure for performance http://flori.github.com/json/doc/index.html
   - add notes about removing xml format
   - add notes about new formatter?
-  - tag, release, announce
+  - add notes about new compliant format
+  - limitations on feature name - will be converted into file path
+  - can use slashes to create directories e.g. Payment/Pay For A Transaction => payment/pay_for_a_transaction.feature
+  - tag, release, announce (twitter,mailing list)
 - update presentation []
 
 --- LATER ---

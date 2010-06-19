@@ -1,8 +1,8 @@
 require File.dirname(__FILE__) + '/../spec_helper.rb'
 
-describe Bumps::RemoteFeature do
+describe Bumps::XmlRemoteFeature do
   
-  subject {Bumps::RemoteFeature}
+  subject {Bumps::XmlRemoteFeature}
   
   describe 'fetching' do
     it 'uses the given location' do

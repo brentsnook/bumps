@@ -1,3 +1,20 @@
+- refactor to allow for JSON input []
+- handle JSON input including determining file name []
+- make sure can post to bumps push URL and try with bumps []
+- add aruba for command line testing []
+......
+- presentation [][][]
+
+......
+- make robot pull add blip version and id
+- formatter for JSON output
+  - line numbers with blip id, version and status
+  - time of last run
+- make robot handle push: highlight feature lines
+- make robot update or insert blip after feature name
+  - time of last run
+......
+- update presentation
 
 --- LATER ---
 

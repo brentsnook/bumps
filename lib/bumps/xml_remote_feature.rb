@@ -3,7 +3,7 @@ require 'open-uri'
 
 module Bumps
   
-  class RemoteFeature
+  class XmlRemoteFeature
 
     def self.fetch location
       parse(open(location){|f| f.read})

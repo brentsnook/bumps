@@ -5,7 +5,7 @@ require 'rubygems'
 require 'cucumber'
 
 [
-  'remote_feature',
+  'xml_remote_feature',
   'feature',
   'configuration',
   'results_push_formatter',

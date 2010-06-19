@@ -11,7 +11,7 @@ module Bumps
     def self.pull
       Configuration.output_stream << "Retrieving features from #{Configuration.pull_url} ...\n"
       begin
-        features = RemoteFeature.fetch(Configuration.pull_url)
+        features = XmlRemoteFeature.fetch(Configuration.pull_url)
       rescue Exception => e
         Configuration.output_stream << "Could not pull features: #{e}\n"
         features = []

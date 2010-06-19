@@ -10,7 +10,7 @@
 - presentation [][][][]
 ......
 - formatter for JSON output
-  - line numbers with blip id, version and status [][]
+  - line numbers with blip id, version and status (dont forget to account for metadata line)[][]
   - time of last run []
 - make robot handle push: highlight feature lines [][][][]
 - make robot update or insert blip after feature name with time of last run [][]

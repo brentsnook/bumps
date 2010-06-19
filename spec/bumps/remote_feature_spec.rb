@@ -64,10 +64,23 @@ describe Bumps::RemoteFeature do
 
       subject.parse(json_from(document)).size.should == 2
     end
- 
-    it 'embeds metadata about a feature within its content'
-    it 'returns an empty list when no features are found'
     
+    it 'returns an empty list when no features are found' do
+      subject.parse(json_from({ "features" => {}})).size.should == 0          
+    end
+ 
+    it 'embeds metadata about a feature within its content' do
+      document = { "features" => {
+        "123" => {
+          "content" => "Feature: do stuff", 
+          "version" => "3",
+          "name" => "feature 0"
+        }
+      }}
+
+      subject.parse(json_from(document)).first.content.should == %{@id="123" @version="3"\nFeature: do stuff}
+    end
+
     def json_from document
       JSON.generate document
     end

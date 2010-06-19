@@ -6,6 +6,7 @@ require 'cucumber'
 
 [
   'xml_remote_feature',
+  'remote_feature',
   'feature',
   'configuration',
   'results_push_formatter',

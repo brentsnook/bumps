@@ -11,7 +11,8 @@ Hoe.spec 'bumps' do
   self.rsync_args = '-av --delete --ignore-errors' # is this needed?
   
   self.extra_deps = [
-    ['cucumber', ">= 0.3.104"],
+    ['cucumber', '>= 0.3.104'],
+    ['json', '>=1.4.3'],
     ['nokogiri','>= 1.3.3'],
   ]
   
@@ -31,6 +32,4 @@ task :features => :create_tmp
 require 'newgem/tasks' # load /tasks/*.rake
 Dir['tasks/**/*.rake'].each { |t| load t }
 
-# IS THIS NEEDED?
-Rake::Task[:default].clear_prerequisites # clear out test-unit
 task :default => [:spec, :features]

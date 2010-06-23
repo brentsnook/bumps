@@ -11,7 +11,7 @@ module Bumps
     
     def self.parse json
       JSON.parse(json)['features'].collect do |id, feature|
-        content = %{@id="#{id}" @version="#{feature['version']}"\n#{feature['content']}}
+        content = "@id:#{id} @version:#{feature['version']}\n#{feature['content']}"
         Feature.new(feature['name'], content)
       end
     end

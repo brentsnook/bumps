@@ -38,11 +38,19 @@ module CucumberWorld
     "ruby #{feature_server_script} #{remote_features_directory} #{push_request_file}"
   end  
   
+  def all_features
+    Dir.glob("#{remote_features_directory}/**/*")
+  end
+  
   def each_feature
-    Dir.glob("#{remote_features_directory}/**/*") do |feature_file|
+    all_features.each do |feature_file|
       content = IO.read(feature_file).strip
       yield content.split("\n").first.strip
     end
+  end
+  
+  def feature_count
+    Dir.glob("#{remote_features_directory}/**/*").size
   end
   
   def clean

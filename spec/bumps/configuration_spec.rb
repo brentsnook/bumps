@@ -62,8 +62,8 @@ describe Bumps::Configuration do
     subject.results_formatter.should == formatter_class
   end
   
-  it 'defaults the results formatter to Cucumber HTML formatter' do
-    subject.results_formatter.should == Cucumber::Formatter::Html
+  it 'defaults the results formatter to the Bumps JSON formatter' do
+    subject.results_formatter.should == Bumps::JSONFormatter
   end
   
   it 'can have only one instance' do

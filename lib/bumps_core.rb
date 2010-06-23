@@ -8,6 +8,7 @@ require 'cucumber'
   'remote_feature',
   'feature',
   'configuration',
+  'json_formatter',
   'results_push_formatter',
   'cucumber_config'
 ].each {|file| require "bumps/#{file}"}

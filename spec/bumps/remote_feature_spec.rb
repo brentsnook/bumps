@@ -78,7 +78,7 @@ describe Bumps::RemoteFeature do
         }
       }}
 
-      subject.parse(json_from(document)).first.content.should == %{@id="123" @version="3"\nFeature: do stuff}
+      subject.parse(json_from(document)).first.content.should == "@id:123 @version:3\nFeature: do stuff"
     end
 
     def json_from document

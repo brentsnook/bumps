@@ -1,21 +1,15 @@
-- refactor to allow for JSON input [X]
-- handle JSON input including determining file name [X]
-- feature constructor to take all arguments [X]
-- embed metadata as tags [X][-] 
-- force robot to return version as string
-- remove nokogiri dependency and xml remote feature, change feature server [X]
-- make sure can post to bumps push URL and try with bumps [X][]
-
-- add aruba for command line testing []
 ......
-- make bot spit out pull URL, bumps address and example bumps config snippet
-- presentation [][][][]
+
 ......
 - formatter for JSON output
   - line numbers with blip id, version and status (dont forget to account for metadata line)[][]
   - time of last run []
-- make robot handle push: highlight feature lines [][][][]
+- use to_json method instead of class method
+- make bot spit out pull URL, bumps address and example bumps config snippet
+- make robot handle push: highlight feature lines via annotations (first remove old ones) [][][][]
 - make robot update or insert blip after feature name with time of last run [][]
+......
+- presentation [][][][]
 ......
 LAST
 - release bumps [][]
@@ -23,6 +17,7 @@ LAST
   - add notes about removing xml format
   - add notes about new formatter?
   - add notes about new compliant format
+  - release notes and version
   - limitations on feature name - will be converted into file path
   - can override file path by supplying it as name in feature - will first attempt to force to lowercase and replace spaces with underscores
   - can use slashes to create directories e.g. Payment/Pay For A Transaction => payment/pay_for_a_transaction.feature

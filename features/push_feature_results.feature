@@ -7,7 +7,7 @@ Feature: Serve feature results
   Scenario: Push all feature results after a run
     Given that a feature server is running
     When a cucumber run is performed
-    Then the results of the feature run will be sent to the feature server
+    Then JSON formatted feature results will be sent to the server
 
   Scenario: Feature server not reachable
     Given that a feature server is not running

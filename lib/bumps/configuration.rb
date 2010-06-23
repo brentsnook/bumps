@@ -15,7 +15,7 @@ module Bumps
     def initialize
       @config = {
         :output_stream => STDOUT,
-        :results_formatter => Cucumber::Formatter::Html
+        :results_formatter => Bumps::JSONFormatter
       }
     end
     

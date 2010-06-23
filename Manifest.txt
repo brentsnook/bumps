@@ -17,6 +17,7 @@ lib/bumps.rb
 lib/bumps/configuration.rb
 lib/bumps/cucumber_config.rb
 lib/bumps/feature.rb
+lib/bumps/json_formatter.rb
 lib/bumps/remote_feature.rb
 lib/bumps/results_push_formatter.rb
 lib/bumps_core.rb
@@ -26,6 +27,7 @@ script/generate
 spec/bumps/configuration_spec.rb
 spec/bumps/cucumber_config_spec.rb
 spec/bumps/feature_spec.rb
+spec/bumps/json_formatter_spec.rb
 spec/bumps/remote_feature_spec.rb
 spec/bumps/results_push_formatter_spec.rb
 spec/bumps_spec.rb
@@ -33,5 +35,10 @@ spec/spec.opts
 spec/spec_helper.rb
 tasks/rspec.rake
 tasks/setup.rake
+test_features/json_formatter_spec/describing_a_feature.feature
+test_features/json_formatter_spec/describing_a_scenario.feature
+test_features/json_formatter_spec/describing_a_step.feature
+test_features/json_formatter_spec/propagating_status_from_step_to_scenario.feature
+test_features/json_formatter_spec/steps/steps.rb
 test_features/remote_content/destroy_dr_thaddeus_venture.feature
 test_features/requires/support/env.rb

@@ -46,20 +46,30 @@ describe Bumps::JSONFormatter do
       @feature['version'].should == '456' 
     end
     
-    it 'includes the time it started and stopped running in ISO8601 format' do
-      start = Time.now
-      finish = start + 10
-      Bumps::JSONFormatter.stub!(:now).and_return start, finish
+    describe 'timing' do
       
-      run_cucumber
-      feature = @all_features['describing_a_feature']
-      
-      iso8601_format = /[\d]{4}-[\d]{2}-[\d]{2}T[\d]{2}:[\d]{2}:[\d]{2}[+-][\d]{2}:[\d]{2}/
-      feature['started'].should match(iso8601_format)
-      feature['finished'].should match(iso8601_format)
-      Time.parse(feature['started']).should be <= Time.parse(feature['finished'])
-    end
+      before(:all) do
+        start = Time.now
+        finish = start + 10
+        Bumps::JSONFormatter.stub!(:now).and_return start, finish
 
+        run_cucumber
+        
+        @feature = @all_features['describing_a_feature']  
+      end
+      
+      it 'includes the time it started and stopped running in ISO8601 format' do
+        iso8601_format = /[\d]{4}-[\d]{2}-[\d]{2}T[\d]{2}:[\d]{2}:[\d]{2}[+-][\d]{2}:[\d]{2}/
+        @feature['started'].should match(iso8601_format)
+        @feature['finished'].should match(iso8601_format)
+      end
+      
+      it 'should include a finish time equal or greater than the start time' do
+        # may be equal due to second only precision
+        Time.parse(@feature['started']).should be <= Time.parse(@feature['finished'])
+      end
+    end
+    
     it 'includes all scenarios' do
       @feature['scenarios'].size.should == 3
     end

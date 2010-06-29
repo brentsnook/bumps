@@ -1,6 +1,7 @@
 = Bumps
 
 * http://github.com/brentsnook/bumps
+* http://github.com/brentsnook/bumpybot
 * http://groups.google.com/group/bumps-for-cucumber
 * http://fuglylogic.com/2009/07/20/bumps-remote-features-for-cucumber/
 
@@ -9,6 +10,8 @@
 Remote feature management for Cucumber.
 
 Bumps extends {Cucumber}[http://cukes.info] by allowing you to pull feature content and push run results to and from a remote server. This means that your feature files no longer need to live with your steps and other code. This also means that you can publish the results of a Cucumber run to another system.
+
+Bumps has been designed to work with {Bumpybot}[http://github.com/brentsnook/bumpybot] (a Google Wave robot) but it can be used with any server that meets the {push/pull contract}[http://wiki.github.com/brentsnook/bumps/push-pull-contract].
 
 See the {wiki}[http://wiki.github.com/brentsnook/bumps] for more details.
 
@@ -24,6 +27,10 @@ Or grab the code from Github and build yourself:
 
 == Synopsis
 
+To use with Bumpybot, {see the directions}[http://github.com/brentsnook/bumpybot].
+
+You can also use Bumps with any other compliant server.
+
 First, start up a server that meets the {push/pull contract}[http://wiki.github.com/brentsnook/bumps/push-pull-contract].
 
 Secondly, bung this inside of your <b>support/env.rb</b> (or equivalent, just make sure it is under a directory named <b>support</b> under the feature directory):
@@ -33,9 +40,9 @@ Secondly, bung this inside of your <b>support/env.rb</b> (or equivalent, just ma
 
 Lastly, just run Cukes as normal.
 
-  cucumber my_feature_directory
+  cucumber
 
-Bumps will pull feature files into the specified feature directory, run Cukes and then push the results back to the server.
+Bumps will pull feature files into the feature directory, run Cukes and then push the results back to the server.
 
 == License
 

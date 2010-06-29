@@ -40,5 +40,6 @@ test_features/json_formatter_spec/describing_a_scenario.feature
 test_features/json_formatter_spec/describing_a_step.feature
 test_features/json_formatter_spec/propagating_status_from_step_to_scenario.feature
 test_features/json_formatter_spec/steps/steps.rb
+test_features/json_formatter_spec/support/env.rb
 test_features/remote_content/destroy_dr_thaddeus_venture.feature
 test_features/requires/support/env.rb

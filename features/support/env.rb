@@ -19,7 +19,7 @@ module CucumberWorld
   end
 
   def push_request_file
-    File.expand_path File.join(ENV['BUMPS_TEMP'], 'results.xml')
+    File.expand_path File.join(ENV['BUMPS_TEMP'], 'pushed_results.txt')
   end
   
   def push_request

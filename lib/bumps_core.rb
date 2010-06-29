@@ -15,7 +15,7 @@ require 'cucumber'
 
 module Bumps
   
-  VERSION = '0.0.4'
+  VERSION = '0.1.0'
   
   def self.configure &block
     Configuration.configure(&block)

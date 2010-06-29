@@ -1,27 +1,6 @@
-......
 
-......
-- load settings from JSON with template
-- commit to github
-- use to_json method instead of class method
-- make bot spit out pull URL, bumps address and example bumps config snippet
-- make robot handle push: highlight feature lines via annotations (first remove old ones) [][][][]
-- make robot update or insert blip after feature name with time of last run [][]
-......
-- presentation [][][][]
-......
-LAST
 - release bumps [][]
-  - add notes about using json ext or pure for performance http://flori.github.com/json/doc/index.html
-  - add notes about removing xml format
-  - add notes about new formatter?
-  - add notes about new compliant format
-  - release notes and version
-  - limitations on feature name - will be converted into file path
-  - can override file path by supplying it as name in feature - will first attempt to force to lowercase and replace spaces with underscores
-  - can use slashes to create directories e.g. Payment/Pay For A Transaction => payment/pay_for_a_transaction.feature
-  - tag, release, announce (twitter,mailing list)
-- update presentation []
+  - tag, release, announce (twitter, Bumps list, LRUG list)
 
 --- LATER ---
 

@@ -29,6 +29,14 @@ module Bumps
       }
     end
 
+    def scenario_name(keyword, name, file_colon_line, source_indent)
+     @scenario = {
+       'line' => line(file_colon_line),
+       'steps' => []
+     }
+     @feature['scenarios'] << @scenario
+    end
+ 
     def after_step(step)
       @step = {
         'status' => step.status,
@@ -37,14 +45,7 @@ module Bumps
       @scenario['steps'] << @step
       @scenario['status'] = step.status unless step.status == :skipped
     end
- 
-    def scenario_name(keyword, name, file_colon_line, source_indent)
-      @scenario = {
-        'line' => line(file_colon_line),
-        'steps' => []
-      }
-      @feature['scenarios'] << @scenario
-    end
+
      
     def after_feature(feature)
       @feature.merge!({'finished' => JSONFormatter.now.iso8601, 'version' => @version})

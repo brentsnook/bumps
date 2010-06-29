@@ -41,7 +41,7 @@ Bumps will pull feature files into the specified feature directory, run Cukes an
 
 (The MIT License)
 
-Copyright (c) 2009 Brent Snook http://fuglylogic.com
+Copyright (c) 2010 Brent Snook http://fuglylogic.com
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the

@@ -97,12 +97,12 @@ describe Bumps::JSONFormatter do
       @step = @all_features['describing_a_step']['scenarios'].first['steps'].first
     end
     
-    it 'includes the line (ignoring the first tag)' do
+    it 'includes the feature file line (ignoring the first tag) but not the step file line' do
       @step['line'].should == 4
     end
     
     it 'includes the status' do
-      @step['status'].should == 'undefined'  
+      @step['status'].should == 'passed'  
     end
     
   end

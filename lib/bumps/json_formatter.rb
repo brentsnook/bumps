@@ -29,13 +29,13 @@ module Bumps
       }
     end
 
-    def step_name(keyword, step_match, status, source_indent, background)
-     @step = {
-       'status' => status,
-       'line' => line(step_match.file_colon_line)
-     }
-     @scenario['steps'] << @step
-     @scenario['status'] = status unless status == :skipped
+    def after_step(step)
+      @step = {
+        'status' => step.status,
+        'line' => line(step.file_colon_line)
+      }
+      @scenario['steps'] << @step
+      @scenario['status'] = step.status unless step.status == :skipped
     end
  
     def scenario_name(keyword, name, file_colon_line, source_indent)

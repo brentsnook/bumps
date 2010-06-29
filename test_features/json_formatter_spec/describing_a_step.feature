@@ -2,4 +2,4 @@
 Feature: Feature
 
   Scenario: Scenario
-    Given I am an undefined step
+    Given I passed

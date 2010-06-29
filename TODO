@@ -1,9 +1,8 @@
 ......
 
 ......
-- formatter for JSON output
-  - line numbers with blip id, version and status (dont forget to account for metadata line)[][]
-  - time of last run []
+- load settings from JSON with template
+- commit to github
 - use to_json method instead of class method
 - make bot spit out pull URL, bumps address and example bumps config snippet
 - make robot handle push: highlight feature lines via annotations (first remove old ones) [][][][]

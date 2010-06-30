@@ -1,3 +1,7 @@
+== 0.1.1 2010-06-30
+
+* Required FileUtils
+
 == 0.1.0 2010-06-30
 
 * Change feature pull format to JSON
